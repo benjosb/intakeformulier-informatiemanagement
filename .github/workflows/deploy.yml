@@ -1,0 +1,34 @@
+name: 🚀 Deploy Website via FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Optioneel: specificeer de map op de server waar het heen moet (bijv. public_html/intakes/)
+          # Als je het direct in de hoofdmap van het FTP account wilt, laat dit dan leeg of gebruik ./
+          server-dir: ./
+          # Welke lokale bestanden moeten mee? (alles behalve git bestanden en docs)
+          exclude: |
+            **/.git*
+            **/.github*
+            **/*.md
+            **/*.doc
+            **/*.docx
+            **/*.pdf
+            **/*.json
+
