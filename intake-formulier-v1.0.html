@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impactanalyse I&amp;D – Intakeformulier Informatiemanagement</title>
+<style>
+:root {
+  --gradient-start: #005b9f;
+  --gradient-end: #00a777;
+  --bg: #ffffff;
+  --card: #ffffff;
+  --border: rgba(0, 91, 159, 0.18);
+  --accent: #0077a5;
+  --accent-light: #e0f1ff;
+  --text: #102a3c;
+  --muted: #587189;
+  --support: #009e67;
+  --danger: #b42318;
+  --radius: 12px;
+  --shadow: 0 20px 45px rgba(0, 65, 115, 0.18);
+  --header-glow: rgba(0, 105, 150, 0.35);
+  --menu-hover: rgba(255, 255, 255, 0.9);
+  --input-bg: #ffffff;
+  --field-empty-bg: #fff6da;
+  --field-empty-border: rgba(244, 178, 41, 0.85);
+  --field-empty-shadow: rgba(244, 178, 41, 0.25);
+  --field-filled-bg: #f0fff7;
+  --field-filled-border: rgba(0, 167, 119, 0.65);
+  --field-filled-shadow: rgba(0, 167, 119, 0.25);
+}
+:root[data-theme="dark"] {
+  --gradient-start: #021a33;
+  --gradient-end: #006d73;
+  --bg: #0b1624;
+  --card: #142338;
+  --border: rgba(255, 255, 255, 0.14);
+  --accent: #4cc3ff;
+  --accent-light: rgba(76, 195, 255, 0.2);
+  --text: #e4f4ff;
+  --muted: #9db5c8;
+  --shadow: 0 25px 55px rgba(0, 0, 0, 0.55);
+  --header-glow: rgba(0, 0, 0, 0.4);
+  --menu-hover: #ffffff;
+  --input-bg: #1a2c45;
+  --support: #00c37e;
+  --field-empty-bg: rgba(255, 213, 134, 0.12);
+  --field-empty-border: rgba(255, 213, 134, 0.55);
+  --field-empty-shadow: rgba(255, 213, 134, 0.15);
+  --field-filled-bg: rgba(0, 195, 126, 0.12);
+  --field-filled-border: rgba(0, 195, 126, 0.75);
+  --field-filled-shadow: rgba(0, 195, 126, 0.35);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: linear-gradient(135deg, rgba(0, 91, 159, 0.1), rgba(0, 167, 119, 0.08));
+  color: var(--text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+  padding: 24px;
+}
+.app {
+  max-width: 1200px;
+  margin: 0 auto 64px auto;
+}
+header {
+  background: linear-gradient(120deg, #ffffff 0%, #ffffff 100%);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+  color: var(--text);
+  border: 1px solid rgba(9, 55, 93, 0.08);
+  box-shadow: 0 35px 70px rgba(10, 58, 105, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  align-items: flex-start;
+  text-align: left;
+}
+header h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+header h1 .title-main {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1em;
+}
+header h1 .title-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 0.78em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+header h1 .title-note {
+  font-size: 0.42em;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  opacity: 0.45;
+  color: var(--muted);
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 10px;
+  white-space: nowrap;
+}
+header p {
+  margin: 0;
+  color: var(--muted);
+}
+.header-copy {
+  width: 100%;
+}
+.header-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.header-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 12px;
+}
+.header-logo {
+  max-width: 420px;
+  width: 100%;
+  min-width: 240px;
+  filter: drop-shadow(0 28px 46px rgba(2, 42, 73, 0.12));
+}
+.summary-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--support);
+  background: var(--support);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 28px rgba(0, 158, 103, 0.25);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.summary-toggle .icon {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+.summary-toggle:not(.active) {
+  background: #fff;
+  color: var(--support);
+  box-shadow: none;
+}
+.meta-toolbar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  background: #f5fbff;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 116, 164, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  justify-content: flex-end;
+  flex: 1;
+}
+.meta-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  position: relative;
+}
+.meta-toolbar button:hover {
+  color: var(--accent);
+  background: rgba(0, 116, 164, 0.04);
+  border-radius: 6px;
+  transform: none;
+  box-shadow: none;
+}
+.meta-toolbar .icon {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+.meta-toolbar button:hover .icon {
+  opacity: 1;
+}
+.header-bar {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header-copy h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  display: inline-block;
+  border-bottom: 4px solid var(--support);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--support);
+}
+.card h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: var(--text);
+}
+.status-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+.status-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.status-card.wide {
+  grid-column: 1 / -1;
+}
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tab-button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+:root[data-theme="dark"] .tab-button {
+  background: rgba(255, 255, 255, 0.05);
+}
+.tab-button.active {
+  background: var(--support);
+  color: #fff;
+  border-color: var(--support);
+}
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px 20px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field.full {
+  grid-column: 1 / -1;
+}
+.field label,
+.field span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.field,
+.status-card {
+  position: relative;
+}
+.field::after,
+.status-card::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid rgba(16, 42, 60, 0.2);
+  background: #fff;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.75);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+.field[data-state="filled"]::after,
+.status-card[data-state="filled"]::after {
+  content: "✓";
+  opacity: 1;
+  transform: scale(1);
+  background: var(--support);
+  border-color: transparent;
+  box-shadow: 0 8px 16px rgba(0, 158, 103, 0.35);
+}
+.field[data-state="empty"]::after,
+.status-card[data-state="empty"]::after {
+  opacity: 0.45;
+  background: transparent;
+  border-style: dashed;
+}
+.field[data-state="filled"] span,
+.status-card[data-state="filled"] > label {
+  color: var(--support);
+}
+.field[data-state="empty"] input:not([type="hidden"]),
+.field[data-state="empty"] select,
+.field[data-state="empty"] textarea,
+.status-card[data-state="empty"] input:not([type="hidden"]),
+.status-card[data-state="empty"] select,
+.status-card[data-state="empty"] textarea {
+  background: var(--field-empty-bg);
+  border-color: var(--field-empty-border);
+  box-shadow: inset 0 0 0 1px var(--field-empty-shadow);
+}
+.field[data-state="filled"] input:not([type="hidden"]),
+.field[data-state="filled"] select,
+.field[data-state="filled"] textarea,
+.status-card[data-state="filled"] input:not([type="hidden"]),
+.status-card[data-state="filled"] select,
+.status-card[data-state="filled"] textarea {
+  background: var(--field-filled-bg);
+  border-color: var(--field-filled-border);
+  box-shadow: 0 0 0 2px var(--field-filled-shadow);
+}
+.status-card[data-state="empty"] .multi-select-trigger {
+  background: var(--field-empty-bg);
+  border-color: var(--field-empty-border);
+  box-shadow: inset 0 0 0 1px var(--field-empty-shadow);
+}
+.status-card[data-state="filled"] .multi-select-trigger {
+  background: var(--field-filled-bg);
+  border-color: var(--field-filled-border);
+  box-shadow: 0 0 0 2px var(--field-filled-shadow);
+}
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 44px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  background: var(--input-bg);
+  color: var(--text);
+}
+textarea {
+  min-height: 120px;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+.fieldset {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: var(--card);
+}
+.fieldset h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+.summary-card textarea {
+  min-height: 110px;
+}
+.multi-select {
+  position: relative;
+}
+.multi-select-trigger {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.multi-select-value {
+  flex: 1;
+  color: var(--muted);
+}
+.multi-select-value.has-value {
+  color: var(--text);
+}
+.multi-select-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+.multi-select-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.multi-select-panel input {
+  width: 16px;
+  height: 16px;
+}
+.multi-select[data-open="true"] .multi-select-panel {
+  display: flex;
+}
+.form-footer {
+  margin-top: 24px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.helper {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(12px);
+  z-index: 999;
+}
+.toast.show {
+  opacity: 0.95;
+  transform: translateY(0);
+}
+@media (max-width: 640px) {
+  body {
+    padding: 16px;
+  }
+  header {
+    padding: 24px;
+  }
+  .header-cta {
+    gap: 8px;
+  }
+  .tab-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media print {
+  body {
+    padding: 0;
+    background: #fff;
+  }
+  .app,
+  .wizard-overlay,
+  .toast,
+  header,
+  .action-menu,
+  .tab-nav {
+    display: none !important;
+  }
+  #print-export {
+    display: block !important;
+    padding: 20px;
+  }
+  #print-export .card {
+    box-shadow: none;
+    border: 1px solid #eee;
+    background: #fff;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    break-inside: avoid;
+  }
+  #print-export h1 {
+    font-size: 18pt;
+    margin-bottom: 24px;
+    color: #000;
+    text-transform: uppercase;
+  }
+  #print-export h2 {
+    font-size: 12pt;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #000;
+    border-bottom: 2px solid #009e67;
+    padding-bottom: 6px;
+  }
+  #print-export table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+  }
+  #print-export td {
+    padding: 4px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  #print-export td:first-child {
+    width: 30%;
+    font-weight: 600;
+    color: #444;
+  }
+  #print-export td:last-child {
+    color: #000;
+  }
+  #print-export tr:last-child td {
+    border-bottom: none;
+  }
+}
+  .wizard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 250, 255, 0.98);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .wizard-overlay.active {
+    display: flex;
+  }
+  .wizard-header {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    z-index: 10;
+  }
+  .wizard-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .wizard-subtitle {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .wizard-progress-container {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .wizard-progress-text {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .wizard-progress {
+    height: 6px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .wizard-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .wizard-stage {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    padding: 40px;
+  }
+  .wizard-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    text-align: left;
+    position: absolute;
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px) scale(0.95) rotateY(-5deg);
+  }
+  .wizard-card.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0) scale(1) rotateY(0);
+    z-index: 5;
+  }
+  .wizard-card.prev {
+    opacity: 0.4;
+    transform: translateX(-120px) scale(0.9) rotateY(5deg) translateZ(-50px);
+    filter: blur(2px);
+    z-index: 1;
+  }
+  .wizard-card.next {
+    opacity: 0; /* Keep next hidden until active to avoid clutter, or low opacity if desired */
+    transform: translateX(120px) scale(0.9) rotateY(-5deg) translateZ(-50px);
+  }
+  .wizard-card h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: var(--text);
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--support);
+    padding-bottom: 12px;
+    display: inline-block;
+  }
+  .wizard-helper {
+    font-size: 0.95rem;
+    color: var(--muted);
+    background: #f8fbff;
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border-radius: 0 8px 8px 0;
+    line-height: 1.5;
+  }
+  .wizard-card .field-container {
+    margin-bottom: 32px;
+  }
+  .wizard-card .field-container label {
+    display: none; /* Hide original label as we show h3 */
+  }
+  .wizard-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  .wizard-btn {
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .wizard-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .wizard-btn.prev {
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .wizard-btn.next {
+    background: var(--gradient-end);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 167, 119, 0.3);
+  }
+  .wizard-close {
+    background: transparent;
+    border: 1px solid var(--border);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  .wizard-close:hover {
+    background: #fff;
+    color: var(--danger);
+    border-color: var(--danger);
+  }
+</style>
+</head>
+<body>
+<div class="wizard-overlay" id="wizard-overlay">
+  <div class="wizard-header">
+    <div class="wizard-title">
+      <span>Wizard Modus</span>
+      <span class="wizard-subtitle" id="wizard-section-title">Start</span>
+    </div>
+    <div class="wizard-progress-container">
+      <div class="wizard-progress"><div class="wizard-bar" id="wizard-bar"></div></div>
+      <div class="wizard-progress-text" id="wizard-progress-text">0 / 0</div>
+    </div>
+    <button class="wizard-close" id="wizard-close" title="Sluiten">✕</button>
+  </div>
+  <div class="wizard-stage" id="wizard-stage">
+    <!-- Cards injected here -->
+  </div>
+</div>
+<div class="app">
+  <header>
+    <div class="header-row">
+      <div class="header-copy">
+        <h1>
+          <span class="title-main">INTAKEFORMULIER</span>
+          <span class="process-title" style="display: block; font-size: 0.65em; font-weight: 400; margin-top: 6px; color: var(--text); line-height: 1.4;"></span>
+        </h1>
+      </div>
+      <img class="header-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDguOTggNTMuODYiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAudXVpZC01YzYyN2VlZi02MzY0LTRhMzUtOGUxYS00ZTdlMmU1YTdlMjAgewogICAgICAgIGZpbGw6ICMwMDYwYWM7CiAgICAgIH0KCiAgICAgIC51dWlkLTVjNjI3ZWVmLTYzNjQtNGEzNS04ZTFhLTRlN2UyZTVhN2UyMCwgLnV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiLCAudXVpZC1iNDk2OTgyZi0wZmNkLTQ0M2EtOTdmMS01ZjM4NDVlNDgwYTEsIC51dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSwgLnV1aWQtNzA5MTAxZTAtNjI5YS00OTc1LTliNjUtYzRiMDQ2ZjQwMTllLCAudXVpZC05Y2Y5MDg1NC02MWNmLTQ1YTktYTZlMi0yYzVjMDcwZjVkYTksIC51dWlkLTcyMWFjMDUzLWQ1OTYtNDNiMi1iYjQyLTJiYWNlYTBjNzY4MiB7CiAgICAgICAgc3Ryb2tlLXdpZHRoOiAwcHg7CiAgICAgIH0KCiAgICAgIC51dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiB7CiAgICAgICAgZmlsbDogI2ZmZGEwMDsKICAgICAgfQoKICAgICAgLnV1aWQtYjQ5Njk4MmYtMGZjZC00NDNhLTk3ZjEtNWYzODQ1ZTQ4MGExIHsKICAgICAgICBmaWxsOiAjZTQwNTIxOwogICAgICB9CgogICAgICAudXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUsIC51dWlkLTljZjkwODU0LTYxY2YtNDVhOS1hNmUyLTJjNWMwNzBmNWRhOSB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgfQoKICAgICAgLnV1aWQtOWNmOTA4NTQtNjFjZi00NWE5LWE2ZTItMmM1YzA3MGY1ZGE5IHsKICAgICAgICBzdHJva2U6ICMwMDA7CiAgICAgIH0KCiAgICAgIC51dWlkLTcyMWFjMDUzLWQ1OTYtNDNiMi1iYjQyLTJiYWNlYTBjNzY4MiB7CiAgICAgICAgZmlsbDogIzFkMWQxYjsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGcgaWQ9InV1aWQtZDNkODc5NmEtZGZhMS00YmU3LTkxZjktOWEwZjY3NWViMWMwIiBkYXRhLW5hbWU9IkdlbWVlbnRlIFdhc3NlbmFhciI+CiAgICA8cmVjdCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIHdpZHRoPSIzMDguOTgiIGhlaWdodD0iNTMuODYiLz4KICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcyMWFjMDUzLWQ1OTYtNDNiMi1iYjQyLTJiYWNlYTBjNzY4MiIgZD0ibTExNC41NCwxOC43OGwtMy4yNSwxLjExdjMuMzNoLTEuMzh2MS45N2gxLjM4djcuMmMwLC44OS4xMywxLjc4LjY1LDIuNDcuNTMuNjksMS40NCwxLjEyLDIuOTMsMS4xMmguMDFjLjk2LDAsMi4wNi0uMjUsMi45NC0uNjVsLjA5LS4wNHYtMi44M2gtMS4zNGwtLjAyLjEzYy0uMS42NC0uNDcsMS4wNy0xLjEzLDEuMDgtLjQ0LDAtLjYyLS4xOS0uNzUtLjQ5LS4xMi0uMy0uMTQtLjcyLS4xNC0xLjA5LDAtLjEsMC0uMiwwLS4yOXYtNi42MWgzLjM3di0xLjk3aC0zLjM3di00LjQ0Wm0tMzMuOCwxMi45N2MtLjQ1LDEuMTYtMS45MSwxLjkzLTMuMTEsMS45Mi0yLjQyLDAtMy43OS0yLjE0LTMuODYtNC40NWg3Ljg3di0uNTRjMC0zLjE4LTIuMDMtNS44My01LjM5LTUuODMtMy41NCwwLTUuOTMsMy4wNi01LjkzLDYuNDIsMCw0LjA0LDMuMDMsNi43MSw2Ljk2LDYuNzIsMS40MSwwLDMuMjItLjQ1LDQuNDctMS4xbC4wOC0uMDR2LTMuMTloLTEuMDZsLS4wNC4wOVptLTQuNjYtNi43M2MxLjM1LDAsMiwuODksMi4wNCwyLjE2di4wMmgtNC4zMWMuMjgtMS4yLjk0LTIuMTgsMi4yOC0yLjE4Wm0xNy42NCw2LjczYy0uNDUsMS4xNi0xLjkxLDEuOTMtMy4xMSwxLjkyLTIuNDIsMC0zLjgtMi4xNC0zLjg2LTQuNDVoNy44N3YtLjU0YzAtMy4xOC0yLjAzLTUuODMtNS4zOS01LjgzLTMuNTQsMC01LjkzLDMuMDYtNS45Myw2LjQyLDAsNC4wNCwzLjAzLDYuNzEsNi45Niw2LjcyLDEuNDEsMCwzLjIxLS40NSw0LjQ3LTEuMWwuMDgtLjA0di0zLjE5aC0xLjA2bC0uMDQuMDlabS00LjY2LTYuNzNjMS4zNSwwLDIsLjg5LDIuMDQsMi4xNnYuMDJoLTQuMzFjLjI3LTEuMi45NC0yLjE4LDIuMjctMi4xOFptNDAuMzMsNi43M2MtLjQ1LDEuMTYtMS45MSwxLjkzLTMuMTEsMS45Mi0yLjQyLDAtMy44LTIuMTQtMy44Ni00LjQ1aDcuODd2LS41NGMwLTMuMTgtMi4wMy01LjgzLTUuMzktNS44My0zLjU0LDAtNS45MywzLjA2LTUuOTMsNi40MiwwLDQuMDQsMy4wMyw2LjcxLDYuOTcsNi43MiwxLjQxLDAsMy4yMS0uNDUsNC40Ny0xLjFsLjA4LS4wNHYtMy4xOWgtMS4wNmwtLjA0LjA5Wm0tNC42Ni02LjczYzEuMzUsMCwyLC44OSwyLjA0LDIuMTZ2LjAyaC00LjMxYy4yOC0xLjIuOTQtMi4xOCwyLjI3LTIuMThabS0xNi40MSw4LjE2di01LjgzYzAtMi42NS0xLjc5LTQuNS00LjA2LTQuNS0xLjI5LDAtMi43Ny40NS0zLjY5LDEuMjN2LS44NmgtNC4xNHYxLjExaC4xNWMuNzQsMCwuNzIuNTguNzQsMS4zM3Y3LjUzYy0uMDIuNy4wMiwxLjMyLS44MywxLjMzaC0uMTV2MS4xMWg1LjIydi0xLjExaC0uMTVjLS44NSwwLS44Mi0uNjMtLjgzLTEuMzN2LTYuMTFjLjMxLTEuMDQsMS4zNC0xLjkyLDIuNDMtMS45MSwxLjcuMDEsMi4wNCwxLjE0LDIuMDYsMi42M3Y1LjM5Yy0uMDIuNy4wMiwxLjMyLS44MywxLjMzaC0uMTV2MS4xMWg1LjIydi0xLjExaC0uMTVjLS44NSwwLS44Mi0uNjMtLjgzLTEuMzNabS04MC4xMi02LjM1bC4xMi4wMmMuOTguMTkuOTQuNzYuOTYsMS44NHY0Ljg3aC0uODFjLTQuMjUsMC03LjUyLTMuMTgtNy41Mi03LjQzLDAtMy4yNiwyLjA2LTYuMTksNS40OC02LjIuNjMsMCwxLjUyLjE1LDIuMjMuNDguNzIuMzQsMS4yMy44NSwxLjIzLDEuNTgsMCwuNDMtLjE1LjY3LS40MywxLjA0bC0uMS4xMywxLjE1Ljc4LDIuODctMy4yNC0uMDgtLjFjLTEuNjktMi4xOS00LjY2LTMuMjMtNy4zMy0zLjIzLTUsMC04Ljg3LDMuOTgtOC44OCw4LjkxLDAsMS45OS43NCw0LjQxLDIuNjEsNi4zNCwxLjg3LDEuOTMsNC44NiwzLjM1LDkuMzIsMy4zNSwxLjU1LDAsMy4xNC0uMDcsNC43My0uMzdsLjEyLS4wMnYtMS4xN2gtLjEzYy0uODQtLjEzLS43OS0uMzUtLjgzLTEsMC0uMDksMC0uMTksMC0uMjl2LTQuNDNjLjAxLTEuMDksMC0xLjY3Ljg0LTEuODRsLjEyLS4wM3YtMS4xOGgtNS42OXYxLjE5Wm0xNy41NSw0LjkxYy0uNDUsMS4xNi0xLjkxLDEuOTMtMy4xMSwxLjkyLTIuNDIsMC0zLjc5LTIuMTQtMy44Ni00LjQ1aDcuODd2LS41NGMwLTMuMTgtMi4wMy01LjgzLTUuMzktNS44My0zLjU0LDAtNS45MywzLjA2LTUuOTMsNi40MiwwLDQuMDQsMy4wMyw2LjcxLDYuOTYsNi43MiwxLjQxLDAsMy4yMS0uNDUsNC40Ny0xLjFsLjA4LS4wNHYtMy4xOWgtMS4wNmwtLjA0LjA5Wm0tNC42Ni02LjczYzEuMzUsMCwyLC44OSwyLjA0LDIuMTZ2LjAyaC00LjMxYy4yNy0xLjIuOTQtMi4xOCwyLjI4LTIuMThabTI3LjE1LDguMTZ2LTUuODNjMC0yLjY1LTEuNzgtNC41LTQuMDYtNC41LTEuMzcsMC0yLjk2LjUyLTQuMjUsMS44LS44MS0xLjM1LTIuMi0xLjgtMy42Mi0xLjgtMS4zOCwwLTIuNzIuNTItMy41NiwxLjQ4di0xLjExaC00LjE0djEuMTFoLjE1Yy43NCwwLC43Mi41OC43NCwxLjMzdjcuNTNjLS4wMi43LjAyLDEuMzItLjgzLDEuMzNoLS4xNXYxLjExaDUuMjJ2LTEuMTFoLS4xNWMtLjg1LDAtLjgyLS42My0uODMtMS4zM3YtNi4xMWMuMzEtMS4wNCwxLjM0LTEuOTIsMi40My0xLjkxLDEuNy4wMSwyLjA0LDEuMTQsMi4wNiwyLjYzdjUuMzljLS4wMi43LjAyLDEuMzItLjgzLDEuMzNoLS4xNXYxLjExaDUuMjJ2LTEuMTFoLS4xNWMtLjg1LDAtLjgyLS42My0uODMtMS4zM3YtNi4xMWMuMzEtMS4wNCwxLjM0LTEuOTIsMi40My0xLjkxLDEuNy4wMSwyLjA0LDEuMTQsMi4wNiwyLjYzdjUuMzljLS4wMi43LjAyLDEuMzItLjgzLDEuMzNoLS4xNXYxLjExaDUuMjJ2LTEuMTFoLS4xNWMtLjg1LDAtLjgyLS42My0uODQtMS4zM1ptMjIzLjAxLTEwLjE5Yy0uMzctLjA3LS43Mi0uMTUtMS4xMS0uMTUtMS4xNSwwLTIuNDQuNTUtMy4xMiwxLjUxdi0xLjE0aC0zLjgydjEuMTFoLjE1Yy43MiwwLC43LjU4LjcxLDEuMzN2Ny41M2MwLC4zMywwLC42OS0uMS45My0uMS4yNC0uMjMuMzgtLjYyLjM5aC0uMTV2MS4xMWg0Ljk3di0xLjExaC0uMTVjLS4zOCwwLS41MS0uMTUtLjYxLS4zOS0uMDktLjI1LS4xLS42LS4xLS45M3YtNS41M2MwLTEuMzEuOTYtMi4yNCwxLjgyLTIuMjQuNjUsMCwxLjA2LjM4LDEuMTMuOTh2LjEzaDEuMTF2LTMuNWwtLjEyLS4wMlptLTUxLjM2LDguNzVjLS40NSwxLjE2LTEuOTEsMS45My0zLjExLDEuOTItMi40MiwwLTMuOC0yLjE0LTMuODYtNC40NWg3Ljg3di0uNTRjMC0zLjE5LTIuMDMtNS44My01LjM5LTUuODMtMy41NCwwLTUuOTIsMy4wNi01LjkzLDYuNDIsMCw0LjA0LDMuMDMsNi43MSw2Ljk2LDYuNzIsMS40MSwwLDMuMjEtLjQ1LDQuNDctMS4xbC4wOC0uMDR2LTMuMTloLTEuMDZsLS4wNC4wOVptLTQuNjYtNi43M2MxLjM1LjAxLDIsLjg5LDIuMDQsMi4xN3YuMDJoLTQuMzJjLjI4LTEuMi45NC0yLjE4LDIuMjgtMi4xOVptMzIuNDgsOS4xMWMtLjA4LS4yNS0uMDktLjYxLS4wOS0uOTR2LTUuNzhjMC0xLjU1LS40LTIuNzEtMS4zMS0zLjQ2LS45LS43NS0yLjI3LTEuMDktNC4xNS0xLjA5LTEuNTIsMC0zLjA2LjI3LTQuNTIuNzVsLS4xLjAzdjIuOTRoMS4wNWwuMDQtLjA4Yy41MS0xLjA0LDEuOTUtMS4zMiwzLjA5LTEuMzIsMS4zNy4wMSwyLjU4LjQzLDIuNjUsMS44MS0zLjIyLjM0LTcuODQuODktNy44Nyw0Ljk2LDAsMi41LDEuOTMsNC4wNiw0LjMzLDQuMDZoMGMxLjM1LDAsMi42LS40NiwzLjUzLTEuNDV2MS4wOGgzLjk5di0xLjExaC0uMTVjLS4zMSwwLS40MS0uMTMtLjUtLjM5Wm0tMy4zNC0zLjJjMCwxLjI2LS45MSwyLjc1LTIuNywyLjc1LTEuMDMsMC0xLjcxLS43NS0xLjcyLTEuODItLjAzLTEuOTIsMi40Mi0yLjU1LDQuNDItMi44NXYxLjkyWm0tMzkuOTUtMi45MmMtMS44Ny0uNTUtMy42MS0uOTItMy41Ni0yLDAtLjQuMjgtLjY3LjY4LS44Ni40LS4xOS44OS0uMjcsMS4yMi0uMjcuNDEsMCwuOTkuMDgsMS40NS4yOS40Ni4yMS43OC41Mi43OCwxLjAxLDAsLjExLS4wNC4yOC0uMDkuNDJsLS4wNC4xNCwxLjE4LjQ3LjA3LS4xMSwxLjc1LTIuODYtLjEzLS4wOGMtMS40OC0uOS0zLjIzLTEuMy00LjkyLTEuMy0yLjI5LDAtNS4zNywxLjAyLTUuMzksMy43OSwwLDIuMTEsMS45NSwyLjgzLDMuNzcsMy4zOSwxLjg2LjU2LDMuNTksMS4wMywzLjU2LDIuMzcsMCwuNTYtLjM1LjkzLS44NCwxLjItLjUuMjYtMS4xMy4zOC0xLjYxLjM3LS40NywwLTEuMTYtLjEtMS43MS0uMzUtLjU1LS4yNi0uOTQtLjY0LS45NS0xLjIyLDAtLjIuMDQtLjMxLjEzLS41bC4wNy0uMTMtMS4xOC0uNTktMi4wNywyLjg3LjExLjA5YzEuNTEsMS4zMSwzLjU5LDEuODYsNS41MywxLjg2LDIuNjMsMCw1Ljk3LTEuMDcsNS45OC00LjIxLDAtMi4zNy0xLjk0LTMuMjMtMy43Ny0zLjc4Wm0tMjIuNjcsNi4xMmMtLjA4LS4yNS0uMDktLjYxLS4wOS0uOTR2LTUuNzhjMC0xLjU1LS40LTIuNy0xLjMxLTMuNDYtLjkxLS43NS0yLjI3LTEuMDktNC4xNi0xLjA5LTEuNTIsMC0zLjA2LjI3LTQuNTIuNzVsLS4xLjAzdjIuOTRoMS4wNWwuMDQtLjA4Yy41MS0xLjA0LDEuOTUtMS4zMiwzLjA5LTEuMzIsMS4zNy4wMSwyLjU4LjQzLDIuNjUsMS44MS0zLjIyLjM1LTcuODQuODktNy44Nyw0Ljk2LDAsMi41LDEuOTMsNC4wNiw0LjMzLDQuMDZoMGMxLjM1LDAsMi42LS40NywzLjU0LTEuNDV2MS4wOGgzLjk5di0xLjExaC0uMTVjLS4zMSwwLS40MS0uMTMtLjUtLjM5Wm0tMy4zNC0zLjJjMCwxLjI3LS45MSwyLjc1LTIuNywyLjc1LTEuMDIsMC0xLjcxLS43NS0xLjcyLTEuODItLjAzLTEuOTIsMi40Mi0yLjU1LDQuNDItMi44NXYxLjkyWm0xMy4yNC0yLjkyYy0xLjg3LS41NS0zLjYxLS45Mi0zLjU2LTIsMC0uNC4yOC0uNjcuNjgtLjg2LjQtLjE5Ljg5LS4yNywxLjIyLS4yNy40MSwwLC45OS4wOCwxLjQ1LjI5LjQ2LjIxLjc4LjUyLjc4LDEuMDEsMCwuMTEtLjA0LjI4LS4wOS40MmwtLjA0LjEzLDEuMTguNDcuMDctLjExLDEuNzUtMi44Ni0uMTMtLjA4Yy0xLjQ4LS45LTMuMjMtMS4zLTQuOTItMS4zLTIuMjksMC01LjM3LDEuMDEtNS4zOSwzLjc5LDAsMi4xMiwxLjk1LDIuODMsMy43NywzLjM5LDEuODYuNTYsMy41OSwxLjAzLDMuNTYsMi4zNywwLC41Ni0uMzUuOTMtLjg1LDEuMi0uNS4yNi0xLjEzLjM3LTEuNjEuMzctLjQ3LDAtMS4xNi0uMS0xLjcxLS4zNS0uNTUtLjI2LS45NC0uNjQtLjk0LTEuMjIsMC0uMi4wNC0uMzEuMTMtLjVsLjA3LS4xNC0xLjE4LS41OS0yLjA3LDIuODcuMS4wOWMxLjUxLDEuMzEsMy41OSwxLjg2LDUuNTQsMS44NiwyLjYzLDAsNS45Ni0xLjA3LDUuOTgtNC4yMSwwLTIuMzctMS45NC0zLjIzLTMuNzctMy43OFptNjkuMzIsNi4xMmMtLjA4LS4yNS0uMDktLjYxLS4wOC0uOTR2LTUuNzhjMC0xLjU1LS40LTIuNy0xLjMxLTMuNDYtLjktLjc1LTIuMjctMS4wOS00LjE1LTEuMDktMS41MiwwLTMuMDYuMjctNC41Mi43NWwtLjExLjAzdjIuOTRoMS4wNWwuMDQtLjA4Yy41MS0xLjA0LDEuOTUtMS4zMiwzLjA5LTEuMzIsMS4zNy4wMSwyLjU4LjQzLDIuNjUsMS44MS0zLjIyLjM1LTcuODQuODktNy44Nyw0Ljk2LDAsMi41LDEuOTMsNC4wNiw0LjMzLDQuMDZoMGMxLjM1LDAsMi42LS40NywzLjU0LTEuNDV2MS4wOGgzLjk5di0xLjExaC0uMTVjLS4zMSwwLS40MS0uMTQtLjUtLjM5Wm0tMy4zNC0zLjJjMCwxLjI2LS45MSwyLjc1LTIuNywyLjc1LTEuMDMsMC0xLjcxLS43NS0xLjcyLTEuODItLjAzLTEuOTIsMi40Mi0yLjU1LDQuNDItMi44NXYxLjkyWm0tMjMuMTUsMi4yNnYtNS44M2MwLTIuNjUtMS43OS00LjUtNC4wNi00LjUtMS4yOSwwLTIuNzcuNDUtMy42OSwxLjIzdi0uODZoLTQuMTN2MS4xMWguMTVjLjc0LDAsLjcyLjU4Ljc0LDEuMzN2Ny41M2MtLjAyLjcuMDIsMS4zMi0uODMsMS4zM2gtLjE1djEuMTFoNS4yMnYtMS4xMWgtLjE1Yy0uODUsMC0uODItLjYzLS44NC0xLjMzdi02LjExYy4zMS0xLjA0LDEuMzQtMS45MiwyLjQ0LTEuOTEsMS43LjAxLDIuMDQsMS4xNCwyLjA2LDIuNjN2NS4zOWMtLjAyLjcuMDIsMS4zMi0uODMsMS4zM2gtLjE1djEuMTFoNS4yMnYtMS4xMWgtLjE1Yy0uODUsMC0uODItLjYzLS44NC0xLjMzWm0tNjMuNTMtMTQuMjR2LTEuMTloLTQuN3YxLjE4bC4xMi4wMmMuNjMuMTUuNzUuNDEuNzcuODIsMCwuMjktLjA5LjY1LS4xOSwxLjAzbC0yLjYxLDkuMzUtMi43MS0xMC4zOGMtLjAzLS4xMS0uMDQtLjItLjA0LS4yOCwwLS4zOS4zLS40OC44Ny0uNTRoLjE0di0xLjIxaC01LjYxdjEuMTlsLjEzLjAyYy41MS4wNy42LjMzLjgzLDEuMDNsLjUzLDEuNzUtMi4xNiw4LjUtMi42OC05LjljLS4wOS0uMzUtLjE2LS42My0uMTYtLjgyLjAxLS4zMS4xLS40NC43NS0uNTZsLjEzLS4wMnYtMS4xOWgtNS41NHYxLjE5bC4xMy4wMmMuNjMuMS42Mi4zOC44MSwxLjAybDQuNTMsMTUuNjNoMy4zNWwuMDMtLjExLDIuMjItOC43NCwyLjQ0LDguODZoMy4yM2w0LjI5LTE1LjM2Yy4yMi0uNzUuMTktMS4xNy45OC0xLjI5bC4xMy0uMDJaIi8+CiAgPC9nPgogIDxnIGlkPSJ1dWlkLTlmOWNiNjFmLTZiOWUtNGU2Yy1iYzU2LTg3Zjk5ZmEwN2RmYyIgZGF0YS1uYW1lPSJMYWFnIDEiPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLWI0OTY5ODJmLTBmY2QtNDQzYS05N2YxLTVmMzg0NWU0ODBhMSIgZD0ibTE0My40Nyw0Mi4yOWg1LjIxYy44NiwwLDEuNTcuODgsMS42OSwxLjE3LjAzLjA2LjAzLjA0LjAzLjA0di0xMy40MXMtMTIuMiwwLTEyLjIsMHY3LjE3cy0uMDIsMi4yOSwxLjY2LDMuNzhjMS41NCwxLjM3LDMuNjEsMS4yNSwzLjYxLDEuMjVaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1MC40MSw0My42MWMtLjA3LDAtLjA4LS4wNC0uMDktLjA1aDBzLS4wMi0uMDMtLjAzLS4wNWgwYy0uMDUtLjEyLS4yNS0uNDEtLjU0LS42NmgwYy0uMjktLjI1LS42Ni0uNDUtMS4wNS0uNDVoLTUuMzRjLS40NywwLTIuMi0uMDgtMy41Ni0xLjI4aDBjLTEuNjgtMS41LTEuNjktMy43My0xLjY5LTMuODVoMHYtNy4yOGgxMi40MXYxMy41M3MwLDAsMCwwYzAsMCwwLC4wMi0uMDEuMDNoMHMtLjA0LjA1LS4wOS4wNWgwWm0tLjUzLS45MmMuMTguMTUuMzIuMzEuNDMuNDZoMHYtMTIuOTZzLTEyLDAtMTIsMHY3LjA3aDBjMCwuMTEuMDMsMi4yOSwxLjYyLDMuN2gwYzEuMjksMS4xNCwyLjk3LDEuMjMsMy40MiwxLjIzaDBjLjA3LDAsLjExLDAsLjExLDBoNS4yMmMuNDYsMCwuODguMjMsMS4xOS41aDBaIi8+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPHBhdGggY2xhc3M9InV1aWQtYjQ5Njk4MmYtMGZjZC00NDNhLTk3ZjEtNWYzODQ1ZTQ4MGExIiBkPSJtMTU4LjksMTcuNDJjLjE0LS40NS0uMzEtLjYyLS4zMS0uNjIsMCwwLTQuMDctLjk3LTguMjMtLjk3LTQuNSwwLTguNDIuOTMtOC40Mi45MywwLDAtLjUuMTMtLjMzLjYyLjIuNTguNzkuNTIuNzkuNTJoMTUuNDNzLjkxLjAyLDEuMDctLjQ5WiIvPgogICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDEuNTUsMTcuNGMtLjAzLS4wOC0uMDQtLjE1LS4wNC0uMjJoMGMwLS4xOS4xMS0uMzIuMjEtLjM5aDBjLjEtLjA3LjItLjEuMi0uMWgwczMuOTMtLjkzLDguNDQtLjk0aC4wMWM0LjE3LDAsOC4yMy45Nyw4LjIzLjk3aDBzMCwwLDAsMGMwLDAsLjEuMDMuMTkuMTFoMGMuMDkuMDguMTkuMjEuMTkuNGgwYzAsLjA2LDAsLjEyLS4wMy4xOWgwbC0uMDYtLjAyLjA2LjAyYy0uMDkuMjctLjM0LjM5LS41OC40NmgwYy0uMjQuMDYtLjQ3LjA3LS41NC4wN2gwcy0uMDIsMC0uMDIsMGgtMTUuNDJzLS4wMiwwLS4wNSwwaDBjLS4xNiwwLS42Mi0uMDYtLjc5LS41N2gwWm04LjgxLTEuNWMtMy4zNywwLTYuNDIuNTMtNy43My43OWgwYy0uNDQuMDktLjY4LjE0LS42OC4xNGgwcy0uMDIsMC0uMDUuMDJoMHMtLjA3LjAzLS4xMS4wNmgwYy0uMDguMDYtLjE1LjE0LS4xNS4yOGgwczAsLjEuMDMuMTdoMGMuMTYuNDQuNTQuNDguNjguNDhoMHMuMDQsMCwuMDQsMGgxNS40M3MwLDAsLjAyLDBoMGMuMDYsMCwuMjgsMCwuNS0uMDdoMGMuMjItLjA2LjQyLS4xNy40OC0uMzdoMGMuMDItLjA2LjAzLS4xMS4wMy0uMTVoMGMwLS4yLS4xNi0uMzEtLjI1LS4zNmgwcy0uMDQtLjAyLS4wNC0uMDJoMHMtLjI4LS4wNy0uNjktLjE1aDBjLS40NC0uMDktMS4wOC0uMjEtMS44NS0uMzNoMGMtMS41My0uMjQtMy41OC0uNDgtNS42Ni0uNDhoMFoiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0idXVpZC01YzYyN2VlZi02MzY0LTRhMzUtOGUxYS00ZTdlMmU1YTdlMjAiIGQ9Im0xNTcuMzUsNDIuMjhzLTQuODIsMC01LjIxLDBjLS44NiwwLTEuNTcuODgtMS42OSwxLjE3LS4wMy4wNi0uMDMuMDQtLjAzLjA0di0xMy40MXMxMi4yLDAsMTIuMiwwdjcuMTdzLjAyLDIuMjktMS42NiwzLjc4Yy0xLjU0LDEuMzctMy42MSwxLjI1LTMuNjEsMS4yNVoiLz4KICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTUwLjMzLDQzLjU0czAtLjAzLS4wMS0uMDRoMHMwLTEzLjUzLDAtMTMuNTNoMTIuNDF2Ny4yOGgwYzAsLjEyLS4wMiwyLjM2LTEuNjksMy44NmgwYy0xLjM1LDEuMi0zLjA4LDEuMjgtMy41NiwxLjI4aDBjLS4wNywwLS4xMSwwLS4xMiwwaC01LjIyYy0uMzksMC0uNzYuMjEtMS4wNS40NWgwYy0uMjkuMjQtLjQ5LjU0LS41NC42NWgwczAsMCwwLDBjMCwuMDItLjAyLjA0LS4wMy4wNWgwcy0uMDIuMDQtLjA5LjA1aDBzLS4wOC0uMDQtLjA5LS4wNWgwWm0uMTktLjRjLjExLS4xNC4yNS0uMy40My0uNDZoMGMuMzEtLjI2LjcyLS41LDEuMTktLjVoNS4yMnYuMnMwLS4xLDAtLjF2LS4xaC4xMmMuNDUsMCwyLjEzLS4wOCwzLjQyLTEuMjNoMGMxLjYtMS40MiwxLjYzLTMuNiwxLjYyLTMuN2gwdi03LjA3aC0xMnYxMi45NmgwWiIvPgogICAgPC9nPgogICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU5LjExLDM0LjU0aC0uMDdzLjA1LS4wMy4wNy0uMDN2LjAzWiIvPgogICAgPGc+CiAgICAgIDxyZWN0IGNsYXNzPSJ1dWlkLTVjNjI3ZWVmLTYzNjQtNGEzNS04ZTFhLTRlN2UyZTVhN2UyMCIgeD0iMTM4LjIxIiB5PSIxNy44OCIgd2lkdGg9IjEyLjIiIGhlaWdodD0iMTIuMiIvPgogICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xMzguMTEsMzAuMTl2LTEyLjQxaDEyLjQxdjEyLjQxaC0xMi40MVptMTIuMzEtLjF2LS4xLjFoMFptLTEyLjEtLjFoMTJ2LTEyaC0xMnYxMmgwWiIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxyZWN0IGNsYXNzPSJ1dWlkLWI0OTY5ODJmLTBmY2QtNDQzYS05N2YxLTVmMzg0NWU0ODBhMSIgeD0iMTUwLjQxIiB5PSIxNy44OCIgd2lkdGg9IjEyLjIiIGhlaWdodD0iMTIuMiIvPgogICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTAuMzEsMzAuMTl2LTEyLjQxaDEyLjQxdjEyLjQxaC0xMi40MVptMTIuMzEtLjF2LS4xLjFoMFptLTEyLjEtLjFoMTJ2LTEyaC0xMnYxMmgwWiIvPgogICAgPC9nPgogICAgPGc+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTljZjkwODU0LTYxY2YtNDVhOS1hNmUyLTJjNWMwNzBmNWRhOSIgZD0ibTE0Mi40NSwyNS4yYzAsLjExLDAsLjIyLjA2LjMyLjA4LjE1LjE3LjI4LjI1LjQyLjAzLjA1LjA3LjA5LjEyLjEzLjAxLDAsLjAyLjAzLjAzLjA0LjQ0LjQ0LDEuMDUuNjIsMS42NS41OC4xNy0uMDEuMzQtLjA3LjUxLS4xMi4wOS0uMDIuMTUtLjA5LjI0LS4xMy4wOS0uMDUuMTYtLjEyLjI1LS4xNi4wNi0uMDQuMTItLjA0LjE2LS4xLDAsMCwuMTMtLjE0LjEyLS4xNS4xNy0uMTIuMTYtLjE1LjI0LS4zNy4wMS0uMDQuMDQtLjA2LjA2LS4xLjAzLS4wOC4wNC0uMTcuMDYtLjI2LDAsMCwwLS4wMS4wMiwwLC4wNC4wMy4wNy4wNy4wOS4xMSwwLC4wMy4wMS4wNi4wMi4wOS4wOC4yMy4xLjQ2LjA1LjctLjA3LjMzLS4xMy42My0uMzYuODktLjAxLjAyLS4wNS4wNi0uMDUuMDksMCwwLS4wOS4wOS0uMDkuMS0uMjUuMjItLjM0LjMzLS42NS40OC0uMDYuMDMtLjExLjA3LS4xOC4wOS0uMDMuMDEtLjA4LjAxLS4xMi4wMi0uMzIuMS0uNTIuMTYtLjk3LjA5LS4zNS0uMDUtLjY5LS4yNi0uOTctLjQ3LS4zMS0uMjItLjQzLS42MS0uNjctLjkxLS4wMi0uMDMtLjA5LS42Ni0uMDgtLjY5LjAzLS4xMiwwLS4yMi4wNS0uMzQuMDItLjA1LDAtLjA4LjA0LS4xMy4wMy0uMDQuMDItLjA5LjA0LS4xMy4wMi0uMDQuMDgtLjA1LjEtLjA5WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0Mi4xOCwyNS45NWMwLS4zMy4wOS0uNjUuMjUtLjkyaDBzLjA2LS4wNC4wOS0uMDNoMHMuMDQuMDYuMDMuMWgwYy0uMTQuMjUtLjIzLjU0LS4yMy44NGgwYzAsMS4wOS44OCwxLjk2LDEuOTcsMS45NmgwYy41NCwwLDEuMDUtLjIyLDEuNDItLjU3aDBjLjM3LS4zNi42LS44NS42LTEuMzloMGMwLS4zLS4xMS0uNTktLjI0LS44NWgwczAtLjA3LjAzLS4wOWgwcy4wNywwLC4wOS4wM2gwYy4xMy4yNy4yNS41OC4yNS45MWgwYzAsMS4xNi0xLDIuMS0yLjE2LDIuMWgwYy0xLjE2LDAtMi4xLS45NC0yLjEtMi4xaDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQyLjM3LDI1LjUzYzAtLjE1LjAyLS4yNy4wNC0uNDNoMGwuMTQuMDJjLS4wMy4xNy0uMDQuMjgtLjA0LjQxaDBjMCwuNDUuMjIuODYuNTUsMS4xNmgwYy4zMy4zLjc4LjQ5LDEuMjMuNDloMGMuNDUsMCwuOTEtLjE4LDEuMjYtLjQ3aDBjLjM1LS4yOS41OC0uNy41OC0xLjE3aDBjMC0uMDYsMC0uMTEsMC0uMTZoMGMwLS4wOSwwLS4xNi0uMDMtLjIzaDBsLjEzLS4wNGMuMDMuMDkuMDMuMTguMDMuMjdoMHMwLC4xLDAsLjE2aDBjMCwxLjA0LTEsMS43OC0xLjk3LDEuNzhoMGMtLjk3LDAtMS45MS0uNzktMS45Mi0xLjc4aDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQzLjAyLDI2LjI5Yy0uMzYtLjI4LS42My0uNjMtLjYzLS45OWgwYzAtLjA4LjAxLS4xNi4wNC0uMjNoMHMuMDUtLjA1LjA5LS4wNGgwcy4wNS4wNS4wNC4wOWgwYy0uMDIuMDYtLjAzLjEyLS4wMy4xOGgwYzAsLjI4LjIzLjYyLjU4Ljg4aDBjLjM0LjI2Ljc5LjQ0LDEuMTkuNDRoMGMuNDYsMCwuOTItLjE3LDEuMjctLjQxaDBjLjM0LS4yNS41Ni0uNTcuNTYtLjg4aDBjMC0uMDUsMC0uMTEtLjAyLS4xNmgwcy4wMS0uMDguMDUtLjA4aDBzLjA3LjAxLjA4LjA1aDBjLjAyLjA2LjAyLjEzLjAyLjJoMGMwLC4zOC0uMjUuNzMtLjYyLjk5aDBjLS4zNy4yNi0uODUuNDMtMS4zNS40M2gwYy0uNDQsMC0uOTEtLjE5LTEuMjctLjQ3aDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtOWNmOTA4NTQtNjFjZi00NWE5LWE2ZTItMmM1YzA3MGY1ZGE5IiBkPSJtMTQ0LjgxLDIwLjIzYzAsLjExLDAsLjIyLjA2LjMyLjA4LjE0LjE3LjI4LjI1LjQyLjAzLjA1LjA3LjA5LjEyLjEzLjAxLDAsLjAyLjAzLjAzLjA0LjQ0LjQ0LDEuMDUuNjIsMS42NS41OC4xNy0uMDEuMzQtLjA3LjUxLS4xMi4wOS0uMDIuMTUtLjA5LjI0LS4xMy4wOS0uMDUuMTYtLjEyLjI1LS4xNi4wNi0uMDMuMTItLjA0LjE2LS4wOSwwLDAsLjEzLS4xNC4xMS0uMTUuMTctLjEzLjE2LS4xNS4yNC0uMzcuMDEtLjA0LjA0LS4wNi4wNi0uMS4wMy0uMDguMDQtLjE3LjA2LS4yNiwwLDAsMC0uMDEuMDIsMCwuMDQuMDMuMDcuMDcuMDkuMTEsMCwuMDIuMDEuMDYuMDIuMDkuMDguMjMuMDkuNDYuMDUuNy0uMDYuMzMtLjEzLjYzLS4zNi44OS0uMDEuMDItLjA1LjA2LS4wNS4wOSwwLDAtLjA5LjA5LS4wOS4xLS4yNS4yMi0uMzQuMzMtLjY1LjQ4LS4wNi4wMy0uMTIuMDctLjE4LjA5LS4wMy4wMS0uMDkuMDEtLjEyLjAyLS4zMi4xLS41Mi4xNi0uOTcuMDktLjM1LS4wNS0uNjktLjI3LS45OC0uNDctLjMxLS4yMi0uNDMtLjYxLS42Ny0uOTEtLjAyLS4wMy0uMDktLjY2LS4wOC0uNjkuMDMtLjEyLDAtLjIyLjA1LS4zNC4wMi0uMDUsMC0uMDguMDQtLjEzLjAzLS4wNC4wMi0uMDguMDQtLjEzLjAyLS4wNC4wOC0uMDUuMS0uMVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDQuNTQsMjAuOTdjMC0uMzMuMDktLjY1LjI1LS45MWgwcy4wNi0uMDQuMDktLjAyaDBzLjA0LjA2LjAzLjA5aDBjLS4xNC4yNS0uMjMuNTQtLjIzLjg0aDBjMCwxLjA5Ljg4LDEuOTYsMS45NywxLjk3aDBjLjU0LDAsMS4wNS0uMjIsMS40Mi0uNThoMGMuMzctLjM2LjYtLjg1LjYtMS4zOWgwYzAtLjMtLjExLS41OS0uMjQtLjg1aDBzMC0uMDcuMDMtLjA5aDBzLjA3LDAsLjA5LjAzaDBjLjEzLjI3LjI1LjU4LjI1LjkxaDBjMCwxLjE3LTEsMi4xLTIuMTYsMi4xaDBjLTEuMTYsMC0yLjEtLjk0LTIuMS0yLjFoMFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDQuNzIsMjAuNTZjMC0uMTUuMDItLjI3LjA0LS40NGgwcy4wNC0uMDYuMDgtLjA2aDBzLjA2LjA0LjA2LjA4aDBjLS4wMi4xNy0uMDQuMjgtLjA0LjQyaDBjMCwuNDUuMjIuODYuNTUsMS4xNmgwYy4zMy4zLjc4LjQ5LDEuMjMuNDloMGMuNDUsMCwuOTEtLjE4LDEuMjYtLjQ3aDBjLjM1LS4yOS41OC0uNy41OC0xLjE3aDBjMC0uMDYsMC0uMTEsMC0uMTZoMGMwLS4wOSwwLS4xNi0uMDMtLjIzaDBzMC0uMDguMDUtLjA5aDBzLjA3LDAsLjA5LjA0aDBjLjAzLjA5LjAzLjE4LjAzLjI3aDBjMCwuMDUsMCwuMSwwLC4xNmgwYzAsMS4wNC0xLDEuNzgtMS45NywxLjc4aDBjLS45NywwLTEuOTEtLjc5LTEuOTItMS43OGgwWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0NS4zOCwyMS4zMWMtLjM2LS4yOC0uNjMtLjYzLS42My0uOTloMGMwLS4wOC4wMS0uMTYuMDQtLjIzaDBzLjA1LS4wNS4wOS0uMDRoMHMuMDUuMDUuMDQuMDloMGMtLjAyLjA2LS4wMy4xMi0uMDMuMThoMGMwLC4yOC4yMy42Mi41OC44OGgwYy4zNC4yNi43OS40NCwxLjE5LjQ0aDBjLjQ2LDAsLjkyLS4xNiwxLjI3LS40MWgwYy4zNC0uMjUuNTYtLjU3LjU2LS44OGgwYzAtLjA1LDAtLjExLS4wMi0uMTZoMHMuMDEtLjA4LjA1LS4wOGgwcy4wNy4wMS4wOC4wNWgwYy4wMi4wNi4wMy4xMy4wMy4yaDBjMCwuMzctLjI1LjczLS42Mi45OWgwYy0uMzcuMjYtLjg1LjQ0LTEuMzUuNDRoMGMtLjQ0LDAtLjktLjE5LTEuMjctLjQ3aDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtOWNmOTA4NTQtNjFjZi00NWE5LWE2ZTItMmM1YzA3MGY1ZGE5IiBkPSJtMTQwLjAzLDIwLjIzYzAsLjExLDAsLjIyLjA2LjMyLjA4LjE1LjE3LjI4LjI1LjQyLjAzLjA1LjA3LjA5LjEyLjEzLjAxLDAsLjAyLjAzLjA0LjA0LjQ0LjQ0LDEuMDUuNjIsMS42NC41OC4xNy0uMDEuMzQtLjA3LjUxLS4xMi4wOS0uMDIuMTUtLjA5LjI0LS4xMy4wOS0uMDUuMTYtLjExLjI1LS4xNi4wNi0uMDMuMTItLjA0LjE2LS4wOSwwLDAsLjEzLS4xNC4xMi0uMTUuMTctLjEyLjE2LS4xNC4yNC0uMzcuMDEtLjA0LjA0LS4wNi4wNi0uMS4wMy0uMDkuMDQtLjE3LjA2LS4yNiwwLDAsMC0uMDEuMDIsMCwuMDQuMDMuMDcuMDcuMDkuMTEsMCwuMDMuMDEuMDYuMDIuMDkuMDguMjMuMDkuNDYuMDUuNy0uMDYuMzMtLjEzLjYzLS4zNi44OS0uMDEuMDItLjA1LjA2LS4wNS4wOCwwLDAtLjA5LjA5LS4wOS4xLS4yNS4yMi0uMzQuMzItLjY1LjQ4LS4wNi4wMy0uMTIuMDctLjE4LjA5LS4wMy4wMS0uMDguMDEtLjEyLjAyLS4zMi4xLS41Mi4xNS0uOTcuMDktLjM1LS4wNS0uNjktLjI3LS45Ny0uNDctLjMxLS4yMi0uNDMtLjYxLS42Ny0uOTEtLjAyLS4wMy0uMDktLjY2LS4wOC0uNjkuMDMtLjEyLDAtLjIyLjA1LS4zNC4wMi0uMDUsMC0uMDkuMDQtLjEzLjAzLS4wNC4wMi0uMDkuMDQtLjEzLjAyLS4wNC4wOC0uMDUuMS0uMDlaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTM5Ljc1LDIwLjk4YzAtLjMzLjA5LS42NS4yNS0uOTJoMHMuMDYtLjA0LjA5LS4wMmgwcy4wNC4wNi4wMy4wOWgwYy0uMTQuMjUtLjIzLjU0LS4yMy44NWgwYzAsMS4wOS44OCwxLjk2LDEuOTcsMS45N2gwYy41NCwwLDEuMDUtLjIyLDEuNDItLjU4aDBjLjM3LS4zNi42LS44NS42LTEuMzloMGMwLS4zLS4xMS0uNTktLjI0LS44NWgwczAtLjA3LjAzLS4wOWgwcy4wNywwLC4wOS4wM2gwYy4xMy4yNy4yNS41OC4yNS45MWgwYzAsMS4xNi0xLDIuMS0yLjE2LDIuMWgwYy0xLjE2LDAtMi4xLS45NC0yLjEtMi4xaDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTM5Ljk0LDIwLjU2YzAtLjE1LjAyLS4yNy4wNC0uNDNoMGwuMTQuMDJjLS4wMi4xNy0uMDQuMjgtLjA0LjQxaDBjMCwuNDUuMjIuODYuNTUsMS4xNmgwYy4zMy4zLjc4LjQ5LDEuMjMuNDloMGMuNDUsMCwuOTEtLjE3LDEuMjYtLjQ3aDBjLjM1LS4yOS41OC0uNy41OC0xLjE3aDBjMC0uMDYsMC0uMTEsMC0uMTZoMGMwLS4wOCwwLS4xNi0uMDMtLjIzaDBsLjEzLS4wNGMuMDMuMDkuMDMuMTguMDMuMjdoMGMwLC4wNSwwLC4xLDAsLjE2aDBjMCwxLjA0LTEsMS43OC0xLjk3LDEuNzhoMGMtLjk3LDAtMS45MS0uOC0xLjkyLTEuNzhoMFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDAuNTksMjEuMzJjLS4zNi0uMjgtLjYzLS42My0uNjMtLjk5aDBjMC0uMDguMDEtLjE2LjA0LS4yM2gwcy4wNS0uMDUuMDktLjA0aDBzLjA1LjA1LjA0LjA5aDBjLS4wMi4wNi0uMDMuMTItLjAzLjE4aDBjMCwuMjguMjMuNjIuNTguODhoMGMuMzUuMjYuNzkuNDQsMS4xOS40NGgwYy40NiwwLC45Mi0uMTYsMS4yNy0uNDFoMGMuMzQtLjI1LjU2LS41Ny41Ni0uODhoMGMwLS4wNSwwLS4xMS0uMDItLjE2aDBzLjAxLS4wNy4wNS0uMDhoMHMuMDcuMDEuMDguMDVoMGMuMDIuMDYuMDIuMTMuMDIuMmgwYzAsLjM3LS4yNS43My0uNjIuOTloMGMtLjM3LjI2LS44NS40NC0xLjM1LjQ0aDBjLS40NCwwLS45MS0uMi0xLjI3LS40N2gwWiIvPgogICAgICA8L2c+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPGc+CiAgICAgICAgPGc+CiAgICAgICAgICA8cmVjdCBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIHg9IjEzOC4yMiIgeT0iMzQuMzYiIHdpZHRoPSIxMi4xNiIgaGVpZ2h0PSIzLjE1Ii8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xMzguMTIsMzcuNjF2LTMuMzVoMTIuMzZ2My4zNWgtMTIuMzZabTEyLjI2LS4xdi0uMS4xaDBabS0xMi4wNi0uMWgxMS45NnYtMi45NGgtMTEuOTZ2Mi45NGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxsaW5lIGNsYXNzPSJ1dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiIgeDE9IjEzOC4zNCIgeTE9IjM0LjQ1IiB4Mj0iMTM5LjgiIHkyPSIzNS45Ii8+CiAgICAgICAgICA8cG9seWdvbiBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIHBvaW50cz0iMTM4LjI3IDM0LjUyIDEzOC40MiAzNC4zNyAxMzkuODcgMzUuODMgMTM5LjczIDM1Ljk3IDEzOC4yNyAzNC41MiAxMzguMjcgMzQuNTIiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8bGluZSBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIHgxPSIxNDguODEiIHkxPSIzNS45MiIgeDI9IjE1MC4zMSIgeTI9IjM3LjQzIi8+CiAgICAgICAgICA8cG9seWdvbiBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIHBvaW50cz0iMTQ4Ljc0IDM2IDE0OC44OSAzNS44NSAxNTAuMzggMzcuMzUgMTUwLjI0IDM3LjUgMTQ4Ljc0IDM2IDE0OC43NCAzNiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxsaW5lIGNsYXNzPSJ1dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiIgeDE9IjEzOC4zNCIgeTE9IjM3LjM5IiB4Mj0iMTM5Ljc5IiB5Mj0iMzUuOTQiLz4KICAgICAgICAgIDxwb2x5Z29uIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgcG9pbnRzPSIxMzguMjYgMzcuMzIgMTM5LjcyIDM1Ljg3IDEzOS44NiAzNi4wMSAxMzguNDEgMzcuNDYgMTM4LjI2IDM3LjMyIDEzOC4yNiAzNy4zMiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxsaW5lIGNsYXNzPSJ1dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiIgeDE9IjE1MC4yOSIgeTE9IjM0LjQzIiB4Mj0iMTQ4Ljg0IiB5Mj0iMzUuODgiLz4KICAgICAgICAgIDxwb2x5Z29uIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgcG9pbnRzPSIxNDguNzcgMzUuODEgMTUwLjIyIDM0LjM2IDE1MC4zNyAzNC41IDE0OC45MSAzNS45NSAxNDguNzcgMzUuODEgMTQ4Ljc3IDM1LjgxIi8+CiAgICAgICAgPC9nPgogICAgICA8L2c+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgcG9pbnRzPSIxMzkuNzEgMzYuMDEgMTM5LjcxIDM1LjggMTQ4Ljg5IDM1LjggMTQ4Ljg5IDM2LjAxIDEzOS43MSAzNi4wMSAxMzkuNzEgMzYuMDEiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC05Y2Y5MDg1NC02MWNmLTQ1YTktYTZlMi0yYzVjMDcwZjVkYTkiIGQ9Im0xNTQuNjksMzcuNDdjMCwuMTEsMCwuMjIuMDYuMzIuMDguMTQuMTcuMjguMjUuNDIuMDMuMDQuMDcuMDkuMTIuMTMuMDEsMCwuMDIuMDMuMDMuMDQuNDQuNDQsMS4wNS42MiwxLjY1LjU4LjE3LS4wMS4zNC0uMDcuNTEtLjEyLjA5LS4wMi4xNS0uMDguMjQtLjEzLjA5LS4wNC4xNi0uMTIuMjUtLjE2LjA1LS4wMy4xMi0uMDQuMTYtLjA5LDAsMCwuMTMtLjE0LjEyLS4xNS4xNy0uMTIuMTYtLjE1LjI0LS4zNy4wMS0uMDQuMDQtLjA2LjA2LS4xLjAzLS4wOS4wNC0uMTcuMDYtLjI2LDAsMCwwLS4wMS4wMiwwLC4wNC4wMy4wNy4wNy4wOS4xMSwwLC4wMy4wMS4wNi4wMi4wOS4wOC4yMy4wOS40Ni4wNS43LS4wNi4zMy0uMTMuNjMtLjM2Ljg5LS4wMS4wMi0uMDUuMDYtLjA1LjA4LDAsMC0uMDkuMS0uMDkuMS0uMjUuMjItLjM0LjMzLS42NS40OC0uMDYuMDMtLjEyLjA3LS4xOC4wOS0uMDMuMDEtLjA4LjAxLS4xMi4wMi0uMzIuMS0uNTIuMTUtLjk3LjA5LS4zNS0uMDUtLjY5LS4yNi0uOTctLjQ2LS4zMS0uMjItLjQzLS42MS0uNjctLjkxLS4wMi0uMDMtLjA5LS42Ni0uMDgtLjY5LjAzLS4xMiwwLS4yMi4wNS0uMzQuMDItLjA1LDAtLjA5LjA0LS4xMy4wMy0uMDQuMDItLjA5LjA0LS4xMy4wMi0uMDQuMDgtLjA1LjEtLjA5WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1NC40MSwzOC4yMWMwLS4zMy4wOS0uNjUuMjUtLjkxaDBzLjA2LS4wNC4wOS0uMDJoMHMuMDUuMDYuMDMuMDloMGMtLjE0LjI1LS4yMy41NC0uMjMuODVoMGMwLDEuMDkuODgsMS45NiwxLjk3LDEuOTdoMGMuNTQsMCwxLjA1LS4yMiwxLjQyLS41OGgwYy4zNy0uMzYuNjEtLjg1LjYxLTEuMzloMGMwLS4zLS4xMS0uNTgtLjI0LS44NWgwczAtLjA4LjAzLS4wOWgwcy4wOCwwLC4wOS4wM2gwYy4xMy4yNy4yNS41Ny4yNS45MWgwYzAsMS4xNi0xLDIuMS0yLjE2LDIuMWgwYy0xLjE2LDAtMi4xLS45NC0yLjEtMi4xaDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU0LjYsMzcuOGMwLS4xNS4wMi0uMjcuMDQtLjQ0aDBsLjE0LjAyYy0uMDIuMTctLjA0LjI4LS4wNC40MmgwYzAsLjQ1LjIyLjg2LjU1LDEuMTZoMGMuMzMuMy43OC40OSwxLjIzLjQ5aDBjLjQ1LDAsLjkxLS4xNywxLjI2LS40N2gwYy4zNS0uMy41OC0uNzEuNTgtMS4xN2gwdi0uMTZoMGMwLS4wOSwwLS4xNi0uMDMtLjIzaDBsLjEzLS4wNGMuMDMuMDkuMDMuMTguMDMuMjdoMGMwLC4wNSwwLC4xLDAsLjE2aDBjMCwxLjA0LTEsMS43OC0xLjk3LDEuNzhoMGMtLjk3LDAtMS45MS0uNzktMS45Mi0xLjc4aDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU1LjI1LDM4LjU1Yy0uMzYtLjI4LS42My0uNjMtLjYzLS45OWgwYzAtLjA4LjAxLS4xNi4wNC0uMjNoMHMuMDUtLjA1LjA5LS4wNGgwcy4wNS4wNi4wNC4wOWgwYy0uMDIuMDYtLjAzLjEyLS4wMy4xOGgwYzAsLjI4LjIzLjYyLjU4Ljg4aDBjLjM0LjI2Ljc5LjQ0LDEuMTkuNDRoMGMuNDYsMCwuOTMtLjE2LDEuMjctLjQxaDBjLjM0LS4yNS41Ni0uNTcuNTYtLjg4aDBjMC0uMDYsMC0uMTEtLjAyLS4xN2gwcy4wMS0uMDcuMDUtLjA4aDBzLjA3LjAxLjA4LjA1aDBjLjAyLjA2LjAzLjEzLjAzLjJoMGMwLC4zNy0uMjUuNzMtLjYyLjk5aDBjLS4zNy4yNi0uODUuNDQtMS4zNS40NGgwYy0uNDMsMC0uOS0uMTktMS4yNy0uNDdoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC05Y2Y5MDg1NC02MWNmLTQ1YTktYTZlMi0yYzVjMDcwZjVkYTkiIGQ9Im0xNTcuMDUsMzIuNWMwLC4xMSwwLC4yMi4wNi4zMi4wOC4xNC4xNi4yOC4yNS40Mi4wMy4wNS4wNy4wOS4xMi4xMy4wMSwwLC4wMi4wMi4wMy4wNC40NC40NCwxLjA1LjYyLDEuNjUuNTguMTctLjAxLjM0LS4wNy41MS0uMTIuMDktLjAyLjE1LS4wOC4yNC0uMTIuMDktLjA1LjE2LS4xMi4yNS0uMTYuMDYtLjAzLjEyLS4wNC4xNi0uMDksMCwwLC4xMy0uMTQuMTItLjE1LjE3LS4xMi4xNi0uMTUuMjQtLjM3LjAxLS4wNC4wNC0uMDYuMDUtLjEuMDMtLjA4LjA0LS4xNy4wNi0uMjYsMCwwLDAtLjAxLjAyLDAsLjA0LjAzLjA3LjA3LjA5LjExLDAsLjAzLjAxLjA2LjAyLjA5LjA4LjIzLjA5LjQ2LjA1LjctLjA2LjMzLS4xMy42My0uMzYuODktLjAxLjAxLS4wNS4wNi0uMDUuMDgsMCwwLS4wOS4wOS0uMDkuMS0uMjUuMjItLjM0LjMyLS42NS40OC0uMDYuMDMtLjEyLjA3LS4xOC4wOS0uMDMuMDEtLjA4LjAxLS4xMi4wMi0uMzIuMS0uNTMuMTYtLjk3LjA5LS4zNS0uMDUtLjY5LS4yNy0uOTctLjQ3LS4zMi0uMjItLjQzLS42MS0uNjctLjkxLS4wMi0uMDMtLjA5LS42Ni0uMDgtLjY5LjAzLS4xMiwwLS4yMi4wNS0uMzQuMDItLjA1LDAtLjA4LjA0LS4xMy4wMy0uMDQuMDItLjA5LjA0LS4xMy4wMi0uMDQuMDgtLjA1LjEtLjA5WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Ni43OCwzMy4yNGMwLS4zMy4wOS0uNjUuMjUtLjkxaDBzLjA2LS4wNC4wOS0uMDJoMHMuMDQuMDYuMDIuMDloMGMtLjE0LjI1LS4yMy41NC0uMjMuODVoMGMwLDEuMDkuODgsMS45NiwxLjk3LDEuOTZoMGMuNTQsMCwxLjA1LS4yMiwxLjQyLS41N2gwYy4zNy0uMzYuNi0uODUuNi0xLjM5aDBjMC0uMy0uMTEtLjU5LS4yNC0uODVoMHMwLS4wOC4wMy0uMDloMHMuMDcsMCwuMDkuMDNoMGMuMTMuMjcuMjUuNTguMjUuOTFoMGMwLDEuMTYtMSwyLjEtMi4xNiwyLjFoMGMtMS4xNiwwLTIuMS0uOTQtMi4xLTIuMWgwWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Ni45NiwzMi44M2MwLS4xNS4wMi0uMjcuMDQtLjQ0aDBsLjEzLjAyYy0uMDIuMTctLjA0LjI4LS4wNC40MmgwYzAsLjQ1LjIyLjg1LjU1LDEuMTZoMGMuMzMuMy43OC40OCwxLjIzLjQ4aDBjLjQ1LDAsLjkxLS4xNywxLjI2LS40N2gwYy4zNS0uMjkuNTgtLjcuNTgtMS4xN2gwYzAtLjA2LDAtLjExLDAtLjE2aDBjMC0uMDgsMC0uMTYtLjAzLS4yM2gwbC4xMy0uMDRjLjAzLjA5LjAzLjE4LjAzLjI3aDB2LjE2aDBjMCwxLjA0LTEuMDEsMS43OC0xLjk3LDEuNzhoMGMtLjk3LDAtMS45MS0uOC0xLjkyLTEuNzhoMFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTcuNjEsMzMuNThjLS4zNi0uMjgtLjYzLS42My0uNjMtLjk5aDBjMC0uMDguMDEtLjE2LjA0LS4yM2gwcy4wNS0uMDUuMDktLjA0aDBzLjA1LjA1LjA0LjA5aDBjLS4wMy4wNi0uMDQuMTItLjA0LjE4aDBjMCwuMjguMjMuNjIuNTguODhoMGMuMzQuMjYuNzkuNDQsMS4xOS40NGgwYy40NiwwLC45Mi0uMTcsMS4yNy0uNDFoMGMuMzQtLjI1LjU2LS41Ny41Ni0uODhoMGMwLS4wNSwwLS4xMS0uMDItLjE2aDBzLjAxLS4wOC4wNS0uMDhoMHMuMDcuMDIuMDguMDVoMGMuMDIuMDYuMDIuMTMuMDIuMmgwYzAsLjM4LS4yNS43My0uNjIuOTloMGMtLjM3LjI2LS44NS40My0xLjM1LjQzaDBjLS40NCwwLS45LS4xOS0xLjI3LS40N2gwWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTljZjkwODU0LTYxY2YtNDVhOS1hNmUyLTJjNWMwNzBmNWRhOSIgZD0ibTE1Mi4yNywzMi41YzAsLjExLDAsLjIyLjA2LjMyLjA4LjE0LjE3LjI4LjI1LjQyLjAzLjA1LjA3LjA5LjEyLjEzLjAxLDAsLjAyLjAzLjAzLjA0LjQ0LjQ0LDEuMDUuNjIsMS42NS41OC4xNy0uMDEuMzQtLjA3LjUxLS4xMi4wOC0uMDIuMTUtLjA5LjI0LS4xMy4wOS0uMDUuMTYtLjEyLjI1LS4xNi4wNi0uMDMuMTItLjA0LjE2LS4wOSwwLDAsLjEzLS4xNC4xMS0uMTUuMTctLjEzLjE2LS4xNS4yNC0uMzcuMDEtLjA0LjA0LS4wNy4wNi0uMS4wMy0uMDkuMDQtLjE3LjA2LS4yNiwwLDAsMC0uMDEuMDIsMCwuMDQuMDMuMDcuMDcuMDkuMTEsMCwuMDMuMDEuMDYuMDIuMDkuMDguMjMuMS40Ni4wNS43LS4wNi4zMy0uMTMuNjMtLjM2Ljg5LS4wMS4wMi0uMDUuMDYtLjA1LjA5LDAsMC0uMDkuMDktLjA5LjEtLjI1LjIyLS4zNC4zMy0uNjUuNDgtLjA2LjAzLS4xMi4wNy0uMTguMS0uMDMuMDEtLjA5LjAxLS4xMi4wMi0uMzIuMS0uNTIuMTYtLjk3LjA5LS4zNS0uMDUtLjY5LS4yNi0uOTctLjQ2LS4zMS0uMjItLjQzLS42MS0uNjctLjkxLS4wMi0uMDMtLjA5LS42Ni0uMDgtLjY5LjAzLS4xMiwwLS4yMi4wNS0uMzQuMDItLjA1LDAtLjA4LjA0LS4xMy4wMy0uMDQuMDItLjA4LjA0LS4xMy4wMi0uMDQuMDgtLjA1LjEtLjA5WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1MS45OSwzMy4yNWMwLS4zMy4wOS0uNjQuMjUtLjkxaDBzLjA2LS4wNC4wOS0uMDNoMHMuMDQuMDYuMDIuMWgwYy0uMTQuMjUtLjIzLjU0LS4yMy44NGgwYzAsMS4wOS44OCwxLjk3LDEuOTcsMS45N2gwYy41NCwwLDEuMDUtLjIyLDEuNDItLjU4aDBjLjM3LS4zNi42LS44NS42LTEuMzloMGMwLS4zLS4xMS0uNTgtLjI0LS44NWgwczAtLjA4LjAzLS4wOWgwcy4wNywwLC4wOS4wM2gwYy4xMy4yNy4yNS41OC4yNS45MWgwYzAsMS4xNy0xLDIuMTEtMi4xNiwyLjExaDBjLTEuMTYsMC0yLjEtLjk0LTIuMS0yLjExaDBaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTUyLjE4LDMyLjgzYzAtLjE1LjAyLS4yNy4wNC0uNDRoMGwuMTMuMDJjLS4wMi4xNy0uMDQuMjgtLjA0LjQyaDBjMCwuNDUuMjIuODYuNTUsMS4xNWgwYy4zMy4zLjc4LjQ5LDEuMjMuNDloMGMuNDUsMCwuOTEtLjE4LDEuMjYtLjQ3aDBjLjM1LS4yOS41OC0uNy41OC0xLjE3aDB2LS4xNmgwYzAtLjA5LDAtLjE2LS4wMy0uMjNoMGwuMTMtLjA0Yy4wMy4wOS4wMy4xOC4wMy4yN2gwdi4xNmgwYzAsMS4wNC0xLDEuNzgtMS45NywxLjc4aDBjLS45NywwLTEuOTEtLjc5LTEuOTItMS43OGgwWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Mi44MywzMy41OGMtLjM2LS4yOC0uNjMtLjY0LS42My0uOTloMGMwLS4wOC4wMS0uMTYuMDQtLjIzaDBzLjA1LS4wNS4wOS0uMDRoMHMuMDUuMDUuMDQuMDloMGMtLjAyLjA2LS4wMy4xMi0uMDMuMThoMGMwLC4yOC4yMy42Mi41OC44OGgwYy4zNS4yNi43OS40NCwxLjE5LjQ0aDBjLjQ2LDAsLjkyLS4xNiwxLjI3LS40MWgwYy4zNC0uMjUuNTYtLjU3LjU2LS44OGgwYzAtLjA1LDAtLjExLS4wMi0uMTZoMHMuMDEtLjA3LjA1LS4wOGgwcy4wNy4wMS4wOC4wNWgwYy4wMi4wNy4wMy4xMy4wMy4yaDBjMCwuMzctLjI1LjczLS42Mi45OWgwYy0uMzcuMjYtLjg1LjQ0LTEuMzUuNDRoMGMtLjQ0LDAtLjkxLS4xOS0xLjI3LS40N2gwWiIvPgogICAgICA8L2c+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPGc+CiAgICAgICAgPHJlY3QgY2xhc3M9InV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiIiB4PSIxNTAuNDIiIHk9IjIyLjI3IiB3aWR0aD0iMTIuMTYiIGhlaWdodD0iMy4xNSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1MC4zMiwyNS41MnYtMy4zNWgxMi4zN3YzLjM1aC0xMi4zN1ptMTIuMjYtLjF2LS4xLjFoMFptLTEyLjA2LS4xaDExLjk2di0yLjk0aC0xMS45NnYyLjk0aDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPGxpbmUgY2xhc3M9InV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiIiB4MT0iMTUwLjU0IiB5MT0iMjIuMzUiIHgyPSIxNTEuOTkiIHkyPSIyMy44MSIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgcG9pbnRzPSIxNTAuNDcgMjIuNDMgMTUwLjYxIDIyLjI4IDE1Mi4wNyAyMy43NCAxNTEuOTIgMjMuODggMTUwLjQ3IDIyLjQzIDE1MC40NyAyMi40MyIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxsaW5lIGNsYXNzPSJ1dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiIgeDE9IjE2MS4wMSIgeTE9IjIzLjgzIiB4Mj0iMTYyLjQ2IiB5Mj0iMjUuMjkiLz4KICAgICAgICA8cG9seWdvbiBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIHBvaW50cz0iMTYwLjk0IDIzLjkxIDE2MS4wOCAyMy43NiAxNjIuNTQgMjUuMjEgMTYyLjM5IDI1LjM2IDE2MC45NCAyMy45MSAxNjAuOTQgMjMuOTEiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8bGluZSBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIHgxPSIxNTAuNTMiIHkxPSIyNS4zIiB4Mj0iMTUxLjk5IiB5Mj0iMjMuODUiLz4KICAgICAgICA8cG9seWdvbiBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIHBvaW50cz0iMTUwLjQ2IDI1LjIzIDE1MS45MSAyMy43OCAxNTIuMDYgMjMuOTIgMTUwLjYxIDI1LjM4IDE1MC40NiAyNS4yMyAxNTAuNDYgMjUuMjMiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8bGluZSBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIHgxPSIxNjIuNDkiIHkxPSIyMi4zNCIgeDI9IjE2MS4wNCIgeTI9IjIzLjc5Ii8+CiAgICAgICAgPHBvbHlnb24gY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBwb2ludHM9IjE2MC45NiAyMy43MiAxNjIuNDIgMjIuMjcgMTYyLjU2IDIyLjQxIDE2MS4xMSAyMy44NiAxNjAuOTYgMjMuNzIgMTYwLjk2IDIzLjcyIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPGxpbmUgY2xhc3M9InV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiIiB4MT0iMTUxLjg5IiB5MT0iMjMuODIiIHgyPSIxNjEuMDkiIHkyPSIyMy44MyIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgcG9pbnRzPSIxNTEuODkgMjMuOTMgMTUxLjg5IDIzLjcyIDE2MS4wOSAyMy43MyAxNjEuMDkgMjMuOTMgMTUxLjg5IDIzLjkzIDE1MS44OSAyMy45MyIvPgogICAgICA8L2c+CiAgICA8L2c+CiAgICA8Zz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiIiBkPSJtMTUwLjQ4LDE1LjQyYzMuOTEtLjAyLDguNTIsMS4wMyw4LjUyLDEuMDNsLjUxLTEuOXMtNC44OS0xLjI3LTguOTctMS4yN2MtNC41NCwwLTkuMzMsMS4yMi05LjMzLDEuMjJsLjUxLDEuOTJzNC40Ny0uOTcsOC43Ni0xWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1OC45OCwxNi41NXMtLjI4LS4wNy0uNzYtLjE2aDBjLS40OC0uMS0xLjE2LS4yMi0xLjk3LS4zNWgwYy0xLjYxLS4yNi0zLjctLjUxLTUuNjMtLjUxaDBzLS4wOSwwLS4xNCwwaDB2LS4xLjFjLTMuMjEuMDItNi41Mi41Ny03Ljk4Ljg1aDBjLS40OC4wOS0uNzYuMTUtLjc2LjE1aDBsLS4xLjAyLS41Ni0yLjEyLjEtLjAzczQuOC0xLjIzLDkuMzYtMS4yM2gwYzQuMSwwLDguOTksMS4yNyw5LDEuMjdoMGwuMS4wMy0uNTYsMi4xLS4xLS4wMmgwWm0tLjA1LS4yMmwuNDYtMS43MWMtLjEzLS4wMy0uMzgtLjA5LS43Mi0uMTdoMGMtLjUyLS4xMi0xLjI2LS4yOC0yLjEyLS40M2gwYy0xLjczLS4zMi0zLjk3LS42My02LS42M2gwYy0zLjM5LDAtNi45My42OS04LjQ5LDEuMDNoMGMtLjM0LjA3LS41OS4xMy0uNzIuMTdoMGwuNDYsMS43M2MuNjctLjE0LDQuNzUtLjk2LDguNjktLjk4aDBzLjA5LDAsLjE0LDBoMGMzLjU2LDAsNy42NC44Niw4LjMxLDEuMDFoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIGQ9Im0xNTAuMzksMTIuOTJjLTQuMDQtLjAxLTkuMTksMS4xNi05LjE5LDEuMTYtLjEuMDMtLjI3LjEtLjMyLS4xMi0uMDMtLjE2LjA5LS4yNS4yMi0uMjhoLjAyczQuNzktMS4xOCw5LjI5LTEuMThjNC4xNiwwLDkuMzYsMS4xNiw5LjM2LDEuMTYsMCwwLC4xNi4wNy4xMi4yNC0uMDMuMTYtLjE0LjE4LS4yNC4xNiwwLDAtNS40Ni0xLjEyLTkuMjgtMS4xM1oiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDAuODIsMTMuOThzMC0uMDQsMC0uMDZoMGMwLS4xNy4xNS0uMjcuMjgtLjNoLjAxczAsMCwwLDBjMCwwLDQuOC0xLjE4LDkuMzEtMS4xOGgwYzQuMTcsMCw5LjM2LDEuMTYsOS4zNywxLjE2aDBzMCwwLDAsMGMwLDAsLjE2LjA3LjE3LjI2aDBzMCwuMDQsMCwuMDZoMGMtLjAzLjE1LS4xNS4yMy0uMjUuMjJoMHMtLjA1LDAtLjA3LDBoMHMtLjM0LS4wNy0uOTEtLjE3aDBjLS41Ny0uMTEtMS4zNy0uMjQtMi4yOS0uMzhoMGMtMS44NC0uMjgtNC4xNi0uNTYtNi4wNi0uNTdoMHYtLjA3czAtLjA3LDAtLjA3YzMuODMuMDEsOS4yOSwxLjEzLDkuMjksMS4xM2gwcy4wMywwLC4wNCwwaDBjLjA2LDAsLjA5LS4wMS4xMi0uMTFoMHMwLS4wMiwwLS4wM2gwYzAtLjA2LS4wNS0uMTEtLjA4LS4xMmgwczAsMCwwLDBoMGMtLjA1LS4wMS0uMzctLjA4LS44Ny0uMThoMGMtLjU1LS4xMS0xLjMzLS4yNS0yLjI0LS40aDBjLTEuODEtLjI5LTQuMTUtLjU4LTYuMjMtLjU4aDBjLTMuMzcsMC02LjkuNjYtOC40Ni45OWgwYy0uNDkuMS0uNzguMTctLjgxLjE4aC0uMDJzMCwwLDAsMGMtLjEuMDItLjE4LjA5LS4xOC4xN2gwczAsLjAyLDAsLjA0aDBjLjAzLjEuMDUuMS4wOS4xaDBzLjA5LS4wMi4xNC0uMDNoMHM1LjEtMS4xNiw5LjE0LTEuMTZoMHMuMDQsMCwuMDYsMGgwdi4xNGgtLjA2Yy0zLjAyLDAtNi42NC42NS04LjI2Ljk4aDBjLS41NC4xMS0uODUuMTgtLjg1LjE4aDBzLS4xLjAzLS4xNy4wNGgtLjAxYy0uMDksMC0uMTktLjA3LS4yMS0uMjFoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNjAuNjIsMTAuOTFjLS4wNy0uMDMuNDQuMTEuNjgtLjM0LjE2LS4zLjExLS42NC0uMS0uNzUiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNjAuNzEsMTEuMDFzLS4wNywwLS4wOCwwaDB2LS4wOXMtLjA1LjA5LS4wNS4wOWMwLDAsMCwwLS4wMi0uMDFoMHMtLjA0LS4wMS0uMDQtLjA4aDBzLjA0LS4wOC4wNS0uMDloMHMuMDMtLjAxLjAzLS4wMWgwcy4wMiwwLC4wMiwwaDBzLjA1LDAsLjA4LDBoMGMuMTQsMCwuMzctLjAzLjUxLS4yOGgwYy4wNi0uMTEuMDgtLjIyLjA4LS4zMmgwYzAtLjE1LS4wNi0uMjYtLjE0LS4zaDBsLjEtLjE4Yy4xNy4wOS4yNS4yOC4yNS40OGgwYzAsLjEzLS4wNC4yOC0uMTEuNDFoMGMtLjE4LjM1LS41MS4zOS0uNjcuMzloLS4wMVptLjAxLS4xaC0uMS4xWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTEzOC44MSw5LjgyYy0uMTguMTctLjEzLjUxLjEuNzYuMjMuMjUuNTcuMzIuNzUuMTUiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xMzkuNDEsMTAuOTJjLS4yLDAtLjQxLS4xLS41Ny0uMjhoMGMtLjE1LS4xNi0uMjQtLjM2LS4yNC0uNTVoMGMwLS4xMy4wNC0uMjYuMTQtLjM1aDBsLjE0LjE1cy0uMDguMTItLjA4LjJoMGMwLC4xMi4wNi4yOC4xOC40MWgwYy4xMy4xNC4yOS4yMS40Mi4yMWgwYy4wNywwLC4xMy0uMDIuMTgtLjA2aDBsLjE0LjE1Yy0uMDkuMDgtLjIuMTItLjMyLjEyaDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtMjFlYzNiYTctZmUwOS00YWVlLTkwYzItODg4NzUyMmYzNzNiIiBkPSJtMTU2LjQzLDExLjU5Yy0uMDMtLjE1LDAtLjQuMTgtLjUuMjYtLjEzLjU3LDAsLjc4LjIxLjAxLS4yMiwwLS40Mi0uMDYtLjYzLjQ5LjA5LDEtLjIxLDEuMTYtLjY3LS4xMS0uMDItLjI1LS4wMi0uMzQtLjExLS4wNi0uMDctLjA3LS4xNi4wMS0uMi4zMy0uMTcuNzQtLjQuOC0uOC0uMzItLjAxLS42NiwwLS45NS0uMTcuMjgtLjQyLjc2LS44LjcyLTEuMzUtLjIxLjAzLS40MS4xMS0uNjIuMTUuMDItLjAxLjA1LS4wMy4wNi0uMDUuMDQtLjA2LjA4LS4xMS4wOS0uMTcuMTItLjQuMDctLjgzLS4xNi0xLjE3LS41OS4xNC0uOTMuNzYtMS40LDEtLjE4LjEtLjQ3LS4zMy0uNTYtLjYyLS4zMi4zNC0uMTMuODctLjEzLDEuMjktLjM4LS4xNS0uNjctLjQyLS45MS0uNzUtLjAxLS4wMS0uMDUsMC0uMDUsMC0uMDMuMTMtLjA3LjIzLS4xLjM0LS4wNy4yMy0uMDEuNDYsMCwuNjgtLjM0LS4wMi0uNjguMjEtLjY3LjU3LjI0LS4wMi41LS4wMi43My4wNy0uMzYuMjctLjg2LjYyLS44MiwxLjEzLjQyLS4wMSwxLjAyLS4wNywxLjIxLjM4LjE0LjM1LS4wNS44MS0uNDIuOTItLjUyLjE2LTEuMTkuMDMtMS41LS40OGwtLjEzLjA2Yy0uNDkuMzctMS4xOC42LTEuODIuNDMtLjE4LS4wNS0uMzUtLjE5LS40LS4zOS0uMDctLjI5LjEzLS41My4zNy0uNjYuNTItLjMxLDEuMjctLjQ5LDEuNzYtLjA2LjEtLjM2LS4xMS0uNzUtLjQzLS45MywwLS4wMS0uMDYtLjAxLS4wNi0uMDIuMzMtLjE5Ljc1LS4yNiwxLjEtLjE4LS4xNy0uMzYtLjcxLS40MS0uOTMtLjY3LS4xMy0uMTcuMTQtLjUxLDAtLjc1LS4wOC40NS0uNzQuNjktMS4wNi40NC0uNS0uMzguMTktMS4yLjMyLTEuMzEtLjM1LS4yNC0uNDctLjE2LS44MiwwbC0uMTIuMDljLjAxLS4wNi4yMi0xLjE3LS42NC0xLjE3LS44LDAtLjYxLDEuMTEtLjYsMS4xNnYuMDRjLS4zMS0uMjItLjg1LS4zMy0xLjIxLS4xLjEyLjExLjc5Ljk2LjI3LDEuMzItLjMzLjIzLS45OC0uMDItMS4wNS0uNDgtLjE2LjI0LjEuNTktLjAzLjc1LS4yMy4yNS0uNzguMjgtLjk2LjY0LjM1LS4wNy43OSwwLDEuMTEuMjEsMCwuMDEtLjA2LjAyLS4wNi4wMy0uMzMuMTctLjU3LjU1LS40OC45MS41LS40MSwxLjI0LS4yMSwxLjc2LjEyLjIzLjE0LjQyLjM5LjM0LjY3LS4wNi4xOS0uMjMuMzMtLjQxLjM4LS42NC4xNS0xLjMyLS4xLTEuOC0uNDlsLS4yOC0uMjRjLS4wOS4yOC0uMTcuNi0uNDMuNzctLjMyLjIzLS42Mi4zOC0uOTguMjMtLjIxLS4wOS0uMzMtLjM5LS4yNS0uNTguMDctLjIxLjI2LS4zMi40LS40OS4yMy0uMy4yNS0uNzEuMy0xLjA2LS4xNC4wMy0uMzQuMDUtLjQ2LS4wMi40Mi0uMzUuMTktMS4wMy4wNi0xLjQ4LS4yLjE2LS41MS4yMS0uNzMuMDctLjA3LS4wNCwwLS4xOC4wMy0uMjcuMDktLjI2LjIxLS43Ny4xMS0uODgtLjEtLjExLS41LjMyLS42Ny4yMi0uMTUtLjA4LS4xNS0uNTUtLjM0LS42LS4wNi4yMy4wNS41LS4xNC42OC0uMDEtLjA4LS4wNi0uMTctLjEtLjIyLS4yMy0uMjQtLjU1LS4yNy0uNzItLjU2bC0uMDQtLjEzYy0uMDUuMDgtLjEyLjE0LS4xNi4yMi0uMTMuMjItLjAxLjQ4LS4wNi43Mi0uMDgtLjE1LS4yNC0uMTMtLjM5LS4xNy0uMDItLjAxLS4wOC0uMDItLjA5LS4wNywwLC4zMi0uMDIuNzEuMi45NywwLDAtLjAyLjAzLDAsLjA2LjA3LjEuMTcuMjEuMTcuMjcuMDEuMjQtLjM5LjIzLS42LjIzLjEuMTQuMTQuMzEuMjQuNDQuMDkuMTIuMzMuMzEuMzMuMzFsLS4yNC4xNGMtLjIzLjEzLS4xOC4yNi0uMjYuNDktLjAyLjA2LS4xNy4yMi0uMTQuMjIuMTgtLjAyLjM1LjI1LjU2LjM2LjE3LjA5LjM0LjEuNTQuMDktLjA1LjItLjE2LjQxLS4zOS40NC4yNy4zMi43OC4wMywxLjExLjI1LjIzLjE1LjA2LjYzLS4yMS42OS0uNDkuMTMtMS4wMy0uMTgtMS4zNS0uNTVoLS4wMmMuMDEuNTktLjU2LDEuMi0xLjA5LDEuMDQtLjA2LDAtLjI5LS4yNC0uMjQtLjMuMjMtLjMxLjE5LS41OC4yNC0uODcuMDEtLjA3LjMxLS4yMy4xMS0uMjQtLjE4LS4wMS0uNDctLjUyLS45LS41NS0uMDItLjQyLjg4LS40OC44Ni0uNTQtLjQzLS44Mi0xLjM0LS40LTEuMzQtLjQuNDQtLjM0LjEtLjYzLjEyLS45LS4xNy4xOS0uMzYuNDEtLjY0LjQ3aC0uMDNjLS4xOS0uMTUtLjEtLjQxLjAxLS41Ni4yNy0uMzMuNS0uNzYuMzUtMS4xNi0uMDYuMjMtLjE2LjQzLS4zMi42MS0uMS4xLS4yNi4xNi0uNC4xMS0uMTUtLjA2LS4xNy0uMjYtLjIzLS40MS0uMTctLjUxLTEuMDMtLjc3LTEuMjktLjcxLjA1LjA0LjU1LjU5Ljc0Ljk0LjA1LjEuMS4xOC4xMS4yNy4xMy44MS4wNCwxLjQ0LjU1LDIuMDEuMzEuMzUuNjIuNjYuODcsMS4wNC4wOC4xMy4xNC4yNS4yLjM4LjA3LjE1LjE0LjMuMTUuNDYuMDIuMzkuMTIuNzYuMzYsMS4wNS40MS40OCwxLjE5LjQ3LDEuNzIuMTEuMjUtLjE2LjMxLS40Mi4zNS0uNzEsMCwwLC41OS43NCwxLjMxLjU5LjQ4LS4xLjc0LS42Ny45Mi0uOTguNDMuNDgsMS4yNC43MiwxLjguNDEuMzMtLjE3LjYzLS40NC44LS43OS4zNy4zOC44NC44NSwxLjU1Ljc3LjYtLjA3Ljk1LS41NSwxLjMtLjkxbC4xMS4xN2MuMjcuNDIuNjMuNjksMS4xLjczLjY3LjA3LDEuNDUtLjE0LDEuODUtLjcuMTguNTIuNjguODgsMS4yMy45NS40Ni4wNy45My0uMDgsMS4yMy0uNDMuMjQuMzYuNTEuNzIuOTcuODEuNDYuMDkuOTUtLjA2LDEuMjYtLjM4LDAsMCwuMjEuMzcuMzMuNDkuMzUuMzQuOC4zNSwxLjIuMTcuNTktLjI3LjcyLS45LjgxLTEuNTMuMDktLjY4LjEtMS4zOC41NS0xLjkzLjMyLS40Ljc1LS42OC45Mi0xLjE2LjE1LS40NC4zMS0uOTMuNzItMS4yMS0uNTQtLjA5LTEuMDkuMTgtMS40My42LS4xNy0uMjUtLjU3LS40NC0uODctLjI4LjI2LjE3LjQuNDcuMy43OC0uMDYuMTUtLjIyLjE0LS4zNC4wOS0uMTUtLjA1LS4xOS0uMjEtLjI0LS4zNC0uMy4yLS4yMS42My0uMDguOTEuMDEuMDUuMDIuMTMuMDEuMTMtLjIzLjAxLS40OS4xLS41Ni40MS0uMTYuNzQuNDkuNjQuMzguOC0uMTIuMTctLjQ0LjIzLS40Ny40Ni4zNy4wMS41OS4zNi42NC42Ni4wNi4zOC0uMjMuNjUtLjUyLjc2LS42Mi4yNC0xLjM2LS4zMi0xLjE0LTEuMDIsMCwwLS4wNy4wOS0uMjYuMjktLjIxLjIyLTEuNTIuNjEtMS42OS0uMTlaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU4LjQ2LDEzLjI3Yy0uMDgtLjA4LS4xNi0uMi0uMjMtLjMxaDBzLS4wNC0uMDYtLjA1LS4wOWgwYy0uMjcuMjItLjYyLjM0LS45Ny4zNWgwYy0uMSwwLS4yLDAtLjI5LS4wM2gwYy0uNDYtLjA5LS43My0uNDEtLjk2LS43NWgwYy0uMjcuMjYtLjYzLjM5LTEsLjM5aDBjLS4wOCwwLS4xNSwwLS4yMy0uMDJoMGMtLjUyLS4wNy0xLjAxLS4zOC0xLjI0LS44NWgwYy0uMzkuNDMtMSwuNjEtMS41Ny42MWgwYy0uMDksMC0uMTcsMC0uMjYtLjAxaDBjLS41Mi0uMDQtLjktLjM0LTEuMTgtLjc3aDBsLS4wNC0uMDZjLS4zMi4zNC0uNjguNzgtMS4yNy44NWgwYy0uMDYsMC0uMTEsMC0uMTcsMGgwYy0uNjEsMC0xLjA1LS4zOC0xLjM3LS43MWgwYy0uMTkuMzEtLjQ3LjU1LS43Ny43MWgwYy0uMTkuMS0uNC4xNS0uNjIuMTVoMGMtLjQ0LDAtLjg5LS4xOS0xLjIxLS40OGgwYy0uMTguMzEtLjQ0LjgxLS45Mi45MWgwYy0uMDcuMDItLjE0LjAyLS4yMS4wMmgwYy0uNDgsMC0uODYtLjMxLTEuMDUtLjVoMGMtLjA1LjIyLS4xNC40My0uMzYuNTdoMGMtLjI3LjE4LS41OS4yNy0uOTEuMjdoMGMtLjM2LDAtLjcxLS4xMy0uOTUtLjQxaDBjLS4yNi0uMzEtLjM2LS43MS0uMzktMS4xMWgwYzAtLjEzLS4wNy0uMjctLjE0LS40MmgwYy0uMDctLjEzLS4xMi0uMjUtLjItLjM3aDBjLS4yNC0uMzctLjU1LS42Ny0uODYtMS4wM2gwYy0uNTUtLjYxLS40NC0xLjI4LS41OC0yLjA2aDBjLS4wMS0uMDctLjA1LS4xNS0uMS0uMjRoMGMtLjA5LS4xNi0uMjYtLjM5LS40MS0uNTdoMGMtLjE1LS4xOC0uMy0uMzMtLjMxLS4zNGgwbC0uMTUtLjEzLjE5LS4wNXMuMDgtLjAxLjEyLS4wMWgwYy4xOSwwLC40NS4wNy43MS4yaDBjLjI1LjEzLjQ5LjMyLjU4LjU5aDBjLjAzLjA4LjA1LjE3LjA4LjI0aDBjLjAzLjA3LjA1LjEuMDkuMTFoMHMuMDQsMCwuMDYsMGgwYy4wOCwwLC4xNi0uMDQuMjItLjFoMGMuMTUtLjE3LjI0LS4zNi4yOS0uNTdoMGwuMDgtLjMyLjEyLjMxYy4wNC4xLjA1LjIuMDUuM2gwYzAsLjM2LS4yLjctLjQyLjk2aDBjLS4wNi4wNy0uMS4xOC0uMS4yNmgwYzAsLjA1LjAxLjA5LjA1LjEyaDBjLjIyLS4wNi4zOS0uMjQuNTUtLjQzaDBsLjIxLS4yNC0uMDMuMzJzMCwuMDEsMCwuMDJoMGMwLC4xMS4xLjI4LjExLjQ5aDBjMCwuMDYtLjAxLjEzLS4wNC4xOWgwYy4wNy0uMDEuMTUtLjAyLjIzLS4wMmgwYy4zLDAsLjY4LjEyLjkxLjU2aDBzLjAxLjAzLjAxLjA1aDBjMCwuMDYtLjA0LjA4LS4wNS4wOWgwcy0uMDMuMDItLjA0LjAyaDBzLS4wNC4wMS0uMDcuMDJoMGMtLjA1LjAxLS4xMi4wMy0uMTkuMDVoMGMtLjE1LjA0LS4zMi4xLS40MS4xOGgwcy0uMDYuMDYtLjA4LjA5aDBjLjE3LjA0LjMyLjE0LjQ0LjI0aDBjLjE0LjEyLjI2LjI1LjMzLjI4aDBzLjAzLjAxLjAzLjAxaDBzLjA2LDAsLjA5LjAyaDBzLjA3LjA2LjA3LjExaDBjMCwuMDYtLjAzLjA4LS4wNS4xMWgwcy0uMDQuMDQtLjA2LjA2aDBzLS4wNy4wNi0uMDguMDdoMGMtLjA0LjI1LDAsLjU0LS4yMy44NmgwczAsMCwwLDBoMHMuMDMuMDUuMDYuMDdoMHMuMDkuMDkuMTEuMWgwcy4xLjAyLjE1LjAyaDBjLjIsMCwuNC0uMTEuNTYtLjNoMGMuMTYtLjE4LjI2LS40Mi4yNi0uNjVoMHYtLjAyaDB2LS4wOHMuMTYtLjA0LjE2LS4wNGwuMDQuMDVjLjI1LjI5LjY2LjU0LDEuMDQuNTRoMGMuMDcsMCwuMTQsMCwuMi0uMDNoMGMuMDUtLjAxLjEyLS4wNi4xNi0uMTRoMGMuMDUtLjA3LjA3LS4xNi4wNy0uMjNoMGMwLS4wNy0uMDItLjExLS4wNi0uMTRoMGMtLjA5LS4wNi0uMjEtLjA3LS4zNC0uMDdoMGMtLjA4LDAtLjE2LDAtLjI0LDBoMGMtLjE4LDAtLjM5LS4wMi0uNTQtLjJoMGwtLjEyLS4xNC4xOC0uMDNjLjA5LS4wMS4xNS0uMDUuMi0uMTJoMHMuMDUtLjA3LjA3LS4xMmgwYy0uMTUsMC0uMy0uMDMtLjQ1LS4xMWgwYy0uMTItLjA3LS4yMS0uMTYtLjI5LS4yNGgwYy0uMDgtLjA4LS4xNi0uMTItLjE5LS4xMmgwczAsMCwwLDBoLS4wMnMtLjA1LDAtLjA3LS4wM2gwcy0uMDMtLjA2LS4wMy0uMDhoMHMwLS4wNS4wMS0uMDZoMHMuMDEtLjAyLjAyLS4wM2gwcy4wMy0uMDQuMDQtLjA1aDBzLjA2LS4wOC4wNy0uMWgwczAsMCwwLDBoMGMuMDQtLjEuMDQtLjE4LjA3LS4yOGgwYy4wMy0uMS4xLS4yLjIzLS4yNmgwbC4xMS0uMDZjLS4wOC0uMDYtLjE3LS4xNS0uMjMtLjIzaDBjLS4xMi0uMTYtLjE1LS4zMy0uMjQtLjQ0aDBsLS4xMi0uMTZoLjI2Yy4xNiwwLC4zOC0uMDIuNDItLjA3aDBzLjAyLS4wMi4wMi0uMDVoMHMwLS4wMSwwLS4wMmgwcy0uMDItLjAzLS4wMy0uMDZoMHMtLjA3LS4wOS0uMTEtLjE1aDBzMC0uMDEsMC0uMDFjMC0uMDItLjAxLS4wNC0uMDEtLjA2aDBzMC0uMDEsMC0uMDJoMGMtLjE4LS4yNS0uMTktLjU2LS4xOS0uODNoMGMwLS4wNiwwLS4xMSwwLS4xN2gwbC4xNy0uMDIuMDItLjAyaDBzLjAyLDAsLjA0LjAxaDBjLjA2LjAyLjEzLjAzLjIxLjA0aDBzLjAzLDAsLjA1LjAyaDBjMC0uMDgtLjAxLS4xNi0uMDEtLjI0aDBjMC0uMS4wMS0uMjEuMDctLjMxaDBjLjA1LS4xLjEyLS4xNi4xNi0uMjNoMGwuMTItLjE4LjA5LjMzYy4wNy4xMS4xNy4xOC4yOS4yNWgwYy4xMy4wNy4yNy4xNC40LjI4aDBzLjAyLjAzLjA0LjA0aDBzMC0uMSwwLS4xNmgwdi0uMDRoMGMwLS4wOCwwLS4xNy4wMi0uMjZoMGwuMDMtLjEuMS4wM2MuMTMuMDQuMTguMTYuMjIuMjZoMGMuMDQuMS4wNy4yMS4xLjI4aDBjLjAyLjA1LjA0LjA3LjA0LjA3aDBzMCwwLDAsMGgwcy4wOS0uMDIuMTctLjA3aDBjLjA3LS4wNC4xNS0uMS4yMy0uMTNoMGMuMDUtLjAyLjEtLjA1LjE2LS4wNWgwcy4wOS4wMS4xMi4wNWgwYy4wNi4wNy4wNi4xNC4wNi4yMmgwYzAsLjIyLS4wOC41NS0uMTUuNzZoMGMtLjAyLjA2LS4wNS4xMy0uMDYuMTZoMGMuMDYuMDQuMTQuMDUuMjIuMDVoMGMuMTMsMCwuMjctLjA1LjM3LS4xM2gwbC4xMi0uMDkuMDQuMTRjLjA4LjI2LjE5LjYuMTkuOTJoMGMwLC4xOS0uMDQuMzgtLjE1LjU0aDBzLjAzLDAsLjA0LDBoMGMuMDcsMCwuMTQsMCwuMi0uMDJoMGwuMTUtLjA0LS4wMi4xNWMtLjA1LjM1LS4wNi43OC0uMzIsMS4xMWgwYy0uMTYuMTktLjMzLjMtLjM4LjQ2aDBzMCwwLDAsMGMtLjAxLjAzLS4wMi4wNi0uMDIuMDloMGMwLC4xMy4xLjMxLjIxLjM2aDBjLjA5LjA0LjE3LjA1LjI1LjA1aDBjLjIsMCwuNC0uMTEuNjMtLjI3aDBjLjIyLS4xNC4zLS40My4zOS0uNzJoMGwuMDUtLjE0LjQuMzNjLjM3LjMuODYuNTEsMS4zNS41MWgwYy4xMiwwLC4yNC0uMDEuMzYtLjA0aDBjLjE1LS4wNC4yOS0uMTUuMzQtLjNoMHMuMDEtLjA3LjAxLS4xaDBjMC0uMTgtLjE0LS4zNS0uMzEtLjQ2aDBjLS4zLS4xOS0uNjgtLjM0LTEuMDItLjM0aDBjLS4yMywwLS40NC4wNi0uNjEuMjFoMGwtLjEyLjEtLjA0LS4xNmMtLjAyLS4wNi0uMDItLjEyLS4wMi0uMThoMGMwLS4zMi4xOS0uNjEuNDYtLjc4aDBjLS4xOS0uMDktLjQyLS4xMy0uNjMtLjEzaDBjLS4wOSwwLS4xOCwwLS4yNi4wMmgwbC0uMjEuMDQuMS0uMTljLjExLS4yMS4zMi0uMzIuNTEtLjRoMGMuMTktLjA5LjM4LS4xNi40Ni0uMjVoMHMuMDItLjAzLjAyLS4wN2gwYzAtLjA5LS4wNi0uMjUtLjA2LS40MmgwYzAtLjA4LjAyLS4xNy4wNy0uMjVoMGwuMTUtLjIyLjA0LjI2Yy4wMy4yNy4zNi40OC42NC40OGgwYy4xLDAsLjE4LS4wMi4yNC0uMDdoMGMuMTEtLjA4LjE1LS4xNy4xNS0uM2gwYzAtLjE2LS4wOC0uMzctLjE4LS41M2gwYy0uMS0uMTctLjIyLS4zMS0uMjUtLjMzaDBsLS4xLS4wOS4xMS0uMDdjLjE2LS4xLjM0LS4xNC41My0uMTRoMGMuMjIsMCwuNDMuMDUuNjIuMTRoMHMwLS4xMSwwLS4xN2gwYzAtLjE4LjAyLS40MS4xMi0uNmgwYy4xLS4yLjMtLjM1LjYtLjM1aDBjLjMxLDAsLjUzLjE0LjY0LjM0aDBjLjExLjE5LjE0LjQxLjE0LjZoMHMwLC4wOSwwLC4xM2gwYy4xNy0uMDguMjktLjE0LjQ0LS4xNWgwYy4xNCwwLC4yNy4wNi40My4xN2gwbC4xMS4wOC0uMS4wOXMtLjE2LjE3LS4yNy4zM2gwYy0uMTEuMTctLjIuMzctLjIuNTNoMGMwLC4xMS4wNC4yMS4xNC4yOWgwYy4wNy4wNS4xNi4wOC4yNi4wOGgwYy4yOCwwLC42LS4yLjY0LS40NmgwbC4wNS0uMjYuMTQuMjNjLjA1LjA3LjA2LjE2LjA2LjIzaDBjMCwuMTktLjA4LjM2LS4wNy40NWgwczAsLjA1LjAxLjA2aDBjLjA4LjEuMjYuMTguNDUuMjdoMGMuMTkuMDkuMzkuMi40OS40MmgwbC4wOS4xOS0uMjEtLjA1Yy0uMDktLjAyLS4xOS0uMDMtLjI5LS4wM2gwYy0uMTksMC0uMzkuMDQtLjU3LjExaDBjLjI0LjE4LjQuNDYuNC43NmgwYzAsLjA3LDAsLjE0LS4wMy4yMmgwbC0uMDQuMTYtLjEyLS4xMWMtLjE4LS4xNi0uNDEtLjIzLS42NS0uMjNoMGMtLjMzLDAtLjcuMTMtLjk5LjNoMGMtLjE4LjEtLjMzLjI3LS4zMy40NWgwczAsLjA2LDAsLjA5aDBjLjA0LjE1LjE4LjI4LjMzLjMyaDBjLjE0LjA0LjI4LjA2LjQyLjA2aDBjLjQ3LDAsLjk1LS4xOSwxLjMxLS40Nmgwcy4yMi0uMTIuMjItLjEybC4wNS4wOGMuMjEuMzQuNTkuNS45OC41aDBjLjE0LDAsLjI4LS4wMi40MS0uMDZoMGMuMjMtLjA3LjM5LS4zMy4zOS0uNThoMGMwLS4wNy0uMDEtLjE0LS4wNC0uMmgwYy0uMDUtLjE0LS4xNS0uMjEtLjI5LS4yNmgwYy0uMTQtLjA1LS4zMS0uMDYtLjQ4LS4wNmgwYy0uMTEsMC0uMjMsMC0uMzQsMGgtLjFzMC0uMDksMC0uMDljMC0uMDMsMC0uMDUsMC0uMDdoMGMwLS4yNy4xNC0uNS4zMS0uNjhoMGMuMTItLjEzLjI2LS4yNC4zOS0uMzRoMGMtLjA4LS4wMi0uMTctLjAyLS4yNi0uMDJoMGMtLjA4LDAtLjE2LDAtLjI0LjAxaC0uMTFzMC0uMSwwLS4xdi0uMDJoMGMwLS4yLjA5LS4zNy4yMy0uNDhoMGMuMTItLjEuMjctLjE2LjQzLS4xN2gwYy0uMDEtLjExLS4wMi0uMjItLjAyLS4zM2gwYzAtLjA5LDAtLjE4LjA0LS4yOGgwYy4wNC0uMTIuMDctLjIyLjEtLjM0aDB2LS4wNXMuMDYtLjAyLjA2LS4wMmMwLDAsLjAyLDAsLjA2LS4wMWgwcy4wNSwwLC4wOS4wNGgwczAsLjAxLDAsLjAxYy4yLjI3LjQzLjUuNzIuNjVoMGMtLjAyLS4xOC0uMDUtLjM4LS4wNS0uNThoMGMwLS4yMS4wNC0uNDQuMjEtLjYyaDBsLjEyLS4xMy4wNS4xN2MuMDQuMTEuMTEuMjcuMi4zOGgwYy4wOC4xMi4xOS4xOS4yLjE4aDBzMCwwLC4wMSwwaDBjLjIxLS4xMS40MS0uMzIuNjMtLjUyaDBjLjIyLS4yMS40Ny0uNDEuOC0uNDloMGwuMDctLjAyLjA0LjA2Yy4xNi4yNC4yNC41Mi4yNC44MWgwYzAsLjE1LS4wMi4zLS4wNi40NWgwczAsLjAyLDAsLjAzaDBjLjEyLS4wMy4yNC0uMDcuMzYtLjA5aDBsLjExLS4wMnYuMTFzLjAxLjA1LjAxLjA4aDBjMCwuNTItLjQxLjg4LS42NywxLjIzaDBjLjIzLjEuNTIuMS44LjExaC4xMnMtLjAyLjEyLS4wMi4xMmMtLjAzLjIzLS4xNy40MS0uMzMuNTVoMGMtLjE2LjE0LS4zNi4yNC0uNTIuMzNoMHMwLC4wMi4wMi4wNGgwYy4wNS4wNS4xNi4wNi4yOS4wOGgwbC4xMi4wMi0uMDQuMTFjLS4xNi40Ni0uNjEuNzYtMS4wOC43Nmgwcy0uMDMsMC0uMDUsMGgwYy4wMi4xMi4wMy4yNC4wMy4zNmgwYzAsLjA1LDAsLjEsMCwuMTVoMHYuMjNzLS4xOC0uMTYtLjE4LS4xNmMtLjEzLS4xMy0uMzItLjIzLS40OC0uMjNoMGMtLjA2LDAtLjEyLjAxLS4xOC4wNGgwYy0uMDkuMDQtLjE0LjE4LS4xNC4zaDBzMCwuMDYsMCwuMDhoMGwtLjEuMDItLjEuMDJzLS4wMS0uMDgtLjAxLS4xM2gwYzAtLjE3LjA2LS4zOC4yNS0uNDhoMGMuMDktLjA1LjE4LS4wNy4yNy0uMDdoMGMuMTYsMCwuMzIuMDYuNDUuMTVoMGMwLS4xMy0uMDItLjI2LS4wNS0uMzloMGwtLjA0LS4xNi4xNi4wM2MuMDUsMCwuMTEuMDEuMTYuMDFoMGMuMzQsMCwuNjgtLjIuODQtLjUxaDBjLS4wOS0uMDEtLjE4LS4wNC0uMjctLjEyaDBzMCwwLDAsMGMtLjA0LS4wNS0uMDctLjExLS4wNy0uMThoMGMwLS4wNy4wNC0uMTUuMTItLjE4aDBjLjE2LS4wOC4zNC0uMTguNDgtLjNoMGMuMTEtLjA5LjE5LS4xOS4yMy0uMzFoMGMtLjI4LDAtLjU5LS4wMi0uODctLjE4aDBsLS4wOS0uMDYuMDYtLjA5Yy4yOC0uNC42OC0uNzQuNy0xLjE2aDBjLS4xNi4wNC0uMzIuMDktLjUuMTJoMGwtLjA2LS4xOXMuMDEsMCwuMDItLjAyaDBjLjA0LS4wNi4wNy0uMTEuMDctLjEzaDBzMCwwLDAsMGMuMDQtLjEzLjA2LS4yNi4wNi0uNGgwYzAtLjIyLS4wNS0uNDQtLjE3LS42M2gwYy0uMjQuMDctLjQzLjIzLS42My40MmgwYy0uMjEuMi0uNDIuNDItLjY3LjU1aDBzLS4wNy4wMy0uMTEuMDNoMGMtLjE2LDAtLjI3LS4xMy0uMzctLjI2aDBjLS4wNi0uMDgtLjExLS4xNy0uMTUtLjI1aDBjLS4wNC4xLS4wNi4yMS0uMDYuMzNoMGMwLC4yMy4wNi40OS4wNi43NGgwdi4xNWwtLjE0LS4wNmMtLjM1LS4xNC0uNjMtLjM4LS44Ny0uNjdoMGMtLjAyLjA2LS4wNC4xMy0uMDYuMTloMGMtLjAyLjA3LS4wMy4xNC0uMDMuMjJoMGMwLC4xMy4wMy4yOC4wMy40M2gwdi4xMnMtLjExLDAtLjExLDBjLS4wMSwwLS4wMywwLS4wNCwwaDBjLS4xNCwwLS4yNy4wNS0uMzcuMTNoMGMtLjA3LjA2LS4xMi4xNC0uMTUuMjNoMHMuMDksMCwuMTMsMGgwYy4xNywwLC4zNS4wMi41Mi4wOWgwbC4xNy4wNy0uMTUuMTFjLS4xOC4xMy0uMzguMjgtLjUzLjQ0aDBjLS4xNC4xNS0uMjQuMzItLjI1LjVoMGMuMDgsMCwuMTYsMCwuMjQsMGgwYy4xOCwwLC4zOC4wMS41NS4wN2gwYy4xNy4wNi4zMy4xOC40MS4zOGgwYy4wNC4wOS4wNS4xOS4wNS4yOGgwYzAsLjMzLS4yLjY3LS41NC43OGgwYy0uMTUuMDUtLjMxLjA3LS40Ny4wN2gwYy0uNDEsMC0uODQtLjE2LTEuMS0uNTJoMGwtLjA0LjAyYy0uMzkuMjktLjkuNS0xLjQyLjVoMGMtLjE2LDAtLjMyLS4wMi0uNDgtLjA2aDBjLS4yMS0uMDYtLjQxLS4yMy0uNDctLjQ2aDBzLS4wMi0uMDktLjAyLS4xNGgwYzAtLjI5LjIxLS41MS40My0uNjNoMGMuMzItLjE5LjcxLS4zMywxLjA5LS4zM2gwYy4yMiwwLC40NS4wNS42NC4xN2gwYzAtLjI2LS4xNy0uNTItLjQxLS42NWgtLjAxcy0uMDMtLjAxLS4wMy0uMDFjMCwwLS4wMSwwLS4wMi0uMDFoMHMtLjA0LS4wNC0uMDQtLjA5aDBzMC0uMDIuMDItLjA2aDBzLjAyLS4wMi4wMy0uMDNoMGMuMjUtLjE1LjU1LS4yMy44NC0uMjNoMHMuMDQsMCwuMDcsMGgwYy0uMDctLjA2LS4xNi0uMS0uMjUtLjE1aDBjLS4xOC0uMDktLjM4LS4xNy0uNTItLjMzaDBjLS4wNC0uMDYtLjA2LS4xMi0uMDYtLjE4aDBjMC0uMDkuMDMtLjE4LjA1LS4yNmgwYy0uMTcuMTctLjQyLjI3LS42Ni4yN2gwYy0uMTQsMC0uMjctLjA0LS4zOS0uMTJoMGMtLjE1LS4xMi0uMjItLjI4LS4yMi0uNDVoMGMwLS4yMy4xMS0uNDYuMjMtLjY0aDBjLjA3LS4xMi4xNS0uMjEuMjEtLjI4aDBjLS4wOS0uMDUtLjE2LS4wNy0uMjEtLjA3aDBjLS4wOSwwLS4yMS4wNS0uNC4xNGgwbC0uMzQuMjQuMDYtLjI2cy4wMy0uMTUuMDMtLjMxaDBjMC0uMTYtLjAzLS4zNS0uMTEtLjQ5aDBjLS4wOC0uMTQtLjItLjIzLS40NS0uMjNoMGMtLjIzLDAtLjM0LjEtLjQzLjI0aDBjLS4wOC4xNC0uMS4zNC0uMS41aDBjMCwuMTYuMDIuMjguMDIuMjloMGwuMDYuMy0uMjEtLjE1Yy0uMTgtLjEyLS40NC0uMjEtLjY5LS4yMWgwYy0uMTEsMC0uMjEuMDItLjMxLjA1aDBjLjA2LjA3LjEyLjE2LjE5LjI3aDBjLjExLjE5LjIxLjQxLjIxLjY0aDBjMCwuMTctLjA3LjM1LS4yNC40NmgwYy0uMTEuMDctLjIzLjExLS4zNi4xMWgwYy0uMjQsMC0uNS0uMTEtLjY3LS4zaDBjLjAyLjA4LjA0LjE2LjA0LjI1aDBjMCwuMDYtLjAxLjE0LS4wNy4yaDBjLS4xNC4xNS0uMzUuMjItLjUzLjMxaDBjLS4wOS4wNC0uMTguMDgtLjI1LjE0aC4wMmMuMzEsMCwuNjMuMDguODkuMjVoMGwuMDUuMDN2LjA2YzAsLjA3LS4wNC4wOC0uMDUuMDloMHMtLjAyLDAtLjAzLjAxaDBsLS4wNC4wMmMtLjI1LjEzLS40NC4zOS0uNDUuNjRoMGMuMTgtLjExLjM5LS4xNS42LS4xNWgwYy40LDAsLjgxLjE2LDEuMTMuMzdoMGMuMjEuMTMuNDEuMzUuNDEuNjNoMGMwLC4wNSwwLC4xMS0uMDIuMTZoMGMtLjA3LjI0LS4yNy4zOS0uNDkuNDVoMGMtLjEzLjAzLS4yNy4wNS0uNDEuMDVoMGMtLjU1LDAtMS4wOC0uMjMtMS40OC0uNTZoMGwtLjE3LS4xNGMtLjA4LjI1LS4xNy41MS0uNDIuNjhoMGMtLjI0LjE3LS40Ny4zMS0uNzUuMzFoMGMtLjExLDAtLjIyLS4wMi0uMzMtLjA3aDBjLS4yMS0uMS0uMzMtLjMyLS4zNC0uNTRoMGMwLS4wNiwwLS4xMS4wMy0uMTdoMGMuMDktLjI1LjMtLjM2LjQxLS41MmgwYy4xOC0uMjMuMjItLjU1LjI2LS44N2gwcy0uMDcsMC0uMSwwaDBjLS4xLDAtLjItLjAxLS4yOS0uMDZoMGwtLjEyLS4wNy4xMS0uMDljLjE1LS4xMy4yLS4zLjItLjUxaDBjMC0uMjMtLjA3LS41LS4xNC0uNzNoMGMtLjExLjA2LS4yNC4wOS0uMzcuMDloMGMtLjEyLDAtLjI0LS4wMy0uMzUtLjA5aDBjLS4wNi0uMDMtLjA4LS4xMS0uMDgtLjE1aDBjMC0uMS4wNS0uMTkuMDctLjI1aDBjLjA2LS4xOC4xNC0uNTIuMTQtLjY5aDBzMC0uMDUsMC0uMDZoMHMtLjAzLjAxLS4wNS4wMmgwcy0uMDkuMDUtLjE0LjA4aDBjLS4xMS4wNi0uMjIuMTQtLjM1LjE0aDBzLS4wOCwwLS4xMS0uMDNoMGMtLjExLS4wNy0uMTMtLjE3LS4xNy0uMjdoMHMtLjAzLS4wOS0uMDQtLjEzaDBjMCwuMTQsMCwuMzItLjE1LjQ2aDBsLS4xNC4xNS0uMDMtLjJjMC0uMDUtLjA1LS4xNC0uMDgtLjE2aDBjLS4xLS4xLS4yMi0uMTctLjM2LS4yNGgwYy0uMTItLjA3LS4yNi0uMTYtLjM2LS4zaDBzLS4wMi4wMy0uMDMuMDVoMHMwLC4wMSwwLC4wMWMtLjA0LjA2LS4wNS4xMy0uMDUuMjJoMGMwLC4wOS4wMi4yLjAyLjMxaDBjMCwuMDUsMCwuMS0uMDEuMTVoMGwtLjA1LjI5LS4xNC0uMjVzLS4wNS0uMDYtLjEtLjA3aDBzLS4xMS0uMDItLjE4LS4wNGgwYzAsLjI3LjAyLjU1LjE4LjczaDBzMCwuMDIsMCwuMDJjMCwuMDIuMDEuMDQuMDEuMDVoMHMwLC4wMiwwLC4wM2gwcy4wNi4wOC4wOS4xMWgwYy4wNC4wNS4wNy4xLjA4LjE4aDBjMCwuMDktLjA0LjE3LS4wOS4yMWgwYy0uMDUuMDUtLjExLjA3LS4xOC4wOWgwYy0uMDguMDItLjE4LjAzLS4yNi4wM2gwYy4wNS4xMS4wOS4yMS4xNC4yOGgwcy4xMi4xMy4xOC4xOGgwYy4wNy4wNi4xMy4xLjEzLjFoMGwuMTIuMDktLjM3LjIxYy0uMS4wNi0uMTIuMDktLjE0LjE1aDBjLS4wMi4wNi0uMDMuMTYtLjA4LjI4aDBzMCwwLDAsMGMtLjAyLjA0LS4wNC4wNy0uMDcuMTFoMGMuMDcuMDMuMTMuMDguMTkuMTNoMGMuMDkuMDguMTguMTcuMjYuMjFoMGMuMTIuMDYuMjMuMDguMzcuMDhoMHMuMDcsMCwuMTEsMGguMTNzLS4wMy4xMy0uMDMuMTNjLS4wMi4xMS0uMDcuMjMtLjE0LjMzaDBzLS4wOC4wOS0uMTMuMTJoMGMuMDcuMDMuMTUuMDMuMjUuMDNoMGMuMDgsMCwuMTYsMCwuMjQsMGgwYy4xNSwwLC4zMS4wMS40NS4xMWgwYy4xMS4wNy4xNS4yLjE1LjMxaDBjMCwuMTItLjA0LjI0LS4xLjM1aDBjLS4wNy4xLS4xNi4xOS0uMjguMjJoMGMtLjA4LjAyLS4xNy4wMy0uMjYuMDNoMGMtLjM5LDAtLjc3LS4yMS0xLjA1LS40NmgwYy0uMDQuMjItLjE1LjQyLS4yOS41OWgwYy0uMTguMjEtLjQ0LjM3LS43MS4zN2gwYy0uMDcsMC0uMTQsMC0uMi0uMDNoMHMtLjA1LS4wMi0uMDctLjA0aDBzLS4wNC0uMDQtLjA3LS4wNmgwcy0uMDktLjEtLjEzLS4xNWgwcy0uMDUtLjA3LS4wNS0uMTNoMHMwLS4wNi4wMy0uMDhoMGMuMjEtLjI4LjE3LS41MS4yMi0uODJoMGMuMDEtLjA1LjAzLS4wNy4wNS0uMDloMHMuMDQtLjA0LjA2LS4wNmgwcy0uMDgtLjA1LS4xMi0uMDhoMGMtLjA2LS4wNS0uMTMtLjEyLS4yLS4xOGgwYy0uMTQtLjEzLS4zMS0uMjQtLjQ4LS4yNWgtLjA5czAtLjEsMC0uMWMwLDAsMC0uMDEsMC0uMDJoMGMwLS4xOS4xNC0uMzIuMjgtLjRoMGMuMTUtLjA4LjMyLS4xMy40NC0uMTZoMHMuMDYtLjAxLjA4LS4wMmgwYy0uMTktLjI4LS40NC0uMzUtLjY3LS4zNWgwYy0uMiwwLS4zNy4wNi0uNDQuMDhoMHMtLjA0LjAyLS4wNC4wMmgwbC0uMS0uMTdjLjE2LS4xMy4xOS0uMjEuMTktLjNoMGMwLS4wOC0uMDQtLjE4LS4wNy0uMjloMGMtLjE0LjE1LS4zMi4yOS0uNTUuMzRoLS4wM3MtLjAzLDAtLjAzLDBsLS4wNS0uMDJoLS4wMWMtLjExLS4wOC0uMTYtLjItLjE2LS4zMWgwYzAtLjE1LjA3LS4yOS4xNS0uMzloMGMuMTYtLjE5LjI5LS40MS4zNS0uNjNoMGMtLjA1LjA4LS4xLjE1LS4xNi4yMmgwczAsMCwwLDBjLS4xLjEtLjIzLjE2LS4zNy4xNmgwcy0uMDksMC0uMTMtLjAyaDBjLS4xMS0uMDUtLjE3LS4xNC0uMjEtLjIzaDBjLS4wMy0uMDktLjA1LS4xOC0uMDgtLjI0aDBzMCwwLDAsMGMtLjA2LS4xOS0uMjUtLjM2LS40OC0uNDdoMGMtLjE2LS4wOC0uMzMtLjE0LS40Ny0uMTZoMGMuMDUuMDUuMS4xMS4xNi4xOGgwYy4xNi4xOS4zMy40Mi40My42MWgwYy4wNS4xLjEuMTkuMTIuMzFoMGMuMTMuODMuMDUsMS40My41MywxLjk2aDBjLjMuMzUuNjIuNjUuODgsMS4wNWgwYy4wOC4xMy4xNC4yNi4yMS4zOGgwczAsMCwwLDBjLjA3LjE1LjE0LjMxLjE2LjQ5aDBjLjAyLjM3LjEyLjczLjM0Ljk5aDBjLjE5LjIzLjQ4LjMzLjc5LjMzaDBjLjI3LDAsLjU2LS4wOC43OS0uMjRoMGMuMjEtLjEzLjI2LS4zNS4zMS0uNjRoMGwuMDQtLjIzLjE0LjE4czAsMCwuMDIuMDJoMHMuMDMuMDQuMDYuMDdoMGMuMDUuMDUuMTMuMTMuMjMuMmgwYy4xOS4xNS40NS4yOS43My4yOWgwYy4wNiwwLC4xMSwwLC4xNy0uMDJoMGMuNDEtLjA4LjY3LS42MS44Ni0uOTNoMGwuMDctLjEyLjA5LjFjLjI4LjMxLjczLjUyLDEuMTYuNTFoMGMuMTksMCwuMzYtLjA0LjUyLS4xM2gwYy4zMS0uMTYuNTktLjQyLjc1LS43NGgwbC4wNi0uMTMuMS4xYy4zNC4zNS43NS43NSwxLjMyLjc1aDBzLjA5LDAsLjE0LDBoMGMuNTQtLjA2Ljg4LS41MSwxLjI0LS44OGgwbC4wOS0uMDkuMTguMjhjLjI3LjQxLjU5LjY1LDEuMDMuNjhoMGMuMDgsMCwuMTYuMDEuMjQuMDFoMGMuNTgsMCwxLjE5LS4yMSwxLjUxLS42NmgwbC4xMi0uMTYuMDcuMTljLjE3LjQ4LjYzLjgxLDEuMTUuODhoMGMuMDcsMCwuMTQuMDEuMi4wMWgwYy4zNiwwLC43MS0uMTQuOTQtLjQxaDBsLjA5LS4xMS4wOC4xMWMuMjQuMzYuNS42OC45Ljc3aDBjLjA4LjAyLjE3LjAyLjI1LjAyaDBjLjM0LDAsLjY5LS4xNC45Mi0uMzdoMGwuMS0uMS4wNy4xMnMuMDUuMDkuMTIuMmgwYy4wNi4xLjE1LjIyLjIuMjdoMGMuMTkuMTguNC4yNS42Mi4yNWgwYy4xNiwwLC4zMS0uMDQuNDctLjExaDBjLjI3LS4xMy40My0uMzMuNTQtLjU4aDBjLjExLS4yNS4xNi0uNTYuMjEtLjg3aDBjLjA5LS42Ny4xLTEuMzkuNTctMS45OGgwYy4zMy0uNDEuNzUtLjcuOS0xLjEzaDBjLjEzLS4zNy4yNi0uNzkuNTUtMS4wOWgwYy0uNDIuMDEtLjgyLjI0LTEuMDkuNTdoMGwtLjA5LjExLS4wOC0uMTFjLS4xLS4xNi0uMzMtLjMtLjUzLS4yOWgwcy0uMDMsMC0uMDQsMGgwYy4xNC4xNC4yMi4zMy4yMi41M2gwYzAsLjA4LDAsLjE2LS4wNC4yNGgwczAsMCwwLDBjLS4wNS4xMy0uMTguMTktLjI5LjE5aDBjLS4wNiwwLS4xMy0uMDItLjE4LS4wNGgwYy0uMS0uMDMtLjE3LS4xMS0uMjEtLjE4aDBzLS4wMi0uMDQtLjAzLS4wN2gwYy0uMDQuMDYtLjA1LjE0LS4wNS4yM2gwYzAsLjE1LjA1LjMyLjExLjQ1aDBzMCwuMDIsMCwuMDJjMCwuMDQuMDIuMDkuMDIuMTNoMHMwLC4wMi0uMDIuMDhoMHMtLjA0LjA0LS4wOC4wNGgwYy0uMSwwLS4yMS4wMy0uMjkuMDhoMGMtLjA4LjA1LS4xNC4xMi0uMTcuMjVoMGMtLjAyLjA4LS4wMi4xNC0uMDIuMmgwYzAsLjEzLjA0LjIuMDguMjVoMGMuMDQuMDUuMTEuMDkuMTcuMTJoMHMuMDguMDMuMTIuMDdoMHMuMDUuMDYuMDUuMTFoMHMtLjAxLjA3LS4wMy4wOWgwYy0uMDkuMTEtLjIxLjE3LS4zLjIzaDBzLS4wOC4wNi0uMS4wOGgwYy4xNS4wNC4yNy4xMy4zNy4yNGgwYy4xMi4xNC4yLjMyLjIyLjQ5aDBzMCwuMDcsMCwuMTFoMGMwLC4zOS0uMy42NS0uNi43NmgwYy0uMTEuMDQtLjIzLjA2LS4zNC4wNmgwYy0uNDksMC0uOTUtLjM2LS45OC0uODdoMHMtLjAzLjA0LS4wNS4wNWgwYy0uMDkuMDgtLjIzLjE1LS40Mi4yMmgwYy0uMTguMDYtLjQuMTEtLjYyLjExaDBjLS4xOCwwLS4zNi0uMDMtLjUxLS4xMmgwYy0uMTUtLjA5LS4yNy0uMjQtLjMyLS40NGgwbC4xLS4wMi4xLS4wMmMuMDQuMTUuMTEuMjQuMjIuMzFoMGMuMTEuMDYuMjUuMDkuNDEuMDloMGMuMTksMCwuMzktLjA0LjU2LS4wOWgwYy4xNy0uMDUuMy0uMTMuMzMtLjE2aDBjLjEtLjEuMTYtLjE3LjItLjIxaDBzLjA1LS4wNi4wNS0uMDZoMGwuMTguMWMtLjAyLjA4LS4wMy4xNS0uMDMuMjJoMGMwLC4yLjA5LjM4LjIzLjUxaDBjLjE1LjEzLjM0LjIxLjU0LjIxaDBjLjA5LDAsLjE4LS4wMS4yNi0uMDVoMGMuMjUtLjEuNDctLjMxLjQ3LS41N2gwczAtLjA1LDAtLjA4aDBjLS4wMi0uMTMtLjA4LS4yOC0uMTgtLjM5aDBjLS4xLS4xMS0uMjEtLjE4LS4zNi0uMTloLS4xMXMwLS4xMSwwLS4xMWMuMDItLjE3LjE0LS4yNi4yNC0uMzNoMGMuMDgtLjA1LjE2LS4xLjIxLS4xNGgwcy0uMDgtLjA0LS4xMy0uMDdoMGMtLjEyLS4wNy0uMjYtLjIzLS4yNS0uNDloMGMwLS4wNywwLS4xNS4wMy0uMjRoMGMuMDQtLjE4LjE0LS4zMS4yNi0uMzhoMGMuMDktLjA1LjE5LS4wOC4yOS0uMWgwYy0uMDctLjE1LS4xMi0uMzQtLjEyLS41M2gwYzAtLjE4LjA2LS4zOC4yNC0uNWgwbC4xMS0uMDguMDQuMTNjLjAyLjA3LjA1LjE0LjA3LjE5aDBzLjA1LjA4LjEuMDloMHMwLDAsMCwwYy4wNC4wMi4wOS4wMi4xMi4wMmgwYy4wNiwwLC4wNywwLC4wOS0uMDZoMGMuMDItLjA2LjAzLS4xMi4wMy0uMTdoMGMwLS4xOS0uMTEtLjM3LS4yOC0uNDloMGwtLjE0LS4wOS4xNC0uMDhjLjEtLjA1LjItLjA4LjMtLjA4aDBjLjI0LDAsLjQ3LjEyLjYyLjI4aDBjLjMxLS4zNC43NS0uNTYsMS4yMi0uNTZoMGMuMDcsMCwuMTUsMCwuMjIuMDJoMGwuMjYuMDQtLjIxLjE0Yy0uMzcuMjUtLjUzLjcxLS42NywxLjE2aDBjLS4xOS41Mi0uNjQuODEtLjk0LDEuMTloMGMtLjQyLjUxLS40MywxLjE4LS41MiwxLjg4aDBjLS4wNS4zMi0uMS42NC0uMjIuOTJoMGMtLjEyLjI4LS4zMi41My0uNjQuNjhoMGMtLjE4LjA4LS4zNi4xMy0uNTUuMTNoMGMtLjI2LDAtLjUzLS4xLS43NS0uMzFoMFptLTUuNjMtNC4wOWgwczAsMCwwLDBoMHMwLDAsMCwwaDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNzA5MTAxZTAtNjI5YS00OTc1LTliNjUtYzRiMDQ2ZjQwMTllIiBkPSJtMTQ0LjM5LDkuNTRjLjI0LS4wNS4zOC0uMzUuMzItLjY5LS4wNi0uMzQtLjMxLS41Ny0uNTUtLjUzLS4yNC4wNS0uMzguMzUtLjMyLjY5LjA2LjM0LjMxLjU3LjU1LjUzWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0My43NCw5LjAzYy0uMDEtLjA2LS4wMi0uMTItLjAyLS4xOGgwYzAtLjMuMTUtLjU4LjQyLS42M2gwcy4wNSwwLC4wOCwwaDBjLjI5LDAsLjUzLjI4LjU5LjYyaDBjLjAxLjA2LjAyLjEyLjAyLjE4aDBjMCwuMy0uMTUuNTgtLjQyLjYzaDBsLS4wMi0uMS4wMi4xcy0uMDUsMC0uMDgsMGgwYy0uMjksMC0uNTMtLjI4LS41OS0uNjJoMFptLjQ4LS42MXMtLjAzLDAtLjA0LDBoMGMtLjEzLjAyLS4yNS4xOS0uMjUuNDNoMHMwLC4wOS4wMS4xNGgwYy4wNS4yOC4yNC40Ni4zOS40NWgwcy4wMywwLC4wNCwwaDBjLjEzLS4wMi4yNS0uMTkuMjUtLjQzaDBzMC0uMDktLjAxLS4xNGgwYy0uMDUtLjI3LS4yNC0uNDUtLjM4LS40NWgwWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE1MC40Niw5LjEzYy4yNCwwLC40NC0uMjguNDQtLjYyLDAtLjM0LS4yLS42Mi0uNDUtLjYyLS4yNCwwLS40NC4yOC0uNDQuNjIsMCwuMzQuMi42Mi40NS42MloiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTAuNDUsOS4yM2MtLjE2LDAtLjMtLjA5LS4zOS0uMjJoMGMtLjA5LS4xMy0uMTUtLjMtLjE1LS40OWgwczAsMCwwLDBoMGMwLS4xOS4wNS0uMzYuMTUtLjVoMGMuMDktLjEzLjIzLS4yMi4zOS0uMjNoMGMuMTYsMCwuMy4wOS40LjIyaDBjLjA5LjEzLjE1LjMxLjE1LjVoMGMwLC4yLS4wNS4zNy0uMTUuNWgwYy0uMDkuMTMtLjIzLjIyLS4zOS4yM2gwWm0wLS4xdi0uMXMwLC4xLDAsLjFoMFptLS4yMy0xYy0uMDcuMDktLjExLjIzLS4xMS4zOGgwYzAsLjE2LjA1LjI5LjExLjM4aDBjLjA3LjA5LjE1LjE0LjIzLjE0aDBjLjA4LDAsLjE2LS4wNS4yMy0uMTRoMGMuMDctLjA5LjExLS4yMy4xMS0uMzhoMGMwLS4xNi0uMDUtLjI5LS4xMS0uMzhoMGMtLjA3LS4wOS0uMTUtLjE0LS4yMy0uMTRoMGMtLjA4LDAtLjE2LjA1LS4yMy4xNGgwWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE1MS4wOSwxNC4zN2MwLS4yNC0uMjktLjQ0LS42My0uNDMtLjM0LDAtLjYyLjIxLS42MS40NiwwLC4yNC4yOS40NC42My40My4zNCwwLC42Mi0uMjEuNjEtLjQ2WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0OS45NywxNC43OWMtLjEzLS4wOS0uMjItLjIzLS4yMy0uMzhoMGMwLS4xNy4wOS0uMzIuMjItLjQxaDBjLjEzLS4wOS4zLS4xNS40OS0uMTZoMHMuMDIsMCwuMDIsMGgwYy4xOSwwLC4zNi4wNS40OS4xNGgwYy4xMy4wOS4yMi4yMy4yMy4zOWgtLjFzLjEsMCwuMSwwaDBjMCwuMTctLjA5LjMxLS4yMi40aDBjLS4xMy4xLS4zLjE1LS40OS4xNmgtLjAyYy0uMTksMC0uMzYtLjA1LS40OS0uMTRoMFptLjQ5LS43NGMtLjE1LDAtLjI4LjA1LS4zNy4xMmgwYy0uMDkuMDctLjE0LjE1LS4xNC4yM2gwczAsMCwwLDBoMGMwLC4wOC4wNS4xNi4xNC4yMmgwYy4wOS4wNi4yMi4xMS4zNy4xMWguMDJjLjE1LDAsLjI4LS4wNS4zNy0uMTJoMGMuMDktLjA3LjE0LS4xNS4xNC0uMjNoMGMwLS4wOC0uMDUtLjE2LS4xNC0uMjNoMGMtLjA5LS4wNi0uMjItLjExLS4zNy0uMTFoLS4wMloiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNTYuNDQsOS41M2MuMjMuMDcuNTEtLjEzLjYxLS40Ni4xLS4zMywwLS42NS0uMjQtLjcyLS4yMy0uMDctLjUuMTMtLjYxLjQ2LS4xLjMzLDAsLjY1LjI0LjcyWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Ni40MSw5LjYzbC4wMy0uMS0uMDMuMWMtLjIzLS4wOC0uMzUtLjMyLS4zNS0uNThoMGMwLS4wOS4wMS0uMTguMDQtLjI4aDBjLjEtLjMxLjMzLS41NC42MS0uNTVoMHMuMDksMCwuMTMuMDJoMGMuMjMuMDguMzUuMzIuMzUuNTdoMGMwLC4wOS0uMDEuMTgtLjA0LjI4aDBjLS4xLjMxLS4zNC41NC0uNjEuNTVoMHMtLjA4LDAtLjEyLS4wMmgwWm0uMTItLjE5Yy4xNCwwLC4zNC0uMTUuNDEtLjRoMGMuMDItLjA3LjAzLS4xNS4wMy0uMjJoMGMwLS4yLS4wOS0uMzUtLjIxLS4zOGgwcy0uMDQsMC0uMDcsMGgwYy0uMTQsMC0uMzQuMTUtLjQxLjRoMGMtLjAyLjA3LS4wMy4xNS0uMDMuMjJoMGMwLC4yLjA5LjM1LjIuMzhoMHMuMDQuMDEuMDcuMDFoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNDYuMTYsMTQuOTZjLjI4LS4wNS40OS0uMjUuNDUtLjQ2LS4wMy0uMi0uMjktLjMzLS41Ny0uMjgtLjI4LjA1LS40OC4yNS0uNDUuNDUuMDMuMjEuMjkuMzMuNTcuMjhaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQ1LjQ5LDE0LjY5czAtLjA0LDAtLjA2aDBjMC0uMjYuMjUtLjQ2LjU0LS41MWgwcy4wOS0uMDEuMTQtLjAxaDBjLjI2LDAsLjUxLjEzLjU2LjM4aDBzMCwuMDQsMCwuMDZoMGMwLC4yNi0uMjUuNDYtLjU0LjUxaDBsLS4wMi0uMS4wMi4xcy0uMDkuMDEtLjE0LjAxaDBjLS4yNiwwLS41MS0uMTMtLjU2LS4zOGgwWm0uNTctLjM3Yy0uMjMuMDQtLjM3LjE5LS4zNy4zMWgwczAsLjAyLDAsLjAzaDBjLjAxLjEuMTUuMjEuMzUuMjFoMHMuMDcsMCwuMSwwaDBjLjIzLS4wNC4zNy0uMi4zNy0uMzFoMHMwLS4wMiwwLS4wM2gwYy0uMDEtLjEtLjE1LS4yMS0uMzUtLjIxaDBzLS4wNywwLS4xLDBoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNTQuOSwxNWMuMjkuMDQuNTQtLjEuNTYtLjMxLjAzLS4yLS4xOC0uNC0uNDctLjQ0LS4yOC0uMDQtLjU0LjEtLjU2LjMtLjAzLjIxLjE4LjQuNDcuNDRaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU0Ljg4LDE1LjF2LS4xcy4wMy0uMS4wMy0uMWMuMDMsMCwuMDUsMCwuMDgsMGgwYy4yMSwwLC4zNi0uMTEuMzctLjIyaDB2LS4wMmgwYzAtLjExLS4xNC0uMjctLjM4LS4zaDBzLS4wNSwwLS4wOCwwaDBjLS4yMiwwLS4zNi4xMS0uMzcuMjJoMHMwLC4wMiwwLC4wMmgwYzAsLjEyLjE0LjI3LjM4LjNoMGwtLjAyLjF2LjFjLS4zMS0uMDQtLjU2LS4yMy0uNTctLjVoMHMwLS4wMywwLS4wNWgwYy4wNC0uMjYuMy0uNC41Ny0uNGgwcy4wNywwLC4xMSwwaDBjLjMuMDQuNTUuMjQuNTYuNTFoMHMwLC4wMywwLC4wNWgwYy0uMDQuMjYtLjMuNC0uNTcuNGgwcy0uMDcsMC0uMTEsMGgwWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTIxZWMzYmE3LWZlMDktNGFlZS05MGMyLTg4ODc1MjJmMzczYiIgZD0ibTE1OS4xNiwxNi43MWMuMDUtLjE5LS4xMi0uMjQtLjEyLS4yNCwwLDAtNC40LTEuMDUtOC41NS0xLjA1LTQuNSwwLTguNzYsMS04Ljc2LDEsMCwwLS4xOS4wOC0uMTQuMjcuMDUuMjEuMjYuMTYuMjYuMTYsMCwwLDQuMTMtMSw4LjYzLTEsNC4xNiwwLDguNDgsMS4wMyw4LjQ4LDEuMDMsMCwwLC4xNy4wNC4yMi0uMTdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU4Ljk3LDE2Ljk1cy0uMDQsMC0uMDQsMGgwcy0uMjctLjA2LS43NC0uMTZoMGMtLjQ3LS4xLTEuMTQtLjIyLTEuOTQtLjM1aDBjLTEuNTktLjI2LTMuNzEtLjUxLTUuNzgtLjUxaDBjLTMuMzcsMC02LjUzLjU2LTcuOS44NGgwYy0uNDYuMDktLjcxLjE2LS43MS4xNmgwcy0uMDMsMC0uMDcsMGgwYy0uMDgsMC0uMjMtLjA0LS4yNy0uMjJoMHMwLS4wNSwwLS4wN2gwYzAtLjEuMDUtLjE3LjEtLjIyaDBzLjA5LS4wNi4xLS4wNmgwczAsMCwwLDBjMCwwLDQuMjctMSw4Ljc3LTFoLjAxYzQuMTcsMCw4LjU2LDEuMDUsOC41NiwxLjA1aDBzLjA0LjAyLjA5LjA1aDBzLjA5LjEuMDkuMTloMHMwLC4wNS0uMDEuMDhoMGwtLjA3LS4wMi4wNy4wMmMtLjA0LjE4LS4xOC4yMy0uMjUuMjNoMHMwLDAsMCwwaDBabTAtLjE0cy4wOSwwLC4xMi0uMTJoMHMwLS4wMywwLS4wNWgwYzAtLjA3LS4wNC0uMDktLjA3LS4xMWgwczAsMCwwLDBoMHMtLjMtLjA3LS43NS0uMTZoMGMtLjQ3LS4xLTEuMTUtLjIzLTEuOTYtLjM2aDBjLTEuNjItLjI2LTMuNzUtLjUyLTUuODItLjUyaDBjLTMuMzcsMC02LjYxLjU2LTguMDEuODRoMGMtLjQyLjA4LS42OC4xNC0uNzMuMTVoMHMwLDAtLjAxLDBoMHMtLjAyLjAyLS4wNC4wM2gwcy0uMDUuMDYtLjA1LjEyaDBzMCwuMDMsMCwuMDRoMGMuMDMuMS4wOC4xMS4xMy4xMWgwcy4wMiwwLC4wMywwaDBzMCwwLDAsMGgwczQuMTMtMS4wMSw4LjY0LTEuMDFoMGM0LjE3LDAsOC40OCwxLjAzLDguNDgsMS4wM2gwczAsMCwwLDBoMHMwLDAsLjAxLDBoMFoiLz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC0yMWVjM2JhNy1mZTA5LTRhZWUtOTBjMi04ODg3NTIyZjM3M2IiIGQ9Im0xNTkuNzcsMTQuMDZzLTUuMTMtMS4xNC05LjI5LTEuMTRjLTQuNSwwLTkuNDksMS4yMS05LjQ5LDEuMjEsMCwwLS4yMy4wNS0uMTcuMjcuMDQuMTguMjcuMTMuMjcuMTMsMCwwLC4wNC0uMDEuMTItLjAzLjc2LS4xOCw1LjEtMS4xNSw5LjItMS4xNiw0LjE2LDAsOS4yNSwxLjIyLDkuMjUsMS4yMiwwLDAsLjI2LjA2LjMxLS4xOS4wNy0uMjktLjItLjMzLS4yLS4zM1oiLz4KICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTkuNzMsMTQuNjVzLS4wOCwwLS4wOCwwaDBzLS4zMi0uMDgtLjg2LS4xOWgwYy0uNTQtLjExLTEuMzEtLjI3LTIuMi0uNDJoMGMtMS43OS0uMzEtNC4xLS42MS02LjE3LS42MWgwYy00LjA4LDAtOC40My45OC05LjE4LDEuMTVoMGMtLjA4LjAyLS4xMS4wMy0uMTIuMDNoMHMtLjA0LDAtLjA4LDBoMHMtLjA5LDAtLjE1LS4wM2gwYy0uMDUtLjAzLS4xLS4wOC0uMTItLjE2aDBzLS4wMS0uMDYtLjAxLS4wOWgwYzAtLjExLjA2LS4xOC4xMi0uMjJoMGMuMDYtLjA0LjExLS4wNS4xMS0uMDVoMHM0Ljk5LTEuMjEsOS41LTEuMjFoMGM0LjEyLDAsOS4xOCwxLjExLDkuMywxLjE0aDBzLjA3LjAxLjEzLjA1aDBjLjA3LjA0LjE0LjEzLjEzLjI2aDBzMCwuMDYtLjAxLjFoMGMtLjA0LjItLjIuMjUtLjMuMjVoLS4wMVptMC0uMTRjLjA3LDAsLjE0LS4wMS4xOC0uMTRoMHMwLS4wNSwwLS4wN2gwYzAtLjEyLS4wOC0uMTUtLjEzLS4xN2gwcy0uMDIsMC0uMDIsMGgwdi0uMDdzLjAzLS4wNy4wMy0uMDdsLS4wMi4wN3YuMDdoLS4wMXMtLjMyLS4wNy0uODYtLjE4aDBjLS41NS0uMTEtMS4zMi0uMjUtMi4yMi0uMzloMGMtMS44LS4yOS00LjEyLS41Ny02LjE5LS41N2gwYy0zLjM3LDAtNy4wMS42OC04LjYyLDEuMDJoMGMtLjU0LjExLS44NS4xOS0uODUuMTloMHMwLDAtLjAyLDBoMHMtLjAzLjAxLS4wNS4wMmgwcy0uMDYuMDUtLjA2LjExaDBzMCwuMDMsMCwuMDVoMHMuMDMuMDUuMDUuMDdoMHMuMDYuMDIuMDguMDJoMHMuMDMsMCwuMDQsMGgwcy4wMSwwLC4wMSwwaDBzLjA0LS4wMS4xMS0uMDNoMGMuNzYtLjE4LDUuMTEtMS4xNiw5LjIxLTEuMTZoMGM0LjE3LDAsOS4yNiwxLjIzLDkuMjYsMS4yM2gwcy4wMiwwLC4wNSwwaDBaIi8+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNDMuNTMsMTUuMzVjLjE5LS4wNC4zMi0uMi4yOS0uMzYtLjAzLS4xNi0uMjEtLjI3LS40LS4yMy0uMTkuMDMtLjMyLjItLjI5LjM2LjAzLjE2LjIxLjI3LjQuMjNaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDMuMDUsMTUuMTNzMC0uMDQsMC0uMDZoMGMwLS4yLjE2LS4zNi4zNi0uNGgwcy4wNiwwLC4wOSwwaDBjLjE5LDAsLjM3LjEyLjQxLjMxaDBzMCwuMDQsMCwuMDZoMGMwLC4yLS4xNi4zNi0uMzYuNGgwbC0uMDItLjA4LjAyLjA4cy0uMDYsMC0uMDksMGgwYy0uMTksMC0uMzctLjEyLS40MS0uMzFoMFptLjM5LS4yOWMtLjE0LjAzLS4yMy4xMy0uMjIuMjNoMHMwLC4wMiwwLC4wM2gwYy4wMS4xLjExLjE3LjI0LjE3aDBzLjA0LDAsLjA2LDBoMGMuMTQtLjAzLjIzLS4xMy4yMi0uMjNoMHMwLS4wMiwwLS4wM2gwYy0uMDItLjA5LS4xMS0uMTctLjI0LS4xN2gwcy0uMDQsMC0uMDYsMGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE0NC42NywxNS4wNWMuMTktLjA0LjMyLS4yLjI5LS4zNi0uMDMtLjE2LS4yMS0uMjctLjQtLjIzLS4xOS4wNC0uMzIuMi0uMjkuMzYuMDMuMTYuMjEuMjcuNC4yM1oiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0NC4xOSwxNC44M3MwLS4wNCwwLS4wNmgwYzAtLjIuMTYtLjM2LjM2LS40aDBzLjA2LDAsLjA5LDBoMGMuMTksMCwuMzcuMTIuNDEuMzFoMHMwLC4wNCwwLC4wNmgwYzAsLjItLjE2LjM2LS4zNi40aDBsLS4wMi0uMDguMDIuMDhzLS4wNiwwLS4wOSwwaDBjLS4xOSwwLS4zNy0uMTItLjQxLS4zMWgwWm0uMzktLjI5Yy0uMTQuMDMtLjIzLjEzLS4yMy4yM2gwczAsLjAyLDAsLjAzaDBjLjAyLjA5LjExLjE3LjI0LjE3aDBzLjA0LDAsLjA2LDBoMGMuMTQtLjAzLjIzLS4xMy4yMi0uMjNoMHMwLS4wMiwwLS4wM2gwYy0uMDItLjA5LS4xMS0uMTctLjI0LS4xN2gwcy0uMDQsMC0uMDYsMGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE0NC4yNiwxNS43MWMuMTktLjAzLjMyLS4yLjI5LS4zNi0uMDMtLjE2LS4yMS0uMjctLjQtLjIzLS4xOS4wNC0uMzIuMi0uMjkuMzYuMDMuMTYuMjEuMjcuNC4yM1oiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0My43OCwxNS40OXMwLS4wNCwwLS4wNmgwYzAtLjIuMTYtLjM2LjM2LS40aDBzLjA2LDAsLjA5LDBoMGMuMTksMCwuMzcuMTIuNDEuMzFoMHMwLC4wNCwwLC4wNmgwYzAsLjItLjE2LjM2LS4zNi40aDBsLS4wMi0uMDguMDIuMDhzLS4wNiwwLS4wOSwwaDBjLS4xOSwwLS4zNy0uMTItLjQxLS4zMWgwWm0uMzktLjI5Yy0uMTQuMDItLjIzLjEzLS4yMy4yM2gwczAsLjAyLDAsLjAzaDBjLjAyLjA5LjExLjE3LjI0LjE3aDBzLjA0LDAsLjA2LDBoMGMuMTQtLjAyLjIzLS4xMy4yMi0uMjNoMHMwLS4wMiwwLS4wM2gwYy0uMDItLjA5LS4xMS0uMTctLjI0LS4xN2gwcy0uMDQsMC0uMDYsMGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE0NC4wMSwxNC44MmMuMTktLjA0LjMyLS4yLjI5LS4zNi0uMDMtLjE2LS4yMS0uMjctLjQtLjIzLS4xOS4wMy0uMzIuMi0uMjkuMzYuMDMuMTYuMjEuMjcuNC4yM1oiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE0My41MiwxNC42MXMwLS4wNCwwLS4wNmgwYzAtLjIuMTYtLjM2LjM2LS40aDBzLjA2LDAsLjA5LDBoMGMuMTksMCwuMzcuMTIuNDEuMzFoMHMwLC4wNCwwLC4wNmgwYzAsLjE5LS4xNi4zNi0uMzYuNGgwbC0uMDItLjA4LjAyLjA4cy0uMDYsMC0uMDksMGgwYy0uMTksMC0uMzctLjEyLS40MS0uMzFoMFptLjM5LS4yOWMtLjE0LjAzLS4yMy4xMy0uMjIuMjNoMHMwLC4wMiwwLC4wM2gwYy4wMi4wOS4xMS4xNy4yNC4xN2gwcy4wNCwwLC4wNiwwaDBjLjE0LS4wMy4yMy0uMTMuMjMtLjIzaDBzMC0uMDIsMC0uMDNoMGMtLjAyLS4xLS4xMS0uMTctLjI0LS4xN2gwcy0uMDQsMC0uMDYsMGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgPC9nPgogICAgICA8Zz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE1Ni4yOCwxNS4xNWMuMTkuMDUuMzctLjA1LjQxLS4yMS4wNC0uMTYtLjA4LS4zMy0uMjctLjM4LS4xOS0uMDUtLjM3LjA1LS40MS4yMS0uMDQuMTYuMDguMzMuMjcuMzhaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTYuMzgsMTUuMjVzLS4wOCwwLS4xMi0uMDFoMGwuMDItLjA4LjAyLS4wOHMuMDUsMCwuMDgsMGgwYy4xMiwwLC4yMS0uMDcuMjMtLjE2aDBzMC0uMDMsMC0uMDRoMGMwLS4xLS4wOC0uMi0uMjEtLjIzaDBzLS4wNS0uMDEtLjA4LS4wMWgwYy0uMTIsMC0uMjEuMDctLjIzLjE2aDBzMCwuMDMsMCwuMDRoMGMwLC4wOS4wOC4yLjIxLjIzaDBsLS4wMi4wOC0uMDIuMDhjLS4yLS4wNS0uMzQtLjIxLS4zNC0uNGgwczAtLjA2LDAtLjA4aDBjLjA0LS4xOC4yMi0uMjkuNC0uMjloMHMuMDgsMCwuMTIuMDJoMGMuMTkuMDUuMzQuMjEuMzQuNGgwczAsLjA1LDAsLjA4aDBjLS4wNC4xOC0uMjEuMjktLjQuMjloMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNTcuNDUsMTUuMzVjLjE5LjA1LjM3LS4wNS40MS0uMjEuMDQtLjE2LS4wOC0uMzMtLjI3LS4zOC0uMTktLjA1LS4zNy4wNS0uNDEuMjEtLjA0LjE2LjA4LjMzLjI3LjM4WiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU3LjU0LDE1LjQ0cy0uMDgsMC0uMTItLjAxaDBsLjAyLS4wOC4wMi0uMDhzLjA1LDAsLjA4LDBoMGMuMTIsMCwuMjEtLjA3LjIzLS4xNmgwczAtLjAzLDAtLjA0aDBjMC0uMDktLjA4LS4yLS4yMS0uMjNoMHMtLjA1LDAtLjA4LDBoMGMtLjEyLDAtLjIxLjA3LS4yMy4xNmgwczAsLjAzLDAsLjA0aDBjMCwuMDkuMDguMi4yMS4yM2gwbC0uMDIuMDgtLjAyLjA4Yy0uMi0uMDUtLjM0LS4yMS0uMzQtLjRoMHMwLS4wNi4wMS0uMDhoMGMuMDQtLjE4LjIyLS4yOS40LS4yOWgwcy4wOCwwLC4xMi4wMWgwYy4yLjA1LjM0LjIxLjM0LjRoMHMwLC4wNi0uMDEuMDloMGMtLjA0LjE4LS4yMS4yOC0uNC4yOGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE1Ni44LDE1Ljc4Yy4xOS4wNS4zNy0uMDUuNDEtLjIxLjA0LS4xNi0uMDgtLjMzLS4yNy0uMzgtLjE5LS4wNS0uMzcuMDUtLjQxLjIxLS4wNC4xNi4wOC4zMy4yNy4zOFoiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Ni44OSwxNS44OHMtLjA4LDAtLjEyLS4wMWgwbC4wMi0uMDgtLjAyLjA4Yy0uMi0uMDUtLjM0LS4yMS0uMzQtLjRoMHMwLS4wNi4wMS0uMDhoMGMuMDQtLjE4LjIxLS4yOS40LS4yOWgwcy4wOCwwLC4xMi4wMWgwYy4yLjA1LjM0LjIxLjM0LjRoMHMwLC4wNiwwLC4wOGgwYy0uMDQuMTgtLjIyLjI5LS40LjI5aDBabTAtLjE3Yy4xMiwwLC4yMS0uMDcuMjMtLjE2aDBzMC0uMDMsMC0uMDRoMGMwLS4wOS0uMDgtLjItLjIxLS4yM2gwcy0uMDUsMC0uMDgsMGgwYy0uMTIsMC0uMjEuMDctLjIzLjE2aDBzMCwuMDMsMCwuMDRoMGMwLC4wOS4wOC4yLjIxLjIzaDBzLjA1LDAsLjA4LDBoMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNTYuOTMsMTQuODdjLjE5LjA0LjM3LS4wNS40MS0uMjEuMDQtLjE2LS4wOC0uMzMtLjI3LS4zOHMtLjM3LjA1LS40MS4yMWMtLjA0LjE2LjA4LjMzLjI3LjM4WiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTU3LjAzLDE0Ljk2cy0uMDgsMC0uMTItLjAxaDBsLjAyLS4wOC4wMi0uMDhzLjA1LDAsLjA3LDBoMGMuMTIsMCwuMjEtLjA3LjIzLS4xNmgwczAtLjAzLDAtLjA0aDBjMC0uMS0uMDgtLjItLjIxLS4yM2gwcy0uMDUsMC0uMDcsMGgwYy0uMTIsMC0uMjEuMDctLjIzLjE2aDBzMCwuMDMsMCwuMDRoMGMwLC4wOS4wOC4yLjIxLjIzaDBsLS4wMi4wOC0uMDIuMDhjLS4yLS4wNS0uMzQtLjIxLS4zNC0uNGgwczAtLjA2LDAtLjA4aDBjLjA1LS4xOC4yMi0uMjkuNC0uMjloMHMuMDgsMCwuMTIuMDFoMGMuMi4wNS4zNC4yMS4zNC40aDBzMCwuMDYtLjAxLjA4aDBjLS4wNC4xOC0uMjIuMjktLjQuMjloMFoiLz4KICAgICAgICA8L2c+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNDcuNTEsMTQuNzljLjE5LS4wMi4zNC0uMTcuMzItLjMzLS4wMi0uMTctLjE4LS4yOS0uMzgtLjI3LS4xOS4wMi0uMzQuMTctLjMyLjMzLjAyLjE3LjE5LjI5LjM4LjI3WiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQ3LjAzLDE0LjU0czAtLjAzLDAtLjA0aDBjMC0uMjIuMTktLjM5LjQxLS40MWgwcy4wMywwLC4wNSwwaDBjLjIyLDAsLjQyLjE0LjQ0LjM2aDBzMCwuMDIsMCwuMDNoMGMwLC4yMi0uMTkuMzktLjQxLjQxaDB2LS4xczAsLjEsMCwuMWMtLjAyLDAtLjAzLDAtLjA1LDBoMGMtLjIyLDAtLjQyLS4xNC0uNDQtLjM2aDBabS40My0uMjVjLS4xNC4wMS0uMjMuMTItLjIzLjIxaDBzMCwuMDEsMCwuMDJoMGMwLC4wOS4xLjE4LjI0LjE4aDBzLjAyLDAsLjAzLDBoMGMuMTQtLjAxLjIzLS4xMS4yMy0uMjFoMGMwLS4xMS0uMS0uMTktLjI0LS4xOWgtLjAzWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE0OC42OCwxNC41OWMuMTktLjAyLjM0LS4xNy4zMi0uMzMtLjAyLS4xNy0uMTktLjI5LS4zOC0uMjctLjE5LjAyLS4zNC4xNy0uMzIuMzMuMDIuMTcuMTkuMjkuMzguMjdaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNDguMiwxNC4zNHMwLS4wMiwwLS4wNGgwYzAtLjIyLjE5LS4zOS40Mi0uNDFoMHMuMDMsMCwuMDUsMGgwYy4yMiwwLC40Mi4xNC40NC4zNmgwczAsLjAyLDAsLjAzaDBjMCwuMjItLjE5LjM5LS40MS40MWgwdi0uMXMwLC4xLDAsLjFjLS4wMiwwLS4wMywwLS4wNSwwaDBjLS4yMiwwLS40Mi0uMTQtLjQ0LS4zNmgwWm0uNDMtLjI0Yy0uMTQuMDEtLjIzLjExLS4yMy4yMWgwdi4wMmgwYzAsLjA5LjEuMTguMjQuMThoMHMuMDIsMCwuMDMsMGgwYy4xNC0uMDEuMjMtLjEyLjIzLS4yMWgwczAtLjAxLDAtLjAyaDBjMC0uMDktLjEtLjE4LS4yNC0uMThoMHMtLjAyLDAtLjAzLDBoMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNDguMjEsMTUuMjJjLjE5LS4wMi4zNC0uMTcuMzItLjMzLS4wMi0uMTctLjE5LS4yOS0uMzgtLjI3LS4xOS4wMi0uMzQuMTctLjMyLjM0LjAyLjE3LjE5LjI4LjM4LjI3WiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQ3LjczLDE0Ljk2czAtLjAyLDAtLjA0aDBjMC0uMjIuMTktLjM5LjQxLS40MWgwcy4wMywwLC4wNSwwaDBjLjIyLDAsLjQyLjE0LjQ0LjM2aDBzMCwuMDIsMCwuMDNoMGMwLC4yMi0uMTkuMzktLjQxLjQxaDB2LS4xczAsLjEsMCwuMWMtLjAyLDAtLjAzLDAtLjA1LDBoMGMtLjIyLDAtLjQyLS4xNC0uNDQtLjM2aDBabS40My0uMjRjLS4xNC4wMS0uMjMuMTEtLjIzLjIxaDBzMCwwLDAsLjAxaDBjMCwuMDkuMS4xOC4yNC4xOGgwcy4wMiwwLC4wMywwaDBjLjE0LS4wMS4yMy0uMTEuMjMtLjIxaDBzMCwwLDAtLjAxaDBjMC0uMDktLjEtLjE4LS4yNC0uMThoMHMtLjAyLDAtLjAzLDBoMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNDguMDMsMTQuMzFjLjE5LS4wMi4zNC0uMTcuMzItLjMzLS4wMi0uMTctLjE4LS4yOS0uMzgtLjI3LS4xOS4wMi0uMzMuMTctLjMyLjMzLjAyLjE3LjE4LjI5LjM4LjI3WiIvPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQ3LjU1LDE0LjA1czAtLjAyLDAtLjA0aDBjMC0uMjIuMTktLjM5LjQxLS40MWgwcy4wMywwLC4wNSwwaDBjLjIyLDAsLjQyLjE0LjQ0LjM2aDBzMCwuMDIsMCwuMDNoMGMwLC4yMi0uMTkuMzktLjQxLjQxaDB2LS4xczAsLjEsMCwuMWMtLjAyLDAtLjAzLDAtLjA1LDBoMGMtLjIyLDAtLjQyLS4xNC0uNDQtLjM2aDBabS40My0uMjRjLS4xNC4wMS0uMjMuMTEtLjIzLjIxaDBzMCwuMDEsMCwuMDJoMGMwLC4wOS4xLjE4LjI0LjE4aDBzLjAyLDAsLjAzLDBoMGMuMTQtLjAxLjIzLS4xMS4yMy0uMjFoMHMwLS4wMSwwLS4wMmgwYzAtLjA5LS4xLS4xOC0uMjQtLjE4aDBzLS4wMiwwLS4wMywwaDBaIi8+CiAgICAgICAgPC9nPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxnPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNzA5MTAxZTAtNjI5YS00OTc1LTliNjUtYzRiMDQ2ZjQwMTllIiBkPSJtMTUyLjIxLDE0LjcxYy4xOS4wMi4zNi0uMDkuMzktLjI1LjAyLS4xNy0uMTItLjMyLS4zMS0uMzUtLjE5LS4wMy0uMzYuMDktLjM5LjI1LS4wMi4xNy4xMi4zMi4zMS4zNFoiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Mi4yNiwxNC44cy0uMDQsMC0uMDYsMGgwdi0uMDlzMCwuMDksMCwuMDljLS4yMS0uMDMtLjM4LS4xOS0uMzktLjRoMHMwLS4wMywwLS4wNWgwYy4wMy0uMi4yMS0uMzMuNDItLjMzaDBzLjA0LDAsLjA2LDBoMGMuMjIuMDMuMzguMTkuMzkuNGgwczAsLjAzLDAsLjA0aDBjLS4wMy4yLS4yMS4zMy0uNDIuMzNoMFptMC0uMTdjLjE0LDAsLjI0LS4wOS4yNS0uMThoMHMwLS4wMiwwLS4wMmgwYzAtLjEtLjA5LS4yMS0uMjQtLjIzaDBzLS4wMywwLS4wNCwwaDBjLS4xNCwwLS4yNC4wOC0uMjUuMThoMHMwLC4wMiwwLC4wMmgwYzAsLjEuMDkuMjEuMjQuMjNoMHMuMDMsMCwuMDQsMGgwWiIvPgogICAgICAgIDwvZz4KICAgICAgICA8Zz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE1My4zOSwxNC43N2MuMTkuMDIuMzYtLjA5LjM5LS4yNi4wMi0uMTYtLjEyLS4zMi0uMzEtLjM0LS4xOS0uMDMtLjM2LjA5LS4zOS4yNS0uMDIuMTYuMTIuMzIuMzEuMzRaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTMuNDQsMTQuODZzLS4wNCwwLS4wNiwwaDB2LS4wOHMwLC4wOCwwLC4wOGMtLjIxLS4wMy0uMzgtLjE5LS4zOS0uNGgwczAtLjAzLDAtLjA1aDBjLjAzLS4yLjIxLS4zMy40Mi0uMzNoMHMuMDQsMCwuMDcsMGgwYy4yMS4wMy4zOC4xOS4zOS40aDBzMCwuMDMsMCwuMDVoMGMtLjAzLjItLjIxLjMzLS40Mi4zM2gwWm0wLS4xN2MuMTMsMCwuMjQtLjA4LjI1LS4xOGgwczAtLjAxLDAtLjAyaDBjMC0uMS0uMDktLjIxLS4yNC0uMjNoMHMtLjAzLDAtLjA0LDBoMGMtLjE0LDAtLjI0LjA5LS4yNS4xOGgwczAsLjAyLDAsLjAyaDBjMCwuMS4xLjIxLjI0LjIzaDBzLjAzLDAsLjA0LDBoMFoiLz4KICAgICAgICA8L2c+CiAgICAgICAgPGc+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC03MDkxMDFlMC02MjlhLTQ5NzUtOWI2NS1jNGIwNDZmNDAxOWUiIGQ9Im0xNTIuOCwxNS4yOGMuMTkuMDMuMzctLjA5LjM5LS4yNS4wMi0uMTYtLjEyLS4zMi0uMzEtLjM0LS4xOS0uMDMtLjM2LjA5LS4zOS4yNi0uMDIuMTYuMTIuMzIuMzEuMzRaIi8+CiAgICAgICAgICA8cGF0aCBjbGFzcz0idXVpZC02MTNiNjRhMS02ODdjLTQ3NTQtYjFiMS1lOTlhYTJjOTU5M2UiIGQ9Im0xNTIuODUsMTUuMzdzLS4wNCwwLS4wNiwwaDB2LS4wOXMwLC4wOSwwLC4wOWMtLjIxLS4wMy0uMzgtLjE5LS4zOS0uMzloMHMwLS4wMywwLS4wNWgwYy4wMy0uMi4yMS0uMzMuNDItLjMzaDBzLjA0LDAsLjA2LDBoMGMuMjEuMDMuMzguMTkuMzkuNGgwczAsLjAzLDAsLjA0aDBjLS4wMy4yLS4yMi4zMy0uNDIuMzNoMFptMC0uMTdjLjE0LDAsLjI0LS4wOC4yNS0uMThoMHMwLS4wMiwwLS4wMmgwYzAtLjEtLjEtLjIxLS4yNC0uMjNoMHMtLjAzLDAtLjA0LDBoMGMtLjE0LDAtLjI0LjA5LS4yNS4xOGgwczAsLjAyLDAsLjAyaDBjMCwuMS4wOS4yMS4yNC4yM2gwcy4wMywwLC4wNCwwaDBaIi8+CiAgICAgICAgPC9nPgogICAgICAgIDxnPgogICAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNzA5MTAxZTAtNjI5YS00OTc1LTliNjUtYzRiMDQ2ZjQwMTllIiBkPSJtMTUyLjgyLDE0LjM1Yy4xOS4wMy4zNy0uMDkuMzktLjI1LjAyLS4xNy0uMTItLjMyLS4zMS0uMzQtLjE5LS4wMy0uMzYuMDktLjM5LjI1LS4wMi4xNy4xMi4zMi4zMS4zNFoiLz4KICAgICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1Mi44NywxNC40NHMtLjA0LDAtLjA2LDBoMHYtLjA4cy4wMi0uMDguMDItLjA4Yy4wMSwwLC4wMywwLC4wNCwwaDBjLjEzLDAsLjI0LS4wOC4yNS0uMThoMHMwLS4wMSwwLS4wMmgwYzAtLjEtLjA5LS4yMS0uMjQtLjIzaDBzLS4wMywwLS4wNCwwaDBjLS4xNCwwLS4yNC4wOC0uMjUuMThoMHMwLC4wMSwwLC4wMmgwYzAsLjEuMDkuMjEuMjQuMjNoMHYuMDhzLS4wMi4wOC0uMDIuMDhjLS4yMS0uMDMtLjM4LS4xOS0uMzktLjRoMHMwLS4wMywwLS4wNGgwYy4wMy0uMi4yMS0uMzMuNDItLjMzaDBzLjA0LDAsLjA2LDBoMGMuMjEuMDMuMzguMTkuMzkuNGgwczAsLjAzLDAsLjA0aDBjLS4wMy4yLS4yMi4zMy0uNDIuMzNoMFoiLz4KICAgICAgICA8L2c+CiAgICAgIDwvZz4KICAgICAgPGc+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNzA5MTAxZTAtNjI5YS00OTc1LTliNjUtYzRiMDQ2ZjQwMTllIiBkPSJtMTU5LjAxLDE1LjgyYy0uMjgtLjA3LS40Ni0uMjktLjQxLS40OS4wNS0uMi4zMi0uMy41OS0uMjMuMjguMDcuNDYuMjkuNDEuNDktLjA1LjItLjMyLjMxLS42LjIzWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTYxM2I2NGExLTY4N2MtNDc1NC1iMWIxLWU5OWFhMmM5NTkzZSIgZD0ibTE1OS4xOSwxNS45MmMtLjA2LDAtLjEzLDAtLjItLjAzaDBsLjAyLS4wOC4wMi0uMDhjLjA1LjAxLjEuMDIuMTUuMDJoMGMuMTgsMCwuMzItLjA5LjM0LS4xOWgwczAtLjAzLDAtLjA1aDBjMC0uMTItLjEzLS4yOS0uMzYtLjM0aDBjLS4wNS0uMDEtLjEtLjAyLS4xNS0uMDJoMGMtLjE4LDAtLjMyLjA5LS4zNC4xOWgwczAsLjAzLDAsLjA1aDBjMCwuMTIuMTQuMjkuMzYuMzRoMGwtLjAyLjA4LS4wMi4wOGMtLjI3LS4wNy0uNDgtLjI3LS40OC0uNTFoMHMwLS4wNi4wMS0uMDloMGMuMDYtLjIxLjI3LS4zMi41MS0uMzJoMGMuMDYsMCwuMTMsMCwuMTkuMDJoMGMuMjcuMDcuNDguMjcuNDguNTFoMHMwLC4wNi0uMDEuMDloMGMtLjA2LjIxLS4yNy4zMi0uNS4zMmgwWiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJ1dWlkLTcwOTEwMWUwLTYyOWEtNDk3NS05YjY1LWM0YjA0NmY0MDE5ZSIgZD0ibTE0MS43MSwxNS43OWMuMjgtLjA3LjQ2LS4yOS40MS0uNDktLjA1LS4yLS4zMi0uMy0uNi0uMjMtLjI4LjA3LS40Ni4yOS0uNDEuNDkuMDUuMi4zMi4zLjYuMjNaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9InV1aWQtNjEzYjY0YTEtNjg3Yy00NzU0LWIxYjEtZTk5YWEyYzk1OTNlIiBkPSJtMTQxLjA0LDE1LjU4cy0uMDEtLjA2LS4wMS0uMDloMGMwLS4yNC4yMS0uNDQuNDgtLjUxaDBjLjA3LS4wMi4xMy0uMDIuMTktLjAyaDBjLjIzLDAsLjQ1LjExLjUxLjMyaDBzLjAxLjA2LjAxLjA5aDBjMCwuMjQtLjIxLjQ0LS40OS41MWgwbC0uMDItLjA4LjAyLjA4Yy0uMDcuMDItLjEzLjAyLS4xOS4wMmgwYy0uMjMsMC0uNDUtLjExLS41MS0uMzJoMFptLjUyLS40M2MtLjIyLjA1LS4zNi4yMi0uMzYuMzRoMHMwLC4wMywwLC4wNWgwYy4wMi4xLjE2LjE5LjM0LjE5aDBzLjEsMCwuMTUtLjAyaDBjLjIyLS4wNS4zNi0uMjIuMzUtLjM0aDBzMC0uMDMsMC0uMDVoMGMtLjAyLS4xMS0uMTYtLjE5LS4zNC0uMTloMHMtLjEsMC0uMTUuMDJoMFoiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+" alt="Gemeente Wassenaar logo">
+    </div>
+    <div class="header-actions">
+      <button type="button" class="tab-button summary-toggle active" data-tab-target="view-samenvatting">
+        <span class="icon">⚑</span>
+        <span>Samenvatting</span>
+      </button>
+      <div class="meta-toolbar" role="menu">
+        <button type="button" data-action="new" title="Nieuwe intake starten: wist alle huidige invoer">Nieuw</button>
+        <button type="button" data-action="load" title="Laad een lokaal JSON-bestand">Laden</button>
+        <button type="button" data-action="prefill" title="Vul de velden met voorbeelddata uit de PDF">PDF-vullen</button>
+        <button type="button" data-action="save" title="Sla voortgang op als JSON-bestand">JSON</button>
+        <button type="button" data-action="html" title="Exporteer rapport naar HTML">HTML</button>
+        <button type="button" data-action="pdf" title="Printvriendelijke weergave">PDF</button>
+        <button type="button" data-action="word" title="Exporteer rapport naar Word">Word</button>
+        <button type="button" data-action="wizard" title="Start de interactieve invulhulp" style="color: var(--gradient-end); font-weight: bold;">✨ Wizard</button>
+      </div>
+    </div>
+  </header>
+
+  <form id="intake-form" autocomplete="off">
+    <nav class="tab-nav" role="tablist">
+      <button type="button" class="tab-button" data-tab-target="blok-1">Blok 1. Basisinfo</button>
+      <button type="button" class="tab-button" data-tab-target="blok-2">Blok 2. Infobehoefte</button>
+      <button type="button" class="tab-button" data-tab-target="blok-3">Blok 3. Applicatie</button>
+      <button type="button" class="tab-button" data-tab-target="blok-4">Blok 4. Infobeveiliging &amp; privacy</button>
+      <button type="button" class="tab-button" data-tab-target="blok-5">Blok 5. Architectuur &amp; standaardisatie</button>
+    </nav>
+
+    <section class="card tab-panel active summary-card" id="view-samenvatting" data-section="Samenvatting">
+      <h2>Samenvatting van de adviezen &amp; bevindingen</h2>
+      <p class="helper">Begin hier met de belangrijkste risico’s, keuzes en besluitpunten. De status-kaarten helpen om direct te zien welk team aan zet is.</p>
+      <div class="status-grid">
+        <div class="status-card wide">
+          <label for="field-summary">Samenvatting</label>
+          <textarea id="field-summary" data-field="summary" data-label="Samenvatting" rows="4" placeholder="Korte duiding van de belangrijkste bevindingen en adviezen."></textarea>
+        </div>
+        <div class="status-card">
+          <label for="field-status">Status</label>
+          <select id="field-status" data-field="status" data-label="Status">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Inventarisatie</option>
+            <option>Analyse loopt</option>
+            <option>Afstemming nodig</option>
+            <option>Gereed voor besluit</option>
+            <option>Afgerond</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-im">Informatiemanagement</label>
+          <select id="field-im" data-field="informatiemanagement" data-label="Informatiemanagement">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Onderzoek loopt</option>
+            <option>Extra aandacht</option>
+            <option>Goedgekeurd</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-privacy">Privacy</label>
+          <select id="field-privacy" data-field="privacy" data-label="Privacy">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>DPIA vereist</option>
+            <option>In behandeling</option>
+            <option>Goedgekeurd</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-security">Informatieveiligheid</label>
+          <select id="field-security" data-field="informatieveiligheid" data-label="Informatieveiligheid">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Analyse loopt</option>
+            <option>Risico's aanwezig</option>
+            <option>Oké</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-fb">Functioneel beheer</label>
+          <select id="field-fb" data-field="functioneel-beheer" data-label="Functioneel beheer">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Capaciteit nodig</option>
+            <option>Ingericht</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-tb">Technisch beheer</label>
+          <select id="field-tb" data-field="technisch-beheer" data-label="Technisch beheer">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Afhankelijkheden</option>
+            <option>Ingericht</option>
+            <option>Uitbesteed</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-arch">Architectuur</label>
+          <select id="field-arch" data-field="architectuur" data-label="Architectuur">
+            <option value="">Kies status</option>
+            <option>Niet getoetst</option>
+            <option>Onderzoek loopt</option>
+            <option>Afwijking</option>
+            <option>Conform richtlijnen</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-archivering">Archivering</label>
+          <select id="field-archivering" data-field="archivering" data-label="Archivering">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Afspraken nodig</option>
+            <option>Geborgd</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+        <div class="status-card">
+          <label for="field-inkoop">Inkoop</label>
+          <select id="field-inkoop" data-field="inkoop" data-label="Inkoop">
+            <option value="">Kies status</option>
+            <option>Niet gestart</option>
+            <option>Marktverkenning</option>
+            <option>Onderhandeling</option>
+            <option>Gereed</option>
+            <option>Niet van toepassing</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="card tab-panel" id="blok-1" data-section="BLOK 1. Basisinformatie">
+      <div class="field-grid">
+        <label class="field">
+          <span>Verantwoordelijk proceseigenaar</span>
+          <input type="text" data-field="proceseigenaar" data-label="Verantwoordelijk proceseigenaar">
+        </label>
+        <label class="field">
+          <span>Naam medewerker (verzoeker)</span>
+          <input type="text" data-field="verzoeker" data-label="Naam medewerker (verzoeker)">
+        </label>
+        <label class="field">
+          <span>Naam van het proces</span>
+          <input type="text" data-field="procesnaam" data-label="Naam van het proces">
+        </label>
+        <label class="field">
+          <span>Staat op het A3 Jaarplan</span>
+          <select data-field="a3-status" data-label="Staat op het A3 Jaarplan">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Gedeeltelijk / indirect</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Draagt bij aan (max. 3)</span>
+          <div style="display: flex; gap: 12px;">
+            <select data-field="contribution-1" data-label="Draagt bij aan (1)" style="flex: 1;">
+              <option value="">Kies waardeketen 1</option>
+              <option>Efficiënte bedrijfsvoering</option>
+              <option>Goede dienstverlening</option>
+              <option>Datagedreven werken</option>
+              <option>Transparantie</option>
+              <option>Onder architectuur</option>
+            </select>
+            <select data-field="contribution-2" data-label="Draagt bij aan (2)" style="flex: 1;">
+              <option value="">Kies waardeketen 2</option>
+              <option>Efficiënte bedrijfsvoering</option>
+              <option>Goede dienstverlening</option>
+              <option>Datagedreven werken</option>
+              <option>Transparantie</option>
+              <option>Onder architectuur</option>
+            </select>
+            <select data-field="contribution-3" data-label="Draagt bij aan (3)" style="flex: 1;">
+              <option value="">Kies waardeketen 3</option>
+              <option>Efficiënte bedrijfsvoering</option>
+              <option>Goede dienstverlening</option>
+              <option>Datagedreven werken</option>
+              <option>Transparantie</option>
+              <option>Onder architectuur</option>
+            </select>
+          </div>
+        </label>
+        <label class="field full">
+          <span>Afstemming met proceseigenaar</span>
+          <textarea data-field="afstemming" data-label="Afstemming met proceseigenaar" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Datum intake</span>
+          <input type="date" data-field="datum-intake" data-label="Datum intake">
+        </label>
+        <label class="field">
+          <span>Gewenste datum inwerkingtreding</span>
+          <input type="date" data-field="gew-datum" data-label="Gewenste datum inwerkingtreding">
+        </label>
+        <label class="field full">
+          <span>Wettelijke grondslag</span>
+          <textarea data-field="wettelijke-grondslag" data-label="Wettelijke grondslag" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>TOPdesk melding</span>
+          <input type="text" data-field="topdesk" data-label="TOPdesk melding" placeholder="Bijv. nummer of link">
+        </label>
+        <label class="field full">
+          <span>Financiële dekking</span>
+          <textarea data-field="financiele-dekking" data-label="Financiële dekking" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Behoefte bij beide gemeenten?</span>
+          <select data-field="behoefte-gemeenten" data-label="Behoefte bij beide gemeenten">
+            <option value="">Selecteer</option>
+            <option>Ja, beide gemeenten</option>
+            <option>Alleen Voorschoten</option>
+            <option>Alleen Wassenaar</option>
+            <option>Nader te bepalen</option>
+          </select>
+        </label>
+      </div>
+      <div class="fieldset">
+        <h3>Capaciteit (indicatie)</h3>
+        <div class="field-grid">
+          <label class="field">
+            <span>Afdeling Informatie &amp; Datamanagement (I&amp;D)</span>
+            <textarea data-field="capaciteit-idm" data-label="Capaciteit I&amp;D" rows="3" placeholder="Bijv. uren, rollen of specifieke expertise."></textarea>
+          </label>
+          <label class="field">
+            <span>Initiatiefnemer / afdeling</span>
+            <textarea data-field="capaciteit-initiatief" data-label="Capaciteit initiatiefnemer" rows="3"></textarea>
+          </label>
+          <label class="field">
+            <span>Leveranciers</span>
+            <textarea data-field="capaciteit-leveranciers" data-label="Capaciteit leveranciers" rows="3"></textarea>
+          </label>
+          <label class="field">
+            <span>Overige capaciteit / opmerkingen</span>
+            <textarea data-field="capaciteit-overig" data-label="Capaciteit overig" rows="3"></textarea>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card tab-panel" id="blok-2" data-section="BLOK 2. Informatiebehoefte">
+      <div class="field-grid">
+        <label class="field full">
+          <span>Behoefte en aanleiding</span>
+          <textarea data-field="behoefte-aanleiding" data-label="Behoefte en aanleiding" rows="4"></textarea>
+        </label>
+        <label class="field">
+          <span>Opgenomen in het A3 jaarplan?</span>
+          <select data-field="a3-opgenomen" data-label="Opgenomen in A3 jaarplan">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Indirect / via ander initiatief</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Huidige situatie</span>
+          <textarea data-field="huidige-situatie" data-label="Huidige situatie" rows="4"></textarea>
+        </label>
+        <label class="field full">
+          <span>Risico’s als huidige situatie blijft bestaan</span>
+          <textarea data-field="risicos" data-label="Risico’s huidige situatie" rows="4"></textarea>
+        </label>
+        <label class="field full">
+          <span>Gewenste situatie</span>
+          <textarea data-field="gewenste-situatie" data-label="Gewenste situatie" rows="4"></textarea>
+        </label>
+        <label class="field full">
+          <span>Wat levert het op?</span>
+          <textarea data-field="opbrengsten" data-label="Wat levert het op" rows="4"></textarea>
+        </label>
+        <label class="field full">
+          <span>Oorspronkelijke uitvraag</span>
+          <textarea data-field="oorspronkelijke-uitvraag" data-label="Oorspronkelijke uitvraag" rows="4"></textarea>
+        </label>
+        <label class="field">
+          <span>Type aanvraag</span>
+          <select data-field="type-aanvraag" data-label="Type aanvraag">
+            <option value="">Selecteer</option>
+            <option>Nieuwe oplossing</option>
+            <option>Vervanging bestaande oplossing</option>
+            <option>Uitbreiding / wijziging</option>
+            <option>Contractverlenging</option>
+            <option>Pilot / proef</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Toelichting type aanvraag</span>
+          <textarea data-field="toelichting-type" data-label="Toelichting type aanvraag" rows="3"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section class="card tab-panel" id="blok-3" data-section="BLOK 3. Applicatie &amp; marktverkenning">
+      <div class="field-grid">
+        <label class="field full">
+          <span>Bestaande interne oplossing?</span>
+          <textarea data-field="interne-oplossing" data-label="Bestaande interne oplossing" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Verkenning SW-broker Protinus</span>
+          <textarea data-field="sw-broker" data-label="Verkenning SW-broker Protinus" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Bekend met SW-broker?</span>
+          <select data-field="sw-broker-bekend" data-label="Bekend met SW-broker">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>In verkenning</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>VNG Softwarecatalogus</span>
+          <textarea data-field="vng-catalogus" data-label="VNG Softwarecatalogus" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Grootste concurrent</span>
+          <input type="text" data-field="concurrent" data-label="Grootste concurrent">
+        </label>
+        <label class="field">
+          <span>SLA of DVO aanwezig?</span>
+          <select data-field="sla-dvo" data-label="SLA of DVO">
+            <option value="">Selecteer</option>
+            <option>Ja, actueel</option>
+            <option>Ja, verouderd</option>
+            <option>Nee</option>
+            <option>Nog te bepalen</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Koppeling met DigiD, eHerkenning of eIDAS</span>
+          <textarea data-field="koppeling-id" data-label="Koppeling met DigiD/eHerkenning/eIDAS" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Behoefte aan functioneel beheer?</span>
+          <select data-field="fb-behoefte" data-label="Behoefte functioneel beheer">
+            <option value="">Selecteer</option>
+            <option>Ja, intern</option>
+            <option>Ja, extern</option>
+            <option>Deels (co-sourcing)</option>
+            <option>Nee</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Taken en verantwoordelijkheden functioneel beheer</span>
+          <textarea data-field="fb-taken" data-label="Taken functioneel beheer" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Type functioneel beheer</span>
+          <select data-field="fb-type" data-label="Type functioneel beheer">
+            <option value="">Selecteer</option>
+            <option>Lokaal</option>
+            <option>Centraal</option>
+            <option>Hybride</option>
+            <option>Extern</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Verwachtte capaciteit vanuit IT-basisdiensten</span>
+          <textarea data-field="itb-capaciteit" data-label="Verwachtte capaciteit IT-basisdiensten" rows="3"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section class="card tab-panel" id="blok-4" data-section="BLOK 4. Informatiebeveiliging &amp; privacy">
+      <div class="field-grid">
+        <label class="field full">
+          <span>Toetsing aan BIO2-eisen</span>
+          <textarea data-field="bio2" data-label="Toetsing aan BIO2-eisen" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Toetsing aan NIS2-eisen</span>
+          <textarea data-field="nis2" data-label="Toetsing aan NIS2-eisen" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Dataclassificatie (risicobeoordeling BIO2)</span>
+          <textarea data-field="dataclassificatie" data-label="Dataclassificatie" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Voldoet aan BIO2 en NIS2 (artikel 21 Cbw)?</span>
+          <select data-field="bio2-conform" data-label="Voldoet aan BIO2/NIS2">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Deels</option>
+            <option>N.t.b.</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Voldoet aan ISO 27001?</span>
+          <select data-field="iso27001" data-label="Voldoet aan ISO 27001">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Onder voorwaarden</option>
+            <option>N.t.b.</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Logging ingericht conform BIO2?</span>
+          <select data-field="logging" data-label="Logging conform BIO2">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>In ontwikkeling</option>
+            <option>N.v.t.</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Back-up &amp; herstel voorziening aanwezig?</span>
+          <select data-field="backup" data-label="Back-up &amp; herstel">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Onder voorwaarden</option>
+            <option>N.v.t.</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Verwerken van persoonsgegevens?</span>
+          <select data-field="persoonsgegevens" data-label="Verwerken van persoonsgegevens">
+            <option value="">Selecteer</option>
+            <option>Geen persoonsgegevens</option>
+            <option>Gewone persoonsgegevens</option>
+            <option>Gevoelige/bijzondere gegevens</option>
+            <option>Nader onderzoek nodig</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Welke persoonsgegevens?</span>
+          <textarea data-field="persoonsgegevens-detail" data-label="Welke persoonsgegevens" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Categorieën betrokkenen</span>
+          <textarea data-field="categorieen-betrokkenen" data-label="Categorieën betrokkenen" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>AVG-grondslag van de verwerking</span>
+          <textarea data-field="avg-grondslag" data-label="AVG-grondslag" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Doeleinden van verwerking</span>
+          <textarea data-field="doeleinden" data-label="Doeleinden van verwerking" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Verwerkersovereenkomst afgesloten?</span>
+          <textarea data-field="verwerkersovereenkomst" data-label="Verwerkersovereenkomst" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Doorgifte buiten EU/EER</span>
+          <textarea data-field="doorgifte" data-label="Doorgifte buiten EU/EER" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Gebruik van AI of algoritmen</span>
+          <textarea data-field="ai-algoritmen" data-label="Gebruik van AI of algoritmen" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>DPIA (Data Protection Impact Assessment)</span>
+          <textarea data-field="dpia" data-label="DPIA" rows="3" placeholder="Is een DPIA uitgevoerd of noodzakelijk?"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section class="card tab-panel" id="blok-5" data-section="BLOK 5. Architectuur &amp; standaardisatie">
+      <div class="field-grid">
+        <label class="field full">
+          <span>Aansluiting zaaksysteem</span>
+          <textarea data-field="zaaksysteem" data-label="Aansluiting zaaksysteem" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Document-management</span>
+          <textarea data-field="document-management" data-label="Document-management" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Gebruik van basisregistraties</span>
+          <textarea data-field="basisregistraties" data-label="Gebruik van basisregistraties" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Koppelingen met interne/externe systemen</span>
+          <textarea data-field="koppelingen" data-label="Koppelingen met interne/externe systemen" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Gegevensuitwisseling met andere systemen</span>
+          <textarea data-field="gegevensuitwisseling" data-label="Gegevensuitwisseling" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Koppelingen met basisregistraties</span>
+          <textarea data-field="koppelingen-basis" data-label="Koppelingen met basisregistraties" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Past binnen de gemeentelijke waardeketen</span>
+          <textarea data-field="waardeketen" data-label="Past binnen de waardeketen" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Common Ground oplossing beschikbaar?</span>
+          <select data-field="common-ground" data-label="Common Ground">
+            <option value="">Selecteer</option>
+            <option>Ja</option>
+            <option>Nee</option>
+            <option>Onderzoek loopt</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Gebruik van API’s</span>
+          <textarea data-field="apis" data-label="Gebruik van API’s" rows="3"></textarea>
+        </label>
+        <label class="field">
+          <span>Bewaartermijn (Selectielijst Gemeenten)</span>
+          <select data-field="bewaartermijn" data-label="Bewaartermijn">
+            <option value="">Selecteer</option>
+            <option>1 jaar</option>
+            <option>5 jaar</option>
+            <option>7 jaar</option>
+            <option>10 jaar</option>
+            <option>Permanent</option>
+            <option>Nee, zie toelichting</option>
+          </select>
+        </label>
+        <label class="field full">
+          <span>Documentopslag locatie</span>
+          <textarea data-field="documentopslag" data-label="Documentopslag locatie" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Vernietigingsprocedure</span>
+          <textarea data-field="vernietiging" data-label="Vernietigingsprocedure" rows="3"></textarea>
+        </label>
+        <label class="field full">
+          <span>Metadata (MDTO / Forum Standaardisatie)</span>
+          <textarea data-field="metadata" data-label="Metadata" rows="3"></textarea>
+        </label>
+      </div>
+    </section>
+
+  </form>
+  <footer class="form-footer">Versie 2025.12.16 (2)</footer>
+</div>
+
+<input type="file" id="json-import" accept="application/json" hidden>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="print-export" style="display:none;"></div>
+
+<script>
+(function () {
+  const pdfPrefill = {
+    summary:
+      "Offerte voor MOOR Facturatie-Ondersteuning (implementatie, licentie en beheer) d.d. 26 augustus 2025. Doel: naadloze export van straatwerk- en legesstromen vanuit het MOOR Platform naar het gemeentelijke facturatiesysteem.",
+    status: "Afstemming nodig",
+    informatiemanagement: "Onderzoek loopt",
+    privacy: "Niet van toepassing",
+    "informatieveiligheid": "Niet gestart",
+    "functioneel-beheer": "Capaciteit nodig",
+    "technisch-beheer": "Afhankelijkheden",
+    architectuur: "Onderzoek loopt",
+    archivering: "Niet van toepassing",
+    inkoop: "Onderhandeling",
+    contribution:
+      "Biedt een gecontroleerde en herhaalbare aansluiting tussen graafmeldingen/legeskosten en het financiële systeem, vermindert handwerk en versnelt facturatie voor de dienst MOOR Platform.",
+    "contribution-1": "Efficiënte bedrijfsvoering",
+    "contribution-2": "Goede dienstverlening",
+    "contribution-3": "",
+    proceseigenaar: "Ruud de Gans (Gemeente Wassenaar)",
+    verzoeker: "Naam Aanvrager",
+    procesnaam: "Naam Proces (bijv. Zaaksysteem)",
+    "a3-status": "Gedeeltelijk / indirect",
+    afstemming:
+      "Offerte opgesteld op 26 augustus 2025 na e-mailcontact tussen Luuk Spijkers en Ruud de Gans / Marjan van der Neut.",
+    "datum-intake": "2025-08-26",
+    "wettelijke-grondslag":
+      "Geen specifieke wettelijke verplichting; verbetering van aansluiting financiële stromen graafmeldingen en leges op basis van gemeentelijke afspraken.",
+    "financiele-dekking":
+      "Implementatiekosten € 2.625 eenmalig, jaarlijkse licentie- en beheerfee € 1.795 (prijspeil 2025) exclusief btw.",
+    "behoefte-gemeenten": "Alleen Wassenaar",
+    "capaciteit-idm":
+      "Informatie & Datamanagement levert projectbegeleiding voor implementatie, inrichting van export en kwaliteitsbewaking.",
+    "capaciteit-initiatief":
+      "Stakeholders Ruud de Gans / Marjan van der Neut (Wassenaar) leveren proceskennis en bepalen gewenste verwerking.",
+    "capaciteit-leveranciers":
+      "Roxit / MOOR verzorgt implementatie (kick-off, inventarisatie, test- en productiefase) en jaarlijkse ondersteuning.",
+    "capaciteit-overig":
+      "Afdeling Financiën levert requirements voor importformaat en test de koppeling; optioneel leverancier facturatiesysteem betrokken.",
+    "behoefte-aanleiding":
+      "Gemeente Wassenaar wil de aansluiting van MOOR-registraties (straatwerkkosten en legeskosten) op het facturatiesysteem verbeteren.",
+    "a3-opgenomen": "Indirect / via ander initiatief",
+    "huidige-situatie":
+      "Er is al een MOOR Platform voor graafmeldingen, maar de financiële stromen worden nog handmatig opgepakt waardoor dubbele invoer nodig is.",
+    risicos:
+      "Handmatige verwerking van exportbestanden is foutgevoelig, vertraagt facturatie en levert beperkte controle over debiteurgegevens.",
+    "gewenste-situatie":
+      "Een standaard MOOR F-O export die periodiek factuurregels oplevert in het gewenste formaat zodat Financiën direct kan inlezen.",
+    opbrengsten:
+      "Snellere facturatie, minder handwerk, eenduidige aansluiting tussen MOOR en het financiële systeem, beter overzicht per debiteur.",
+    "oorspronkelijke-uitvraag":
+      "Vraag aan MOOR om implementatie, licentieafname en beheer voor facturatie-ondersteuning inclusief export naar financieel systeem.",
+    "type-aanvraag": "Uitbreiding / wijziging",
+    "toelichting-type":
+      "Uitbreiding op bestaande MOOR Platform-voorziening waarbij nieuwe functionaliteit voor facturatie wordt toegevoegd.",
+    "interne-oplossing":
+      "Bestaande combinatie van MOOR Platform en gemeentelijk facturatiesysteem; koppeling ontbreekt of gebeurt handmatig.",
+    "sw-broker":
+      "Niet via SW-broker aangevraagd; directe offerte van MOOR/Roxit gericht op deze aansluiting.",
+    "vng-catalogus":
+      "MOOR Platform is bekend binnen gemeentelijke sector; facturatie-ondersteuning sluit aan bij bestaande dienstverlening.",
+    concurrent:
+      "Geen concrete concurrent benoemd; MOOR F-O is uitbreiding op reeds afgenomen MOOR Platform.",
+    "sla-dvo":
+      "Ja, gebaseerd op bestaande hoofdovereenkomst met Roxit/MOOR (voorwaarden gelijk aan MOOR Platform-contract).",
+    "koppeling-id":
+      "Geen DigiD/eHerkenning/eIDAS-koppeling; betreft export naar financieel systeem met debiteurgegevens.",
+    "fb-behoefte":
+      "Ja, intern",
+    "fb-taken":
+      "Functioneel beheer bewaakt de periodieke exports, monitort debiteurinstellingen en stemt wijzigingen af met MOOR.",
+    "fb-type": "Hybride",
+    "itb-capaciteit":
+      "IT-basisdiensten leveren ondersteuning voor aansluiting op het financiële systeem en beheer van importtaken.",
+    bio2:
+      "Geen specifieke BIO2-eisen benoemd; koppeling betrekt alleen financiële data vanuit MOOR.",
+    nis2:
+      "Niet expliciet beoordeeld; dienst valt onder reguliere beschikbaarheids- en integriteitseisen van bestaande MOOR Platform.",
+    dataclassificatie:
+      "Operationele gegevens over graafmeldingen en factuurlijnen; geen bijzondere persoonsgegevens.",
+    "bio2-conform": "N.t.b.",
+    iso27001: "N.t.b.",
+    logging:
+      "Periodieke exportlogboeken binnen MOOR; verdere logging in financieel systeem.",
+    backup:
+      "Back-up geregeld via MOOR Platform en gemeentelijke financiële systemen.",
+    persoonsgegevens: "Gewone persoonsgegevens",
+    "persoonsgegevens-detail":
+      "Contact- en debiteurgegevens van netbeheerders/bedrijven die graafmeldingen doen.",
+    "categorieen-betrokkenen":
+      "Netbeheerders, aannemers en overige organisaties die graafwerkzaamheden uitvoeren.",
+    "avg-grondslag":
+      "Uitvoering van publiekrechtelijke taak (verwerken straatwerkkosten, leges en instemmingsbesluiten).",
+    doeleinden:
+      "Opstellen en verzenden van facturen voor straatwerk- en legeskosten op basis van MOOR-registraties.",
+    verwerkersovereenkomst:
+      "Onderdeel van bestaande hoofdovereenkomst MOOR Platform tussen Gemeente Wassenaar en Roxit.",
+    doorgifte:
+      "Geen doorgifte buiten de EU/EER genoemd.",
+    "ai-algoritmen":
+      "Geen gebruik van AI of geautomatiseerde besluitvorming benoemd.",
+    dpia:
+      "Niet uitgevoerd; inschatting laag risico omdat het om bedrijfsgegevens van bedrijven / debiteuren gaat.",
+    zaaksysteem:
+      "Geen zaaksysteemkoppeling; output wordt ingelezen in financieel systeem.",
+    "document-management":
+      "Exportbestand wordt bewaard conform financiële procedures; betalingen verlopen via financieel systeem.",
+    basisregistraties:
+      "Niet gekoppeld aan basisregistraties; gegevens komen vanuit MOOR en gemeentelijke administratie.",
+    koppelingen:
+      "Koppeling tussen MOOR Platform en financieel systeem via periodiek exportbestand.",
+    gegevensuitwisseling:
+      "Bestanden met factuurregels worden gedeeld tussen MOOR en Financiën, daarna verder verwerkt in financieel systeem.",
+    "koppelingen-basis":
+      "Niet van toepassing; geen automatische koppelingen met BAG/BRP etc.",
+    waardeketen:
+      "Ondersteunt waardeketen ‘Betrouwbare dienstverlening’ en ‘Efficiënte bedrijfsvoering’ voor beheer en facturatie.",
+    "common-ground": "Nee",
+    apis:
+      "Export via bestand (CSV/XML) volgens gemeentelijk formaat; geen API benoemd.",
+    bewaartermijn: "7 jaar",
+    documentopslag:
+      "Bewaren binnen financieel systeem en gemeentelijke administratie conform selectielijsten.",
+    vernietiging:
+      "Volgt reguliere financiële vernietigings- en archiveringsprocedures (na wettelijke bewaartermijn).",
+    metadata:
+      "Metadata volgt financieel systeem (factuurdatum, debiteur, kostenpost) en MOOR registraties."
+  };
+  const storageKey = "impact_intake_form_v20241123";
+  const fields = document.querySelectorAll("[data-field]");
+  const toast = document.getElementById("toast");
+  const fileInput = document.getElementById("json-import");
+  const metaNav = document.querySelector(".meta-toolbar");
+  const themeToggle = metaNav?.querySelector("[data-action='toggle-theme']");
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabPanels = document.querySelectorAll(".tab-panel");
+  const themeKey = "impact_intake_theme";
+  let saveTimer = null;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+  }
+
+  function getFieldValue(field) {
+    if (field.tagName === "SELECT") {
+      return field.value;
+    }
+    return field.value || "";
+  }
+
+  function getFieldLabel(field) {
+    return field.dataset.label || field.name || "Onbekend veld";
+  }
+
+  function hasFieldValue(field) {
+    const value = getFieldValue(field);
+    if (typeof value === "string") {
+      return value.trim().length > 0;
+    }
+    return Boolean(value);
+  }
+
+  function getFieldWrapper(field) {
+    return field.closest(".field, .status-card");
+  }
+
+  function updateFieldState(field) {
+    if (!field) return;
+    const wrapper = getFieldWrapper(field);
+    if (!wrapper) return;
+    wrapper.dataset.state = hasFieldValue(field) ? "filled" : "empty";
+  }
+
+  function refreshFieldStates() {
+    fields.forEach(updateFieldState);
+  }
+
+  function collectData() {
+    const data = {};
+    fields.forEach((field) => {
+      data[field.dataset.field] = getFieldValue(field);
+    });
+    return data;
+  }
+
+  function updateHeaderTitle() {
+    const procesField = document.querySelector('[data-field="procesnaam"]');
+    const processTitle = document.querySelector(".process-title");
+    if (procesField && processTitle) {
+      processTitle.textContent = procesField.value.trim() || "Nog geen procesnaam ingevuld";
+    }
+  }
+
+  function applyData(data) {
+    if (!data) return;
+    
+    // Migration for old contribution field
+    if (data.contribution && !data["contribution-1"]) {
+      const parts = data.contribution.split("|").map(p => p.trim()).filter(Boolean);
+      if (parts.length > 0) data["contribution-1"] = parts[0];
+      if (parts.length > 1) data["contribution-2"] = parts[1];
+      if (parts.length > 2) data["contribution-3"] = parts[2];
+    }
+
+    fields.forEach((field) => {
+      const key = field.dataset.field;
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        field.value = data[key];
+      }
+    });
+    refreshFieldStates();
+    updateHeaderTitle();
+  }
+
+  function setTheme(theme) {
+    const nextTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = nextTheme;
+    if (themeToggle) {
+      themeToggle.textContent = nextTheme === "light" ? "🌙 Donker thema" : "☀️ Licht thema";
+      themeToggle.setAttribute("aria-pressed", nextTheme === "dark");
+    }
+  }
+
+  function triggerAutoSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveToLocalStorage, 500);
+  }
+
+  function saveToLocalStorage() {
+    const data = collectData();
+    localStorage.setItem(storageKey, JSON.stringify(data));
+    showToast("Intake opgeslagen (lokaal)");
+  }
+
+  function loadInitialData() {
+    const raw = localStorage.getItem(storageKey);
+    if (raw) {
+      applyData(JSON.parse(raw));
+    }
+  }
+
+  function resetForm() {
+    if (!confirm("Weet je zeker dat je alle velden wilt leegmaken?")) {
+      return;
+    }
+    document.getElementById("intake-form").reset();
+    localStorage.removeItem(storageKey);
+    refreshFieldStates();
+    updateHeaderTitle();
+    showToast("Formulier geleegd");
+  }
+
+  function handleSaveClick() {
+    const data = collectData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `impactanalyse-id-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast("JSON-export gedownload");
+  }
+
+  function handleLoadClick() {
+    fileInput.value = "";
+    fileInput.click();
+  }
+
+  function handlePrefillClick() {
+    applyData(pdfPrefill);
+    localStorage.setItem(storageKey, JSON.stringify(pdfPrefill));
+    showToast("Velden gevuld met data uit de PDF");
+  }
+
+  function handleThemeToggle() {
+    const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    localStorage.setItem(themeKey, nextTheme);
+  }
+
+  setTheme(localStorage.getItem(themeKey) || "light");
+
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        applyData(data);
+        saveToLocalStorage();
+        showToast("Intake geladen");
+      } catch (error) {
+        alert("Kon het bestand niet lezen: " + error.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  function handlePdfClick() {
+    const content = buildReportHtml(true, true);
+    const container = document.getElementById("print-export");
+    container.innerHTML = content;
+    window.print();
+  }
+
+  function buildReportHtml(bodyOnly = false, onlyFilled = false) {
+    const sections = document.querySelectorAll("[data-section]");
+    const css = document.querySelector("style").textContent;
+    const logoSrc = document.querySelector(".header-logo")?.src || "";
+    const logoHtml = logoSrc ? `<img src="${logoSrc}" style="max-width: 180px; height: auto;" alt="Logo">` : "";
+    
+    const sectionHtml = Array.from(sections)
+      .map((section) => {
+        const title = section.getAttribute("data-section");
+        const rows = Array.from(section.querySelectorAll("[data-field]"))
+          .map((field) => {
+            const label = getFieldLabel(field);
+            let value = field.value || "";
+            if (field.tagName === "SELECT") {
+              const selected = field.options[field.selectedIndex];
+              value = selected ? selected.text : "";
+            }
+            
+            if (onlyFilled && (!value || !value.trim() || value === "Selecteer" || value === "Kies status")) {
+              return "";
+            }
+
+            value = value.replace(/\n/g, "<br>");
+            return `<tr><td>${label}</td><td>${value || "&nbsp;"}</td></tr>`;
+          })
+          .join("");
+        
+        if (onlyFilled && !rows.trim()) return "";
+
+        return `<div class="card"><h2>${title}</h2><table>${rows}</table></div>`;
+      })
+      .join("");
+
+    if (bodyOnly) {
+      return `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 2px solid #eee; padding-bottom: 16px;">
+          <h1 style="margin: 0; font-size: 20pt; border: none;">Impactanalyse I&amp;D</h1>
+          ${logoHtml}
+        </div>
+        ${sectionHtml}`;
+    }
+
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Impactanalyse I&amp;D</title><style>
+      ${css}
+      body { padding: 40px; background: #f9f9f9; max-width: 1000px; margin: 0 auto; }
+      .card { margin-bottom: 32px; break-inside: avoid; background: #fff; padding: 32px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--support); }
+      h1 { font-size: 24px; margin-bottom: 32px; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; }
+      h2 { color: var(--text); border-bottom: none; margin-top: 0; }
+      table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+      td { border-bottom: 1px solid var(--border); padding: 12px 8px; vertical-align: top; font-size: 0.95rem; line-height: 1.6; }
+      td:first-child { font-weight: 600; width: 35%; color: var(--muted); }
+      td:last-child { color: var(--text); }
+      tr:last-child td { border-bottom: none; }
+    </style></head><body>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+      <h1>Impactanalyse I&amp;D – Intakeformulier</h1>
+      ${logoHtml}
+    </div>
+    ${sectionHtml}
+    </body></html>`;
+  }
+
+  function handleHtmlClick() {
+    const html = buildReportHtml();
+    const blob = new Blob([html], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `impactanalyse-id-${new Date().toISOString().slice(0, 10)}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast("HTML-export aangemaakt");
+  }
+
+  function handleWordClick() {
+    const html = buildReportHtml();
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `impactanalyse-id-${new Date().toISOString().slice(0, 10)}.doc`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast("Word-document aangemaakt");
+  }
+
+  const wizardOverlay = document.getElementById("wizard-overlay");
+  const wizardStage = document.getElementById("wizard-stage");
+  const wizardBar = document.getElementById("wizard-bar");
+  const wizardProgressText = document.getElementById("wizard-progress-text");
+  const wizardSectionTitle = document.getElementById("wizard-section-title");
+  const wizardClose = document.getElementById("wizard-close");
+  let currentWizardStep = 0;
+  let wizardFields = [];
+
+  function startWizard() {
+    wizardFields = Array.from(document.querySelectorAll(".field, .status-card")).filter(el => {
+        return el.querySelector("input:not([type='hidden']), select, textarea");
+    });
+    if (wizardFields.length === 0) return;
+    currentWizardStep = 0;
+    wizardOverlay.classList.add("active");
+    updateWizard();
+  }
+
+  function getFieldHelperText(element) {
+    const input = element.querySelector("input, select, textarea");
+    if (input && input.placeholder && input.placeholder.length > 5) return input.placeholder;
+    if (input && input.title) return input.title;
+    return "Vul dit veld in om de impactanalyse compleet te maken.";
+  }
+
+  function getSectionTitle(element) {
+    const section = element.closest("section");
+    return section ? section.dataset.section : "Algemeen";
+  }
+
+  function createWizardCard(index) {
+    if (index < 0 || index >= wizardFields.length) return null;
+    
+    const sourceWrapper = wizardFields[index];
+    const labelText = sourceWrapper.querySelector("label, span")?.textContent || "Vraag";
+    const inputOriginal = sourceWrapper.querySelector("input, select, textarea");
+    const helperText = getFieldHelperText(sourceWrapper);
+    
+    const card = document.createElement("div");
+    card.className = "wizard-card";
+    
+    // Determine position class
+    if (index === currentWizardStep) card.classList.add("active");
+    else if (index === currentWizardStep - 1) card.classList.add("prev");
+    else if (index === currentWizardStep + 1) card.classList.add("next");
+    
+    // Clone input
+    const clone = inputOriginal.cloneNode(true);
+    const realInput = inputOriginal;
+    
+    card.innerHTML = `
+      <h3>${labelText}</h3>
+      <div class="wizard-helper">${helperText}</div>
+      <div class="field-container"></div>
+      <div class="wizard-nav">
+        <button class="wizard-btn prev" ${index === 0 ? 'disabled' : ''}>← Vorige</button>
+        <button class="wizard-btn next">${index === wizardFields.length - 1 ? 'Klaar' : 'Volgende →'}</button>
+      </div>
+    `;
+    
+    const container = card.querySelector(".field-container");
+    container.appendChild(clone);
+    
+    // Sync logic
+    const wizardInput = container.querySelector("input, select, textarea");
+    if (wizardInput) {
+        wizardInput.value = realInput.value;
+        wizardInput.addEventListener("input", (e) => {
+            realInput.value = e.target.value;
+            realInput.dispatchEvent(new Event('input'));
+            realInput.dispatchEvent(new Event('change'));
+        });
+    }
+
+    // Events
+    card.querySelector(".prev").addEventListener("click", () => {
+        if (currentWizardStep > 0) {
+            currentWizardStep--;
+            updateWizard();
+        }
+    });
+    card.querySelector(".next").addEventListener("click", () => {
+        if (currentWizardStep < wizardFields.length - 1) {
+            currentWizardStep++;
+            updateWizard();
+        } else {
+            wizardOverlay.classList.remove("active");
+        }
+    });
+
+    return card;
+  }
+
+  function updateWizard() {
+    wizardStage.innerHTML = "";
+    
+    // Render Previous, Current, Next cards for animation context
+    [-1, 0, 1].forEach(offset => {
+        const card = createWizardCard(currentWizardStep + offset);
+        if (card) wizardStage.appendChild(card);
+    });
+    
+    // Update Header Info
+    const currentField = wizardFields[currentWizardStep];
+    wizardSectionTitle.textContent = getSectionTitle(currentField);
+    
+    const progress = ((currentWizardStep + 1) / wizardFields.length) * 100;
+    wizardBar.style.width = `${progress}%`;
+    wizardProgressText.textContent = `Vraag ${currentWizardStep + 1} van ${wizardFields.length}`;
+  }
+
+  wizardClose.addEventListener("click", () => {
+    wizardOverlay.classList.remove("active");
+  });
+
+  document.querySelector(".meta-toolbar")?.addEventListener("click", (event) => {
+    const targetButton = event.target.closest("button");
+    if (!targetButton) return;
+    switch (targetButton.dataset.action) {
+      case "wizard":
+        startWizard();
+        break;
+      case "new":
+        resetForm();
+        break;
+      case "load":
+        handleLoadClick();
+        break;
+      case "prefill":
+        handlePrefillClick();
+        break;
+      case "save":
+        handleSaveClick();
+        break;
+      case "html":
+        handleHtmlClick();
+        break;
+      case "pdf":
+        handlePdfClick();
+        break;
+      case "word":
+        handleWordClick();
+        break;
+      default:
+        break;
+    }
+  });
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.tabTarget;
+      tabButtons.forEach((btn) => btn.classList.toggle("active", btn === button));
+      tabPanels.forEach((panel) => panel.classList.toggle("active", panel.id === targetId));
+    });
+  });
+
+  fields.forEach((field) => {
+    const handleFieldInteraction = () => {
+      updateFieldState(field);
+      triggerAutoSave();
+      if (field.dataset.field === "procesnaam") {
+        updateHeaderTitle();
+      }
+    };
+    field.addEventListener("input", handleFieldInteraction);
+    field.addEventListener("change", handleFieldInteraction);
+  });
+
+  refreshFieldStates();
+  loadInitialData();
+
+  document.getElementById("intake-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+})();
+</script>
+</body>
+</html>
+
