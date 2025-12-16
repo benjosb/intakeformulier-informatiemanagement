@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           # Optioneel: specificeer de map op de server waar het heen moet (bijv. public_html/intakes/)
           # Als je het direct in de hoofdmap van het FTP account wilt, laat dit dan leeg of gebruik ./
-          server-dir: ./
+          server-dir: public_html/intakes/
           # Welke lokale bestanden moeten mee? (alles behalve git bestanden en docs)
           exclude: |
             **/.git*
